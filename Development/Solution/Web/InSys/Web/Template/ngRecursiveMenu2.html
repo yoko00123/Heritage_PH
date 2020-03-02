@@ -1,0 +1,17 @@
+﻿<ul>
+    <li ng-repeat="menu in menus" context-menu="menuContext" use-menu="2">
+        <a href="" ng-if="menu.Children.length > 0" ng-click="openMenu(menu)">
+            <!--<span class="menu-abbr">{{SetIcon(menu.Parent.Name)}}</span>-->
+            <i class="menu-abbr fa fa-folder"></i>
+            <p ng-mouseenter="SetSlide(menu.Parent.ID)" ng-mouseleave="DeSetSlide()" id="{{menu.Parent.ID}}">&nbsp;<span>{{menu.Parent.Name}}</span>&nbsp;</p>
+            <i class="fa fa-chevron-right"></i>
+        </a>
+        <a ng-if="menu.Children.length == 0" ng-click="itemSelect(menu.Parent)">
+            <!--<span class="menu-abbr">{{SetIcon(menu.Parent.Name)}}</span>-->
+            <i ng-class="menu.Parent.ReportFile != null ? 'menu-abbr fa fa-file-text-o': 'menu-abbr fa fa-cube'"></i>
+            <p ng-mouseenter="SetSlide(menu.Parent.ID)" ng-mouseleave="DeSetSlide()" class="menu-item-parent" id="{{menu.Parent.ID}}">&nbsp;<span>{{menu.Parent.Name}}</span> </p>
+            <!--<span class="menu-fav-star" ng-class="{'menu-fav-star-active': menu.Parent.HasFav }" ng-click="itemToggleFav(menu.Parent)"><i class="fa fa-star"></i></span>-->
+        </a>
+        <!--<div ng-if="menu.Children.length > 0" ng-recursive-menu menus="menu.Children" item-select="itemSelect" item-toggle-fav="itemToggleFav" menu-context="menuContext"><div ng-transclude></div></div>-->
+    </li>
+</ul>

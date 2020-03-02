@@ -1,0 +1,17 @@
+﻿<div class="input-group custom-ig-lu">
+    <input autocomplete="on" type="text" class="form-control"
+           ng-model="row[fld.Name.trim().substr(3)]"
+           ng-required="Required(fld)"
+           name="{{fld.EffectiveLabel || fld.Name}}"
+           id="{{inputId}}" ng-enter="ExecuteFilter()" ng-inj-validator />
+    <span class="input-group-btn lu">
+        <button ng-if="!showLoading" class="btn btn-default lookup-btn"
+                type="button" ng-click="loadLookup()">
+            <!--<i class="fa fa-ellipsis-h"></i>-->
+        </button>
+        <i class="lu-spin" ng-if="showLoading"></i>
+    </span>
+    <ul ng-if="ShowLookup" class="lookup-autocomplete">
+        <li ng-repeat="d in dataLookup" ng-click="onRowSelect(d)">{{d.Name}}</li>
+    </ul>
+</div>

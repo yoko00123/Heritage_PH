@@ -1,0 +1,180 @@
+﻿<div class="lzy_dy_table">
+    <div class="lzy_freeze_pane">
+        <div class="lzy_fp_header">
+            <div class="lzy_fp_column_container">
+                <div class="form-check-2 lzy_fp_column selector" ng-if="tableOptions.hasOpenIcon == true">
+                    <label>
+                        &nbsp;
+                        <span class="label-text"></span>
+                    </label>
+                </div>
+                <div class="form-check-2 lzy_fp_column selector" ng-if="tableOptions.multiSelect == true">
+                    <label>
+                        <input type="checkbox" ng-click="checkAllBox()" ng-model="cb.checkAll" />
+                        <span class="label-text"></span>
+                    </label>
+                </div>
+                <div class="lzy_fp_column" ng-repeat="title in FreezeColumns | orderBy: 'SeqNo'">
+                    <div class="lzy_label" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), (tableOptions.columnSortName != (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) ? 'desc' : tableOptions.columnSortOrder))">{{title.Label || title.Name}}</div>
+                    <div class="lzy_tools">
+                        <div class="lzy_sort">
+                            <div ng-class="{'active_up' : (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) == tableOptions.columnSortName && tableOptions.columnSortOrder == 'asc'}" class="lzy_chevron lzy_chevron_up" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), 'desc')"></div>
+                            <div ng-class="{'active_down' : (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) == tableOptions.columnSortName && tableOptions.columnSortOrder == 'desc'}" class="lzy_chevron lzy_chevron_down" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), 'asc')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lzy_fp_body">
+            <div class="lzy_fp_Top"></div>
+            <div ng-if="records.length > 0" class="lzy_fp_row_container">
+                <div ng-mouseover="hover($index)" ng-mouseleave="hoverOut($index)" class="lzy_fp_row" ng-style="setRowHeight()" ng-repeat="(rowIdx, row) in records | orderBy: (tableOptions.columnSortOrder.toLowerCase() == 'desc' ? '-' : '') + (tableOptions.columnSortName)">
+                    <div class="form-check-2 lzy_fp_row_column selector" ng-if="tableOptions.hasOpenIcon == true" ng-click="tableOptions.hasOpenIconClick(row, rowIdx)">
+                        <label>
+                            <i ng-if="row.ID > 0" class="fa fa-folder-open"></i>
+                        </label>
+                    </div>
+                    <div class="form-check-2 lzy_fp_row_column selector" ng-if="tableOptions.multiSelect == true">
+                        <label>
+                            <input type="checkbox" ng-model="row.IsChecked" />
+                            <span class="label-text"></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="tableOptions.onRowDoubleClick(row, $index)" class="lzy_fp_row_column" ng-repeat="title in FreezeColumns | orderBy: 'SeqNo'">
+                        <!--template-->
+                        <div ng-switch="title.type">
+                            <div ng-switch-when="2|4" ng-switch-when-separator="|" class="lzy_control lzy_label">
+                                {{ replaceNull(row[title.Name.substr(3)]) }}
+                            </div>
+                            <div ng-switch-when="3" class="lzy_control lzy_checkbox">
+                                <div class="form-check-2">
+                                    <label>
+                                        <input type="checkbox" ng-model="row[title.Name]" disabled />
+                                        <span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div ng-switch-when="7" class="lzy_control lzy_image">
+                                <div lazy-load-image="{ Image: row[title.Name], Container: 'Photos' }"></div>
+                            </div>
+                            <div ng-switch-when="11" class="lzy_control lzy_label">
+                                {{formatDate(row[title.Name], 'MMM DD, YYYY')}}
+                            </div>
+                            <div ng-switch-when="12" class="lzy_control lzy_label">
+                                {{formatDate(row[title.Name], 'hh:mm A')}}
+                            </div>
+                            <div ng-switch-when="17" class="lzy_control lzy_label">
+                                {{formatDate(row[title.Name], 'MMM DD, YYYY hh:mm A')}}
+                            </div>
+                            <div ng-switch-default class="lzy_control lzy_label">
+                                {{replaceNull((row[title.Label] || row[title.Name]))}}
+                            </div>
+                        </div>
+                        <!--template-->
+                    </div>
+                </div>
+            </div>
+            <div class="lzy_fp_Bottom"></div>
+        </div>
+    </div>
+
+    <div class="lzy_header">
+        <div class="lzy_column_container">
+            <div ng-if="tableOptions.hasOpenIcon == true" class="lzy_column input_filler">
+                <div class="lzy_tools">
+                    <div class="lzy_resize"></div>
+                </div>
+            </div>
+            <div ng-if="tableOptions.multiSelect == true" class="lzy_column input_filler">
+                <div class="lzy_tools">
+                    <div class="lzy_resize"></div>
+                </div>
+            </div>
+            <div ng-if="tableOptions.multiSelect == true || FreezeColumns.length > 0" class="lzy_column freeze" ng-repeat="t in FreezeColumns | orderBy: 'SeqNo'">
+                <div class="lzy_tools">
+                    <div class="lzy_resize"></div>
+                </div>
+            </div>
+            <div ng-if="(title.IsFreeze == undefine ? false : title.IsFreeze) == false" ng-class="{'sys-hide': title.isShow == false}" class="lzy_column" ng-repeat="title in tableOptions.columns | orderBy: 'SeqNo'">
+                <div class="lzy_label" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), (tableOptions.columnSortName != (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) ? 'desc' : tableOptions.columnSortOrder))">{{title.Label || title.Name}}</div>
+                <div class="lzy_tools">
+                    <div class="lzy_sort">
+                        <div ng-class="{'active_up' : (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) == tableOptions.columnSortName && tableOptions.columnSortOrder == 'asc'}" class="lzy_chevron lzy_chevron_up" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), 'desc')"></div>
+                        <div ng-class="{'active_down' : (title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name) == tableOptions.columnSortName && tableOptions.columnSortOrder == 'desc'}" class="lzy_chevron lzy_chevron_down" ng-click="tableOptions.onSortChange((title.type == 2 || title.type == 4 ? title.Name.substr(3) : title.Name), 'asc')"></div>
+                    </div>
+                    <div class="lzy_resize" ng-mousedown="resizeColumn($event, $index)">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lzy_body">
+        <div class="lzy_Top"></div>
+        <div ng-if="records.length == 0" class="lzy_row_container no_record">
+            <div class="no-rec-ico">
+                <i class="fa fa-file-text"></i>
+                <i class="fa fa-search"></i>
+            </div>
+            <p>No record found.</p>
+        </div>
+        <div ng-if="records.length > 0" class="lzy_row_container">
+            <div ng-dblclick="tableOptions.onRowDoubleClick(row, $index)" ng-mouseover="hover($index)" ng-mouseleave="hoverOut($index)" class="lzy_row" ng-style="setRowHeight()" ng-repeat="row in records | orderBy: (tableOptions.columnSortOrder.toLowerCase() == 'desc' ? '-' : '') + (tableOptions.columnSortName)">
+                <div ng-if="tableOptions.hasOpenIcon == true" class="lzy_row_column input_filler"></div>
+                <div ng-if="tableOptions.multiSelect == true" class="lzy_row_column input_filler"></div>
+                <div ng-if="FreezeColumns.length > 0" class="lzy_row_column freeze" ng-repeat="title in FreezeColumns | orderBy: 'SeqNo'"></div>
+                <div ng-if="(title.IsFreeze == undefine ? false : title.IsFreeze) == false" class="lzy_row_column" ng-class="{'sys-hide': title.isShow == false}" ng-repeat="(colIdx, title) in tableOptions.columns | orderBy: 'SeqNo'">
+                    <!--template-->
+                    <div ng-switch="title.type">
+                        <div ng-switch-when="2|4" ng-switch-when-separator="|" class="lzy_control lzy_label">
+                            {{ replaceNull(row[title.Name.substr(3)]) }}
+                        </div>
+                        <div ng-switch-when="3" class="lzy_control lzy_checkbox">
+                            <div class="form-check-2">
+                                <label>
+                                    <input type="checkbox" ng-model="row[title.Name]" disabled />
+                                    <span class="label-text"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-switch-when="7" class="lzy_control lzy_image">
+                            <div lazy-load-image="{ Image: row[title.Name], Container: 'Photos' }"></div>
+                        </div>
+                        <div ng-switch-when="11" class="lzy_control lzy_label">
+                            {{formatDate(row[title.Name], 'MMM DD, YYYY')}}
+                        </div>
+                        <div ng-switch-when="12" class="lzy_control lzy_label">
+                            {{formatDate(row[title.Name], 'hh:mm A')}}
+                        </div>
+                        <div ng-switch-when="17" class="lzy_control lzy_label">
+                            {{formatDate(row[title.Name], 'MMM DD, YYYY hh:mm A')}}
+                        </div>
+                        <div ng-switch-default class="lzy_control lzy_label">
+                            {{replaceNull((row[title.Label] || row[title.Name]))}}
+                        </div>
+                    </div>
+                    <!--template-->
+                </div>
+            </div>
+        </div>
+        <div class="lzy_Bottom"></div>
+    </div>
+
+    <div class="lzy_footer">
+        <div class="lzy_count">
+            <div class="lzy_label"><span>{{tableOptions.tableData.length}}</span> {{tableOptions.tableData.length > 1 ? 'items' : 'item'}} found</div>
+        </div>
+        <div ng-if="tableOptions.hasPaging == true" class="lzy_paging">
+            <div class="lzy_view_count">
+                <label>View</label>
+                <select ng-change="tableOptions.onViewChange()" ng-model="tableOptions.viewCount" ng-options="item for item in tableOptions.pageView"></select>
+            </div>
+            <div class="lzy_page_count">
+                <label>Page</label>
+                <select ng-change="tableOptions.onPageChange()" ng-model="tableOptions.selectedPage" ng-options="item for item in tableOptions.pages"></select>
+                <button ng-click="tableOptions.Previous()" ng-disabled="!(tableOptions.selectedPage > 1)" class="fa fa-arrow-left"></button>
+                <button ng-click="tableOptions.Next()" ng-disabled="!(tableOptions.selectedPage < tableOptions.pages.length)" class="fa fa-arrow-right"></button>
+            </div>
+        </div>
+    </div>
+</div>

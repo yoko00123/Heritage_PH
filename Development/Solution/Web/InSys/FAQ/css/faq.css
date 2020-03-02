@@ -1,0 +1,121 @@
+﻿.md-nav-expanded {
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+}
+
+.md-nav-expanded > #main {
+    margin-top: 35px;
+}
+
+.md-nav-expanded > #main > article #topic_footer {
+    position: fixed;
+    bottom: 0px;
+    font-size: 12px;
+    width: 70%;
+    background-color: #fff;
+    padding: 10px 5px;
+    margin: 0px;
+}
+
+.md-nav-expanded > ul li a {
+    display: block;
+    font-size: 14px;
+    padding-top: 8px !important;
+    color: #fff;
+}
+
+.md-nav-expanded .tab-tabs>li.tab::after {
+    background: rgba(255,255,255,.7);
+    height: 4px;
+}
+
+.md-nav-expanded .tab-tabs > li.tab.active::after,
+.md-nav-expanded .tab-tabs > li.tab:hover::after {
+    transform: scale(.97);
+}
+
+.md-nav-expanded > ul li.active a,
+.md-nav-expanded > ul li a:hover,
+.md-nav-expanded > ul li.active a:hover,
+.md-nav-expanded > ul li.active a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+
+.md-nav-expanded > ul li:nth-child(3){
+    display: none;
+}
+
+.headroom, .md-nav-expanded > ul {
+    background-color: #2980b9;
+    border: none!important;
+    box-shadow: none;
+    height: 35px;
+    min-height: 35px;
+}
+
+.headroom h1 {
+    font-size: 14px;
+    color: #fff;
+}
+
+.jstree-container-ul {
+    padding-top: 15px;
+}
+
+.jstree .jstree-node .jstree-clicked {
+    border: none !important;
+    background-color: #2980b9;
+    color: #fff;
+    padding: 0px 8px 0px 0px;
+}
+
+.rvps4 {
+    display: none;
+}
+
+#search-form input {
+    border-radius: 0px;
+    background-color: #f5f5f5;
+    border: none;
+    box-shadow: none;
+    border-left: 5px solid #2980b9;
+}
+
+#search-form button {
+    border-radius: 0px;
+    border-radius: 0px;
+    background-color: #f5f5f5;
+    border: none;
+    box-shadow: none;
+    padding: 7px 12px;
+    color: #2980b9;
+}
+
+#search-info {
+    background-color: rgba(241, 196, 15, .3);
+    border-left: none!important;
+    font-size: 13px;
+    padding: 5px 10px!important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    background: rgba(0, 0, 0,.3);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(0, 0, 0,.3);
+}

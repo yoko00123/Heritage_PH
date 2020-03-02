@@ -1,0 +1,123 @@
+﻿<div class="ions-dashboard">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <p class="headr">{{Employee.Code}}</p>
+                <div class="profile-container">
+                    <div class="profile-pic" lazy-load-image="{ Image: DisplayPhoto || 'noimage.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"></div>
+                    <p class="profile-name">{{Employee.FirstName.toUpperCase() || Employee.Name.toUpperCase()}}</p>
+                    <p class="profile-dept">{{Employee.Development}}</p>
+                    <p class="profile-position">{{Employee.JobClass}}</p>
+                    <div class="grp-btn">
+                        <i ng-if="Employee.isMyApproval == 1" class="fa fa-users" ui-sref="MyApprovals" data-toggle="tooltip" title="My Approvals"><span class="badge" ng-if="ApprovalCount > 0">{{ApprovalCount}}</span></i>
+                        <i ng-if="Employee.isDirectReport == 1" class="fa fa-area-chart" ui-sref="DirectReport" data-toggle="tooltip" title="Direct Report"></i>
+                        <i ng-if="Employee.isMyHR == 1" class="fa fa-building" ng-click="OpenHR()" data-toggle="tooltip" title="My HR"></i>
+                    </div>
+                </div>
+                <p class="headr" ng-if="Employee.ID != null">LEAVE CREDITS</p>
+                <div class="leavecred-container" ng-if="Employee.ID != null">
+                    <div class="leavecred-itm" ng-repeat="lc in LeaveCredits">
+                        <p class="cred-title">{{lc.Code}}</p>
+                        <div class="itm">
+                            <p class="cred-count" style="color: #2980b9;">{{lc.Alloted}}</p>
+                            <p class="cred-desc">ALLOTED</p>
+                        </div>
+                        <div class="itm">
+                            <p class="cred-count" style="color: #f9ca24;">{{lc.Used}}</p>
+                            <p class="cred-desc">USED</p>
+                        </div>
+                        <div class="itm">
+                            <p class="cred-count" style="color: #27ae60;">{{lc.Balance}}</p>
+                            <p class="cred-desc">BALANCE</p>
+                        </div>
+                        <div class="itm">
+                            <p class="cred-count" style="color: #c0392b;">{{lc.Expired}}</p>
+                            <p class="cred-desc">EXPIRED</p>
+                        </div>
+                        <div class="itm" ng-if="lc.ProjBalance!==undefined">
+                            <p class="cred-count" style="color: #27ae60;">{{lc.ProjBalance}}</p>
+                            <p class="cred-desc">PROJECTED</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding-left: 0px;">
+                <p class="headr" style="padding-left: 0px;" ng-if="Announcements.length >= 1">ANNOUNCEMENTS</p>
+                <div id="crslAnn" class="carousel slide carousel-fade col-md-12" data-ride="carousel" ng-if="Announcements.length >= 1">
+                    <ol class="carousel-indicators">
+                        <li data-target="#crslAnn" data-slide-to="{{$index}}" ng-repeat="a in Announcements" ng-class="{active : Active($index)}"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="ann-container row  item " ng-repeat="a in Announcements" ng-class="{active : Active($index)}">
+                            <div class="col-md-3" style="padding: 0;">
+                                <div class="date-container">
+                                    <p class="month">{{a.Month}}</p>
+                                    <p class="day">{{a.Day}}</p>
+                                    <p class="pday">{{a.WeekDay}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-9" style="padding: 0;">
+                                <p class="ann-header">{{a.Name}}</p>
+                                <div style="max-height: 80px;overflow-y: auto;padding-right: 10px;">
+                                    <p class="ann-content" ng-bind-html="a.Comment"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="float: right"><a ng-if="a.Attachment" ng-click="DownloadAttachment(a,col)" style="cursor: pointer">Download Attachment</a></div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs custom-nav" ng-if="Employee.ID != null">
+                    <li class="active"><a data-toggle="tab" href="#applications">MY APPLICATIONS</a></li>
+                    <li ng-if="Employee.ApprovalTab >= 1"><a data-toggle="tab" href="#approval">MY APPROVALS</a></li>
+                    <li ng-if="Employee.ApprovalTab >= 1"><a data-toggle="tab" href="#cancellation">FOR CANCELLATION</a></li>
+                </ul>
+                <div class="tab-content custom-tab-content" ng-if="Employee.ID != null">
+                    <div id="applications" class="tab-pane fade in active">
+                        <div>
+                            <div ng-repeat="fd in FilingData">
+                                <div class="app-itm">
+                                    <i class="app-icon {{fd.Icon}}" ng-click="OpenTK(fd.ID_Menu)"></i>
+                                    <p class="app-title">{{fd.Name}}</p>
+                                    <span class="badge" ng-if="fd.Count > 0">{{fd.Count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="approval" class="tab-pane fade" ng-if="Employee.ApprovalTab >= 1">
+                        <div>
+                            <div ng-repeat="ad in ApprovalData">
+                                <div class="app-itm">
+                                    <i class="app-icon {{ad.Icon}}" ng-click="OpenTK(ad.ID_Menu)"></i>
+                                    <p class="app-title">{{ad.Name}}</p>
+                                    <span class="badge" ng-if="ad.Count > 0">{{ad.Count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cancellation" class="tab-pane fade" ng-if="Employee.ApprovalTab >= 1">
+                        <div>
+                            <div ng-repeat="cd in CancellationData">
+                                <div class="app-itm">
+                                    <i class="app-icon {{cd.Icon}}" ng-click="OpenTK(cd.ID_Menu)"></i>
+                                    <p class="app-title">{{cd.Name}}</p>
+                                    <span class="badge" ng-if="cd.Count > 0">{{cd.Count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+            $(".carousel").carousel({
+                interval: 10000
+            })
+        }, 2000)
+    });
+    
+</script>
+

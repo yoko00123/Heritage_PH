@@ -1,0 +1,139 @@
+﻿<div class="btn-toolbar" role="toolbar" aria-label="...">
+
+    <div class="btn-group tab-heading-2" role="group" aria-label="...">
+        <span>{{ dtData.Name }}</span>
+
+        <div class="detail-paging">
+            <p>Total no. of items: <span>{{ RowData.length }}</span> | </p>
+            <div class="paging">
+                Show
+                <select ng-model="grid.Take" ng-options="item as item for item in [10, 30, 50]" ng-change="UpdateView()"></select> of
+                Page
+                <select ng-model="grid.Skip" ng-options="item as item for item in grid.Pages" ng-change="UpdateView()"></select>
+            </div>
+        </div>
+        <span ng-if="dtData.AllowNewRow">
+            <button type="button" class="add-row" ng-click="AddNewRow()" data-toggle="tooltip" title="Add row"><i class="fa fa-plus"></i> Add row</button>
+        </span>
+        <span ng-if="HasImportFile">
+            <button type="button" class="btn btn-default" ng-click="bImportFile()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-upload"></i> Import File</button>
+            <button type="button" class="btn btn-default" ng-click="bGenerateTemplate()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-file-excel-o"></i> Generate Template</button>
+        </span>
+
+        <span ng-if="dtData.ID_ListMenu !== null">
+            <button type="button" class="btn btn-default" ng-filter-lookup col-value="ID_ListMenuValues" menu="dtData.ID_ListMenu" idx="idx" lookup-type="button" look-up-set="DetailMenuSet"><i class="fa fa-plus"></i> {{ dtData.ListMenu }}</button>
+        </span>
+        <span ng-repeat="btn in Buttons">
+            <button type="button" class="btn btn-default" ng-disabled="!btn.Enabled" ng-click="buttonClick(btn)"><i class="fa fa-circle"></i> {{ btn.Name }}</button>
+        </span>
+    </div>
+    <div class="Detail-Container">
+        <div class="table-container" style="overflow-y:auto;">
+            <table id="table" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th />
+                        <th style="user-select:none;" ng-repeat="tf in Columns | filter : ColumnFilter" cellindex="{{ $index }}" class="fl-word" large-width>{{tf.EffectiveLabel}} <i ng-click="SortRow(tf.Name)" ng-class="SortIcon(tf.Name)" style="cursor:pointer;padding:5px;"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(idx, row) in RowData | filter: PageBreak" ng-click="SelectRow(row, $index, $event)">
+                        <td class="td-action">
+                            <span class="fa fa-trash fa-lg" style="color: #c0392b;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Delete Row" ng-click="DeleteRow(row, idx)" ng-show="dtData.AllowDeleteRow"></span>
+                            <!--<span class="fa fa-folder-open fa-lg" data-toggle="tooltip" data-placement="bottom" title="Open Info" ng-click="OpenDetail(row.ID)" ng-show="dtData.ID_DetailMenu !== null"></span>-->
+                            <span class="folder-open" data-toggle="tooltip" data-placement="bottom" title="Open Info" ng-click="OpenDetail(row.ID)" ng-show="dtData.ID_DetailMenu !== null" ng-class="{'hasDel' : dtData.AllowDeleteRow && dtData.ID_DetailMenu !== null }"></span>
+                        </td>
+                        <td ng-repeat="tf in Columns | filter : ColumnFilter" class="fl-word cell-hover" ng-switch="tf.ID_SystemControlType">
+                            <div ng-switch-when="1" style="display: unset;">
+
+                                <input type="text" name="{{tf.Name}}" id="checkif" effective-label="{{tf.EffectiveLabel}}"
+                                       class="detail-control form-control"
+                                       ng-readonly="ReadOnly(tf, row) || Disabled[row.ID]"
+                                       ng-model="row[tf.Name]"
+                                       ng-blur="evBlur(tf, row)"
+                                       ng-class="{'isID' : tf.Name == 'ID'}"
+                                       ng-required="Required(tf)" maxlength="{{ FieldLength(tf) }}"
+                                       style="width:100%;min-width:200px;" ng-input db-data-type="tf.DataType"
+                                       ng-inj-validator />
+                                <!--input-autosize=""-->
+                            </div>
+                            <div ng-switch-when="2">
+                                <select class="form-control" name="{{tf.Name}}" effective-label="{{tf.EffectiveLabel}}"
+                                        ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-blur="evBlur(tf, row)"
+                                        ng-model="row[tf.Name]"
+                                        ng-options="item.ID as item.Name for item in Combos[tf.Name]"
+                                        style="width:100%;min-width:200px;"></select>
+                                <!--input-autosize=""-->
+                            </div>
+                            <div ng-switch-when="3">
+                                <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" style="text-align:center;">
+                                    <!--<label>
+                <input type="checkbox" class="detail-control" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" /><span></span>
+            </label>-->
+                                    <span class="remember-me-check">
+                                        <input type="checkbox" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" id="remember-me-{{idx}}-{{$index}}_{{row.ID}}_{{tf.Name}}" />
+                                        <label for="remember-me-{{idx}}-{{$index}}_{{row.ID}}_{{tf.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                    </span>
+                                </fieldset>
+                            </div>
+                            <div ng-switch-when="4">
+                                <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]">
+                                    <div class="detail-lookup" row="row" input-id="tf.Name + '_' + idx + '_' + colIdx" seq-no="0" fld="tf" required="Required" lookup-autocomplete></div>
+                                </fieldset>
+                            </div>
+                            <div ng-switch-when="5" class="input-group">
+                                <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]">
+                                    <input name="{{tf.Name}}" effective-label="{{tf.EffectiveLabel}}" style="width:100%;min-width:200px;" type="text" class="detail-control form-control" ng-model="row[tf.Name]" ng-required="Required(tf)" ng-blur="evBlur(tf, row)" ng-inj-validator />
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default" aria-label="Help"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="evTextEditor()"></i></button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div ng-switch-when="7" class="input-group">
+                                <center>
+                                    <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-bind-html="PhotoBomb(row)"></fieldset>
+                                </center>
+                            </div>
+                            <div ng-switch-when="11">
+                                <!-- DataDate -->
+
+                                <input name="{{tf.Name}}" effective-label="{{tf.EffectiveLabel}}" style="width:100%;min-width:200px;" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" ng-inj-validator />
+                            </div>
+                            <div ng-switch-when="12">
+                                <!-- DataTime -->
+
+                                <input name="{{tf.Name}}" effective-label="{{tf.EffectiveLabel}}" style="width:100%;min-width:200px;" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-input text-type="'time'" text-format="'hh:mm A'" ng-inj-validator />
+                            </div>
+                            <div ng-switch-when="16">
+
+                                <!-- FileUpload-->
+                                <div class="file-upload-control">
+                                    <label ng-class="row[tf.Name] == null ? 'nan' : ''">{{row[tf.Name] || 'Upload file here'}}</label>
+                                    <div style="display:flex;align-items:center;">
+                                        <i class="fa fa-upload" title="Upload File" ng-click="UploadFileDetail(row, tf.Name)"></i>
+                                        <i style="margin:1px;" class="fa fa-download" title="Download File" ng-if="row[tf.Name + '_GUID'] != null && row[tf.Name + '_GUID'] != ''" ng-click="DownloadFileDetail(row, tf.Name)"></i>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                            <div ng-switch-when="17">
+                                <!-- DataDateTime -->
+
+                                <input name="{{tf.Name}}" effective-label="{{tf.EffectiveLabel}}" style="width:100%;min-width:200px;" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row) || Disabled[row.ID]" ng-disabled="ReadOnly(tf, row)" ng-required="Required(tf)" ng-input text-type="'datetime'" text-format="'MM/DD/YYYY hh:mm A'" ng-inj-validator />
+                            </div>
+                            <div ng-switch-default>
+                                <!-- default -->
+                                <label>{{ row[tf.Name] }}</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <!--<tr ng-if="dtData.AllowNewRow">
+                        <td colspan="{{ Columns.length + 1 }}" style="padding-top: 5px;border-top: 1px solid #ddd;">
+                            <button class="add-row" ng-click="AddNewRow()" data-toggle="tooltip" title="Add row"><i class="fa fa-plus"></i></button>
+                        </td>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

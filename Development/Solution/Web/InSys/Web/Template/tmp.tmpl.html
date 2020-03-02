@@ -1,0 +1,29 @@
+﻿<div class="terminal-holder" ng-init="Init()">
+    <div class="terminal-header">
+        <p>Terminal</p>
+        <label ng-bind="FileName || 'No script selected.'"></label>
+        <div class="t-button">
+            <button ng-click="SelectScript()"><i class="fa fa-upload"></i> Upload Script</button>
+            <button ng-disabled="GUID == '' || GUID == null" ng-click="ExecScript()"><i class="fa fa-play"></i> Execute</button>
+            <button ng-click="Close()"><i class="fa fa-times"></i> Exit</button>
+        </div>
+    </div>
+    <textarea ng-model="qry"></textarea>
+    <button ng-click="Execute()" class="btn btn-primary">Run</button>
+    <div class="tbl-holder">
+        <div ng-repeat="dt in data" class="tbl-holder">
+            <table  class="table table-bordered table-condensed table-striped" freeze-header>
+                <thead>
+                    <tr>
+                        <th ng-repeat="col in dt.Columns">{{col}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="d in dt.Data">
+                        <td ng-repeat="x in d">{{x ||'NULL'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

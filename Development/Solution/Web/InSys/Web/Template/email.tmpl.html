@@ -1,0 +1,36 @@
+﻿<div class="custom-dialog email-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="dialog-title" data-toggle="tooltip" title="Email">
+                Email
+            </div>                
+            <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="ToggleCC()" style="font-size: 14px;padding-top: 5px;">CC</button>
+                <button type="button" class="btn btn-default" ng-click="ToggleBCC()" style="font-size: 14px;padding-top: 5px;">BCC</button>
+                <button type="button" class="btn btn-default" ng-click="Cancel()"><i class="fa fa-close"></i></button>
+            </div>
+        </div>
+        <div class="panel-body">            
+            <div class="row">
+                <div class="col-lg-12" style="padding:0px;">
+                    <form>
+                        <div class="form-group"><label for="To" class="col-md-1">To</label><input type="text" id="To" class="form-control col-md-11"></div> 
+                        <div class="form-group"><label for="Subject" class="col-md-2">Subject</label><input type="text" id="Subject" class="form-control col-md-10"></div>
+                        <div class="form-group" id="cc-frm"><label for="CC" class="col-md-1">CC</label><input type="text" id="CC" class="form-control col-md-11"></div>
+                        <div class="form-group" id="bcc-frm"><label for="BCC" class="col-md-1">BCC</label><input type="text" id="BCC" class="form-control col-md-11"></div>
+                        <div style="padding: 10px;">
+                            <textarea class="form-control" rows="8" placeholder="Message Body" style="max-width: 580px;"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary"><i class="fa fa-link"></i> Attachment</button>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-danger" ng-click="Cancel()">Cancel</button>
+                <button type="button" class="btn btn-primary ok" ng-click="OK()">Send <i class="fa fa-send"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

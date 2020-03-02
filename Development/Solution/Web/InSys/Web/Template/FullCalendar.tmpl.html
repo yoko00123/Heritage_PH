@@ -1,0 +1,8 @@
+﻿<div style="padding:10px;background-color:aliceblue;">
+    <select id="cmonth" ng-change="updateCalendar(getCurrentMonth, getCurrentYear, getCurrentEmployee)" style="padding:5px;float:left;margin-right:10px;" ng-model="getCurrentMonth" ng-options="d.ID as d.Name for d in months"></select>
+    <select id="cyear" ng-change="updateCalendar(getCurrentMonth, getCurrentYear, getCurrentEmployee)" style="padding:5px;float:left;margin-right:10px;" ng-model="getCurrentYear" ng-options="d.ID as d.Name for d in years"></select>
+    <select id="cemployee" ng-change="refetchCalendar(getCurrentMonth, getCurrentYear, getCurrentEmployee)" style="padding:5px;float:left;" ng-model="getCurrentEmployee" ng-options="d.ID as d.Name for d in EmployeeSource"></select>
+    <!--<button ng-click="showLegend()" style="background: url(../Resources/System/help.png) no-repeat center;height: 32px;width: 32px;border-radius: 15px;float: right;margin-left: 10px;margin-top: -3px;border-color: white;"></button>-->
+    <button class="fa close-btn" ng-click="closeCalendar()" style="no-repeat center;height: 32px;width: 32px;border-radius: 15px;float: right;margin-left: 10px;margin-top: -3px;border-color: white;">X</button>
+    <div id="fullCalendar"></div>
+</div> 

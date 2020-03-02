@@ -1,0 +1,1 @@
+delete from tEmployeeMovementType where id in (14,15)

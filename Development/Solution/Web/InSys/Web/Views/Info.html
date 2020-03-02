@@ -1,0 +1,251 @@
+﻿
+<div style="display:flex;" ng-class="{ 'info-dialog': IsDialog }" info-id="{{ InfoGUID }}" id="{{ InfoGUID }}">
+    <div class="info-panel" ng-class="{ 'info-toggled': IsDialog }">
+        <div class="info-header"><p>Quicklink</p></div>
+        <div class="info-list"> 
+            <div ng-repeat="mTab in InfoTabFields">
+                <p ng-click="SwitchActiveTab(mTab)" scroll-on-click="'tb_'+ mTab.ID" scroll-id="{{ InfoGUID }}">{{ mTab.Name }}</p>
+            </div>
+            <div class="separator"></div>
+            <div ng-repeat="mdTab in tMenuDetailTab | filter : MenuDetailTabReportOnlyFilter">
+                <p ng-click="ShowReportTab(mdTab)">{{ mdTab.Name }}</p>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal Info-Form">
+        <div ng-form name="ParentForm" class="panel panel-primary InfoSet" ng-init="InitInfoSet()">
+            <div class="panel-heading">
+                <button class="toggle-info shine" ng-class="{ 'toggle-info-off': IsDialog }" ng-click="ToggleInfoPanel(InfoGUID)"></button>
+                <div id="panel-title"><p>{{  tMenu.Name }}</p></div> 
+                <div id="panel-controls">
+                    <div class="btn-toolbar" role="toolbar" aria-label="...">
+                        <div class="btn-group" role="group" aria-label="..." ng-if="tMenuButton.length <=  3">
+                            <button ng-repeat="btn in tMenuButton | filter: ButtonFilter" type="button" class="btn btn-default info-set-custom shine" ng-click="ButtonClick(btn)" ng-disabled="!btn.Enabled">
+                                {{ btn.Name }}
+                            </button>
+                        </div>
+
+                        <div class="dropdown" ng-if="tMenuButton.length > 3" style="right: 0px;">
+                            <button class="btn btn-primary dropdown-toggle shine" style="width: auto" type="button" data-toggle="dropdown">
+                                Other options <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="btn in tMenuButton | filter: ButtonFilter" style="cursor: pointer;" ng-disabled="!btn.Enabled" ng-click="ButtonClick(btn)"><a>{{ btn.Name }}</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group " role="group" aria-label="...">
+                            <button type="button" class="btn btn-default shine" data-toggle="tooltip" title="New" ng-click="NewInfo()" ng-if="IsAllowNew"><i class="fa fa-file-o"></i></button>
+                            <button type="button" class="btn btn-default shine" data-toggle="tooltip" title="Save" ng-view="AllowEdit()" ng-click="btnSaveInfo()" ng-if="IsAllowEdit" ng-disabled="!EnableSave"><i class="fa fa-floppy-o"></i></button>
+                            <button type="button" class="btn btn-default shine" data-toggle="tooltip" title="Refresh" ng-click="RefreshInfo()"><i class="fa fa-refresh"></i></button>
+                            <!--<button type="button" class="btn btn-default shine dropdown-toggle print" data-toggle="tooltip" title="Print" print-dialog="PrintData"></button>-->
+                        </div>
+                        <div class="separator-btn"></div>
+                        <button type="button" class="btn btn-danger shine pull-right close-btn" ng-click="Cancel()"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="info-body-container">
+                <div class="panel-body" scroll-area>
+                    <div class="row tab-container" ng-repeat="mTab in InfoTabFields" ng-class='{"tab-container-show": mTab.TabType == 1 }' tab-uid="tbh_{{mTab.ID}}" tab-type="{{mTab.TabType}}" style="margin-top: 10px; margin-bottom: 10px;">
+                        <div class="col-md-12" ng-switch="mTab.TabType">
+                            <div ng-switch-when="1" id="tb_{{ mTab.ID }}" class="anchor">
+                                <div class="tab-heading">
+                                    <span>{{ mTab.Name }}</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" ng-repeat="Panel in MenuTabPanel(mTab)" style="min-height: 300px; margin-bottom: 5px;">
+                                        <br />
+                                        <div ng-repeat="fld in tMenuTabField | filter : MenuTabFieldFilter(mTab, Panel)" ng-switch on="fld.ID_SystemControlType">
+                                            <div class="info-sub-header" ng-show="fld.Header !== null">{{ fld.Header }}</div>
+                                            <div ng-switch-when="2" class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" id="{{field.Name}}"
+                                                            ng-model="data.Row[fld.Name.trim()]"
+                                                            ng-options="item.ID as item.Name for item in data.Combos[fld.Name]"
+                                                            ng-disabled="ReadOnly(fld)"
+                                                            name="_{{fld.Name}}"
+                                                            ng-required="Required(fld)"></select>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="3" class="form-group" ng-if="VisibleIf(fld)">
+                                                <fieldset ng-disabled="ReadOnly(fld)">
+                                                    <div class="col-sm-offset-3 col-sm-9">
+                                                        <span class="remember-me-check">
+                                                            <input type="checkbox" id="remember-me-{{fld.ID}}" name="_{{fld.Name}}" ng-model="data.Row[fld.Name.trim()]" ng-required="Required(fld)"> {{ fld.EffectiveLabel }}
+                                                            <label for="remember-me-{{fld.ID}}" style="margin: 0; padding: 0 0 0 25px;">{{ fld.EffectiveLabel }}</label>
+                                                        </span>
+
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div ng-switch-when="4" class="form-group" ng-readonly="ReadOnly(fld)" ng-required="Required(fld)" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <fieldset class="col-sm-9" ng-disabled="ReadOnly(fld)">
+                                                    <div row="data.Row" input-id="fld.Name + '_0_' + $index + '_' + data.Row.ID" seq-no="0" fld="fld" parent-fields="tMenuTabField" required="Required" lookup-autocomplete></div>
+                                                </fieldset>
+                                            </div>
+                                            <div ng-switch-when="7" class="form-group" ng-if="VisibleIf(fld)">
+                                                <!-- dataImage -->
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <fieldset class="col-sm-9" ng-disabled="ReadOnly(fld)">
+                                                    <div class="image-group">
+                                                        <div class="image-button" ng-click="UploadImage(fld.Name)"><p><i class="fa fa-camera"></i> Change</p></div>
+                                                        <div class="image-view" lazy-load-image="{ Image: data.Row[fld.Name.trim()], Container: 'Photos' }">
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div ng-switch-when="11" class="form-group" ng-if="VisibleIf(fld)">
+                                                <!-- dataDate -->
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <!--<div class="col-sm-9">
+            <input datetimeformat="MMM DD, YYYY" make-datetime-picker type="text" class="form-control"
+                   name="_{{fld.Name}}"
+                   ng-model="data.Row[fld.Name.trim()]"
+                   id="{{fld.Name}}"
+                   ng-readonly="ReadOnly(fld)"
+                   ng-required="Required(fld)"
+                   date-to-iso />
+        </div>-->
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                           make-datetime-picker
+                                                           datetimeformat="MMM DD YYYY"
+                                                           name="_{{fld.Name}}"
+                                                           ng-model="data.Row[fld.Name.trim()]"
+                                                           id="{{fld.Name}}"
+                                                           ng-readonly="ReadOnly(fld)"
+                                                           ng-required="Required(fld)" ng-inj-validator />
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="12" class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <!--<div class="col-sm-9">
+            <input type="text" class="form-control"
+                   name="_{{fld.Name}}"
+                   ng-model="data.Row[fld.Name.trim()]"
+                   id="{{fld.Name}}"
+                   ng-readonly="ReadOnly(fld)"
+                   ng-required="Required(fld)" make-datetime-picker datetimeformat="h:mm A"
+                   time-to-iso />
+        </div>-->
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                           name="_{{fld.Name}}"
+                                                           make-datetime-picker
+                                                           datetimeformat="LT"
+                                                           ng-model="data.Row[fld.Name.trim()]"
+                                                           id="{{fld.Name}}"
+                                                           ng-readonly="ReadOnly(fld)"
+                                                           ng-required="Required(fld)" ng-input text-type="'time'" text-format="'hh:mm A'" ng-inj-validator />
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="17" class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                           name="_{{fld.Name}}"
+                                                           ng-model="data.Row[fld.Name.trim()]"
+                                                           id="{{fld.Name}}"
+                                                           ng-readonly="ReadOnly(fld)"
+                                                           ng-required="Required(fld)" ng-input text-type="'datetime'" text-format="'MMM DD YYYY hh:mm A'" ng-inj-validator />
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="5" class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="form-control"
+                                                              name="_{{fld.Name}}"
+                                                              ng-model="data.Row[fld.Name.trim()]"
+                                                              id="{{fld.Name}}"
+                                                              ng-readonly="ReadOnly(fld)"
+                                                              ng-required="Required(fld)" ng-inj-validator />
+                                                </div>
+                                            </div>
+
+                                            <!--WYSYWIG-->
+                                            <div ng-switch-when="18" class="form-group text-editor col-md-12" ng-if="VisibleIf(fld)">
+                                                <label class="control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div>
+                                                    <text-angular name="_{{fld.Name}}"
+                                                                  ng-model="data.Row[fld.Name.trim()]"
+                                                                  id="{{fld.Name}}"
+                                                                  ng-readonly="ReadOnly(fld)"
+                                                                  ng-required="Required(fld)"
+                                                                  ng-inj-validator><p>{{data.Row[fld.Name.trim()]}}</p></text-angular>
+                                                </div>
+                                            </div>
+
+                                            <div ng-switch-when="16" class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div class="col-sm-9">
+                                                    <i class="fa fa-upload" title="Upload File" style="cursor:pointer" ng-click="UploadFileTab(data.Row, fld.Name)"></i>
+                                                    <label ng-class="data.Row[fld.Name.trim()] == null ? 'nan' : ''">{{data.Row[fld.Name.trim()] || 'Upload file here'}}</label>
+                                                    <!--<input type="file" class="form-control" accept="file_extension"
+            name="_{{//fld.Name}}"
+            ng-model="data.Row[fld.Name.trim()]"
+            id="{{//fld.Name}}"
+            ng-readonly="ReadOnly(fld)"
+            ng-required="Required(fld)" ng-inj-validator />-->
+
+                                                </div>
+                                            </div>
+
+                                            <div ng-switch-default class="form-group" ng-if="VisibleIf(fld)">
+                                                <label class="col-sm-3 control-label" for="{{ fld.Name }}">{{ fld.EffectiveLabel }}</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                           name="_{{fld.Name}}"
+                                                           ng-model="data.Row[fld.Name.trim()]"
+                                                           id="{{fld.Name}}"
+                                                           ng-readonly="ReadOnly(fld)"
+                                                           ng-required="Required(fld)" ng-input db-data-type="tf.DataType" ng-inj-validator />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <!-- detail tabs -->
+                            
+                            <div ng-switch-when="2" class="info-detail">
+                                <div class="panel-default" id="tb_{{ mTab.ID }}"> <!--ng-repeat="mTab in tMenuDetailTab | filter : MenuDetailTabFilter"-->
+                                    <div ng-switch="mTab.ID_MenuDetailTabType">
+                                        <div ng-switch-when="1" type-view="1" detail-grid="{ GUID: InfoGUID, DetailTab: mTab, TableSchema: GetTableSchema(mTab.TableName), DetailTabField: GetDetailTableField(mTab), Buttons: GetTabButton(mTab) }" button-click="ButtonClick" id="mdt-{{ mTab.ID }}"></div>
+                                        <div ng-switch-when="2" detail-tree="{ GUID: InfoGUID, DetailTab: mTab, TableSchema: GetTableSchema(mTab.TableName), DetailTabField: GetDetailTableField(mTab)  }" id="mdt-{{ mTab.ID }}"></div>
+                                        <div ng-switch-when="3" detail-list="{ GUID: InfoGUID, DetailTab: mTab, TableSchema: GetTableSchema(mTab.TableName), DetailTabField: GetDetailTableField(mTab)  }" id="mdt-{{ mTab.ID }}"></div>
+                                        <div ng-switch-when="5" type-view="2" v-if="VisibleIf" detail-grid="{ GUID: InfoGUID, DetailTab: mTab, TableSchema: GetTableSchema(mTab.TableName), DetailTabField: GetDetailTableField(mTab), Buttons: GetTabButton(mTab) }" button-click="ButtonClick" id="mdt-{{ mTab.ID }}"></div>
+                                        <div ng-switch-default id="mdt-{{ mTab.ID }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-body"> 
+                    <div class="web-content-body">
+                        <iframe frameid="{{ ReportTab.ID }}" id="pdfViewer" ng-src="{{ pdfSource }}" style="width: 100%; height: 82.5vh; border: none" allowfullscreen="" webkitallowfullscreen=""></iframe>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="panel-footer" ng-class="StatusBar()"><i class="fa {{StatusFa()}}"></i> &nbsp;{{ Status }}</div>
+        </div>
+    </form>
+    <div class="report-param-dialog">
+        <p class="report-param-header">Report Parameters <span ng-click="CloseReportParamDialog()"><i class="fa fa-close"></i></span></p>
+        <div class="report-param-inner">
+            <form class="form-horizontal" ng-submit="ReportParamDialogSubmit()">
+                <div class="form-group" ng-repeat="rp in ReportTab.ReportParams">
+                    <label for="inputEmail3" class="control-label">{{ rp.Label }}</label>
+                    <input type="text" ng-model="rp.Value" class="form-control" id="rp_{{ rp.Name }}" placeholder="{{  rp.Label }}">
+                </div>
+            </form>
+            <button type="button" ng-click="ReportParamDialogSubmit()" class="btn btn-default">Submit <i class="fa fa-send"></i></button>
+        </div>
+    </div>
+</div>
+

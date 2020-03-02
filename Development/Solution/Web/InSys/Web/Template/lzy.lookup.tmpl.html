@@ -1,0 +1,16 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label>{{ tMenu.Name }}</label>
+        <i class="fa fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div ng-show="showFilter" show-filter="showFilter" grid-filter="grid.filter" system-filter="tableOptions.columns"></div>
+        <div class="tbl-header">
+            <div class="btn-group">
+                <button ng-if="tableOptions.multiSelect" ng-click="retRowCollection()" class="btn btn-default load"><i class="fa fa-repeat"></i> Load</button>
+                <button type="button" class="btn btn-default filter" ng-click="TogglePanelFilter()"><i class="fa fa-filter"></i> Filter</button>
+            </div>
+        </div>
+        <lzy-table table-options="tableOptions"></lzy-table>
+    </div>
+</div>

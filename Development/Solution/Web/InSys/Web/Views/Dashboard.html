@@ -1,0 +1,70 @@
+﻿<div class="module-header dash-board" ng-init="Init()"  lazy-load-image="{ Image: 's1.jpg', Path: 'Banner' }">
+        <div id="crslAnnouncement" class="carousel slide carousel-fade col-md-12" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#crslAnnouncement" data-slide-to="0" class="active"></li>
+                <li data-target="#crslAnnouncement" data-slide-to="1"></li>
+                <li data-target="#crslAnnouncement" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                <!--<div class="col-md-2"></div>-->
+                <!--for ng-repeat-->
+                <div class="col-md-12 item shining active">
+                    <div class="col-md-2 date">
+                        <p class="month">JUN</p>
+                        <p class="day">30</p>
+                    </div>
+                    <div class="col-md-10 announcement">
+                        <p class="head"><i class="fa fa-bullhorn"></i> Azure Training</p>
+                        <div class="content-container">
+                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 shining item">
+                    <div class="col-md-2 date">
+                        <p class="month">JUL</p>
+                        <p class="day">01</p>
+                    </div>
+                    <div class="col-md-10 announcement">
+                        <p class="head"><i class="fa fa-bullhorn"></i> InSys Azure</p>
+                        <div class="content-container">
+                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 shining item">
+                    <div class="col-md-2 date">
+                        <p class="month">AUG</p>
+                        <p class="day">20</p>
+                    </div>
+                    <div class="col-md-10 announcement">
+                        <p class="head"><i class="fa fa-bullhorn"></i> Holiday Season</p>
+                        <div class="content-container">
+                            <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end for ng-repeat-->
+                <!--<div class="col-md-2"></div>-->
+            </div>
+        </div>
+
+    <div class="mh-header-overlay"></div>
+    <p class="mh-header">{{ toggled ? 'Announcement' : 'Dashboard' }}</p>
+    <center><i class="fa fa-chevron-up toggle-db" ng-click="ToggledDashBoard()"></i></center>
+</div>
+<div class="col-md-12" style="background-color: #f5f5f5; padding-left: 0px; padding-right: 0px;">
+    <ros-widget web-widget="WebWidget"></ros-widget>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 10000
+    })
+  });
+</script>

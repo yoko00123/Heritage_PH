@@ -1,0 +1,107 @@
+﻿<div class="print-dialog themes-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="padding: 0px 15px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <p style="padding-top: 7px;">{{ Menu.tMenu.Name }}</p>
+                </div>
+                <div class="col-md-5" style="padding:0px;">
+                    <script>
+                        $("#clearselected").click(function () {
+                            //  location.reload();
+                            // $('#me').trigger('click');
+                            $('#me').trigger('click');
+                            $('#clearthis').val("");
+                            $('#idd').trigger('click');
+
+                        });
+
+                        /*var auto_refresh = setInterval(
+                            function () {
+                                $('#load_tweets').load('Control-Filter.tmpl.html').fadeIn("slow");
+                            }, 10000);  refresh every 10000 milliseconds */
+
+                    </script>
+                   
+
+                    <div id="load_tweets" class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                       
+                        <button ng-click="retRowCollection()" class="btn btn-default shine load">Load</button>
+                        <button type="button" class="btn btn-default shine filter" ng-click="TogglePanelFilter()"></button>
+                        <div class="verticalToolbarSeparator"></div>
+                        <button type="button" class="btn btn-default shine" id="me" title="Close" ng-click="Cancel()"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div style="margin-top:-38px;max-height:85vh!important;display:none;" class="right-box lookup_filter_{{idx}}" ng-controller="RightPanelController">
+                <div class="right-inner">
+                    <p class="right-box-header">Filter<span ng-click="TogglePanelFilter()"><i class="fa fa-close"></i></span></p> <!--{{PanelTitle()}}-->
+                    <div class="lookup_filter_body_{{idx}} lfb">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="list-table">
+                        <div class="table-container" style="margin-bottom: 15px;">
+                            <table id="table" class="groupIndx_00 table table-mc-light-blue table-condensed MenuTable table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="user-select:none;padding-top: 0px;border-right:none!important;">&nbsp;</th>
+                                        <th ng-if="c.ID != 0 && HasUserColumn" style="user-select:none;" ng-repeat="c in grid.Columns | orderBy: 'SeqNo':false" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                                        <th ng-if="c.ID == 0 && !HasUserColumn" style="user-select:none;" ng-repeat="c in grid.Columns | orderBy: 'SeqNo':false" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in grid.Rows">
+                                        <td style="padding-bottom: 0px;width:20px;">
+                                            <span class="remember-me-check" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                                                <input type="checkbox" id="remember-me-{{r.ID}}" catch-check ng-model="r.IsChecked" targetid="child_00"/>
+                                                <label for="remember-me-{{r.ID}}" style="margin: 0; padding: 0 0 0 25px;" ></label>
+                                            </span>
+
+                                        </td>
+                                        <td ng-if="c.ID != 0 && HasUserColumn" ng-repeat="c in grid.Columns" ng-switch on="c.ID_SystemControlType">
+                                            <div ng-switch-when="3"><md-switch class="md-primary" ng-model="r[c.Name]" disabled></md-switch></div>
+                                            <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="00" txt="{{ r[c.Name.substr(3)] }}" data-toggle="tooltip" title="{{ r[c.Name.substr(3)] }}">{{ r[c.Name.substr(3)] }}</span></div>
+                                            <div ng-switch-when="7" style="position:relative;">
+                                                <!--<div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                                                <div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Container: 'Photos' }"></div>
+                                            </div>
+                                            <div ng-switch-default>
+                                                <span shorten-text tbl="00" txt="{{ FormatColumn(c.Name, r) }}" data-toggle="tooltip" title="{{ FormatColumn(c.Name, r) }}">{{ FormatColumn(c.Name, r) }}</span>
+                                            </div>
+                                        </td>
+                                        <td ng-if="c.ID == 0 && !HasUserColumn" ng-repeat="c in grid.Columns" ng-switch on="c.ID_SystemControlType">
+                                            <div ng-switch-when="3"><md-switch class="md-primary" ng-model="r[c.Name]" disabled></md-switch></div>
+                                            <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="00" txt="{{ r[c.Name.substr(3)] }}" data-toggle="tooltip" title="{{ r[c.Name.substr(3)] }}">{{ r[c.Name.substr(3)] }}</span></div>
+                                            <div ng-switch-when="7" style="position:relative;">
+                                                <!--<div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                                                <div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Container: 'Photos' }"></div>
+                                            </div>
+                                            <div ng-switch-default>
+                                                <span shorten-text tbl="00" txt="{{ FormatColumn(c.Name, r) }}" data-toggle="tooltip" title="{{ FormatColumn(c.Name, r) }}">{{ FormatColumn(c.Name, r) }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-footer" style="left:0px;">
+                        <p>{{ grid.Rows.length }}</p>
+                        <div class="paging">
+                            Show
+                            <select ng-model="grid.Take" ng-options="item as item for item in [10, 30, 50]" ng-change="LoadData()"></select> of
+                            Page
+                            <select ng-model="grid.Skip" ng-options="item as item for item in grid.Pages" ng-change="LoadData()"></select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

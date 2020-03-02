@@ -1,0 +1,24 @@
+﻿<div class="web-content-body" ng-init="Init()">
+    <div class="report-loading-screen">
+        <div class="report-loading-status">
+            <div class="loader"></div>
+           <!--{{ reportLoadingStatus }}-->
+        </div>
+    </div>
+    <div class="report-param-dialog">
+        <p class="report-param-header">Report Parameters <span ng-click="CloseReportParamDialog()"><i class="fa fa-close"></i></span></p>
+        <div class="report-param-inner">
+            <form class="form-horizontal" ng-submit="ReportParamDialogSubmit()">
+                <div class="form-group" ng-repeat="rp in data.ReportParams">
+                    <label for="inputEmail3" class="control-label">{{ rp.Label }}</label>
+                    <input type="text" ng-model="rp.Value" class="form-control" id="rp_{{ rp.Name }}" placeholder="{{  rp.Label }}">
+                </div>
+            </form>
+            <button type="button" ng-click="ReportParamDialogSubmit()" class="btn btn-default">Submit <i class="fa fa-send"></i></button>
+        </div>
+    </div>
+    <div>
+        <button style="margin-top: 4px;position: absolute;right: 6px;background-color:transparent;border:none;color:#eee;font-size: 16px;" ng-click="FilterClick()"><i class="fa fa-search"></i></button>
+    </div>
+    <iframe frameid="{{ Menu.tMenu.ID }}" id="pdfViewer" ng-src="{{ pdfSource }}" style="width: 100%; height: 95.5vh; border: none" allowfullscreen="" webkitallowfullscreen=""></iframe>
+</div>

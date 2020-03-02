@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Companies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="account-login" ng-controller="AccountComponent">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 login-holder" lazy-load-image="{ Image: 'index_bg3.jpg', Size: { Width: 1366, Height: 768 } }">
+                <div class="side-bar-logo">
+                    <div class="side-bar-overlay"></div>
+                    <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" lazy-load-image="{ Image: 's1.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's2.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's3.jpg', Path: 'LoginBG' }">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-container" ng-init="InitCompanies()">
+                    <div class="login-inner">
+                        <form>
+                            <p class="login-title"><span><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" /></span> Select a company</p>
+                            <ul class="company-ul">
+                                <li ng-repeat="c in Companies | orderBy : 'ID'" ng-click="SelectCompany(c)">
+                                    <div style="display:flex">
+                                        @*<img />*@
+                                        <p class="company-abbr">{{ SetIcon(c.Name) }}</p>
+                                        <p ng-mouseenter="SetSlide(c.ID)" ng-mouseleave="DeSetSlide()" id="ml_{{c.ID}}"><span>{{ c.Name }}</span></p>
+                                    </div>
+                                </li> 
+                            </ul>
+                            <button class="btn btn-primary back-btn" style="border-radius: 0px;margin-left: 30px; margin-top: 20px;" ng-click="LogOut()">Back</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 bg-holder">
+                <div class="app-bg">
+                    <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" lazy-load-image="{ Image: 's1.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's2.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's3.jpg', Path: 'LoginBG' }">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-bg-overlay"></div>
+
+                    <div class="insys">
+                        <p class="main-text">InSys</p>
+                        <p class="sub-text">Integrated System | Powered by Intellismart</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-footer">&#9400; Intellismart Technology Inc.</p>
+        </div>
+    </div>
+</div>
+@*<script>
+    //Overrides
+    window.PreLoad = (function (actionCallback) {
+        require(['/Web/Components/AccountComponent.js'], function () {
+            actionCallback();
+        });
+    });
+</script>*@
+
+<script>window.PreLoad = (function (actionCallback) { require(['/Scripts/System/Out/auth.min.js'], function () { actionCallback(); }); });</script>
+
+

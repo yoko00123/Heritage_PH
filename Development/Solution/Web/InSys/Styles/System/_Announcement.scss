@@ -1,0 +1,129 @@
+﻿#crslAnnouncement {
+    position: absolute;
+    top: 25%;
+    z-index: 1;
+    display: none;
+
+    .item {
+        background-color: rgba(0,0,0,.2);
+        height: 160px;
+        padding: 0px;
+
+        .date {
+            height: 160px;
+
+            p {
+                padding: 0px;
+                text-align: center;
+
+                &.month {
+                    font-weight: bold;
+                    top: 25px;
+                    position: relative;
+                    font-size: 37px;
+                    text-transform: uppercase;
+                }
+
+                &.day {
+                    font-size: 70px;
+                }
+            }
+
+            &:after {
+                content: '';
+                width: 2px;
+                top: 30px;
+                right: 2px;
+                height: 100px;
+                background-color: #ccc;
+                position: absolute;
+            }
+        }
+
+        .announcement {
+            height: 160px;
+            padding-top: 25px;
+
+            p {
+                padding: 0px;
+
+                &.head {
+                    font-size: 18px;
+                    padding: 5px 0px;
+
+                    i {
+                        color: #ccc;
+                    }
+                }
+            }
+
+            .content-container {
+                max-height: 10vh;
+                min-height: 10vh;
+                overflow-y: auto;
+
+                .content {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        &.active {
+        }
+    }
+
+    .carousel-indicators {
+        position: absolute;
+        width: auto;
+        margin: 0px;
+        bottom: 0px;
+        left: 25px;
+    }
+}
+
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+}

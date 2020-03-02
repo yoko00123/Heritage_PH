@@ -1,0 +1,92 @@
+﻿<div class="direct-report" ng-init="Init()">
+    <div class="row" style="margin: 0px">
+        <div class="col-md-12" style="padding: 0px;">
+            <div class="col-md-3 col-sm-3 left-panel">
+                <p class="left-header">Select employee</p>
+                <div class="emp-list-container">
+                    <div class="search-container">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search employee..." ng-model="ESearch" />
+                    </div>
+                    <ul>
+                        <li ng-repeat="e in AData.Source | filter: SearchEmployee(ESearch)" ng-click="SelectEmployee(e)">
+                            <img lazy-load-image="{ Image: e.ProfilePicture || 'userdefault.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" />
+                            <div style="display:grid;">
+                                <p class="emp-name">{{e.Name}}</p>
+                                <p class="emp-position">{{e.Department}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 right-panel">
+                <div class="detail-header" ng-show="Employee.ID >= 1">
+                    <div class="btn-grp">
+                        <div class="itm" href="javascript:;" ng-repeat="fm in FilingModule" ng-click="OpenInfo(fm.ID_MenuFiling,Employee.ID )">
+                            <i class="{{fm.Icon}}"></i>
+                            <p>{{fm.Name}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-selection" ng-show="Employee.ID == null">
+                    <p>Please select employee</p>
+                </div>
+
+                <div class="detail-container" ng-show="Employee.ID >= 1">
+                    <div class="cover-photo">
+                        <img class="profile-pic" lazy-load-image="{ Image: Employee.ProfilePicture || 'userdefault.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" />
+                        <div style="position: absolute;left: 250px;top: 20px;">
+                            <p class="name">{{Employee.Name}}</p>
+                            <p class="position">{{Employee.Department}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4" style="min-height: 300px;max-height: 300px;padding-top: 100px;padding-right: 0px;">
+                                <div class="scrl">
+                                    <div class="credit-container" ng-repeat="lc in ELC" ng>
+                                        <p class="leave-itm" data-toggle="tooltip" title="{{lc.LeaveItem}}">{{lc.Code}}</p>
+                                        <div class="alloted"><p class="count" style="color: #27ae60">{{lc.Alloted}}</p> <p class="lbl">alloted</p></div>
+                                        <div class="used"><p class="count" style="color: #2980b9">{{lc.Used}}</p> <p class="lbl">used</p></div>
+                                        <div class="balanced"><p class="count" style="color: #c0392b">{{lc.Balance}}</p> <p class="lbl">balanced</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8" style="padding-top: 30px;">
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Code</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.EmployeeCode)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Company</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.Company)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Department</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.Department)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Position</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.Position)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Status</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.EmployeeStatus)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Access no.</label>
+                                    <div class="col-md-9"><span>{{IsNull(Employee.AccessNo)}}</span></div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-3">Date hired</label>
+                                    <div class="col-md-9"><span>{{IsNull(DateFormatter(Employee.StartDate))}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

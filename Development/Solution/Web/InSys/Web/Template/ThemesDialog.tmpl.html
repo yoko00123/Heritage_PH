@@ -1,0 +1,208 @@
+﻿<div class="print-dialog themes-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="padding: 0px 15px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <p style="padding-top: 7px;">Add Theme</p>
+                </div>
+                <div class="col-md-5" style="padding:0px;">
+                    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default shine" title="Save" ng-click="saveThemes()" style="padding: 1px 10px;height: 34px;border-radius: 0px;"><i class="fa fa-floppy-o"></i></button>
+                        <button type="button" class="btn btn-default shine" title="Help" ng-click="OpenThemeHelp()" style="height: 34px;border-radius: 0px;"><i class="fa fa-question-circle"></i></button>
+                        <button type="button" class="btn btn-default shine" title="Close" ng-click="Cancel()" style="height: 34px;border-radius: 0px;"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="hidden" ng-model="skin.ID" disabled="disabled" />
+                        <div class="form-group col-md-12">
+                            <label class="col-md-3 control-label" for="Name">Skin Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control"
+                                       name="_Name"
+                                       ng-model="skin.Name"
+                                       id="Name"
+                                       placeholder="Skin Name"
+                                       required />
+                            </div>
+                        </div>
+                        <div class="form-group  col-md-12">
+                            <label class="col-md-3 control-label" for="ID_Company">Company</label>
+                            <div class="col-md-9" auto-complete-box>
+                                <input type="text" class="form-control"
+                                       name="_ID_Company"
+                                       ng-model="skin.ID_Company"
+                                       id="auto_Company"
+                                       placeholder="Company" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12" style="margin-top: 10px;margin-left: -10px;">
+                            <fieldset>
+                                <div class="col-md-offset-3 col-md-9" style="padding-left: 25px;">
+                                    <span class="remember-me-check">
+                                        <input type="checkbox" id="remember-me-123" name="_IsActive" ng-model="skin.IsActive" /> Active
+                                        <label for="remember-me-123" style="margin: 0; padding: 0 0 0 25px;">Active</label>
+                                    </span>
+
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:-20px"><hr /></div>
+                    <div class="col-md-6">
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="PrimaryColor">Primary Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.PrimaryColor == null ? skin.PrimaryColor = '#2980b9' : skin.PrimaryColor = skin.PrimaryColor)"
+                                       ng-model="skin.PrimaryColor"
+                                       id="PrimaryColor"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="Secondary">Secondary Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.SecondaryColor == null ? skin.SecondaryColor = '#e67e22' : skin.SecondaryColor = skin.SecondaryColor)"
+                                       ng-model="skin.SecondaryColor"
+                                       id="Secondary"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="RightBox">Filter Container Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.RightBox == null ? skin.RightBox = '#333333' : skin.RightBox = skin.RightBox)"
+                                       ng-model="skin.RightBox"
+                                       id="RightBox"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="RightBoxHeader">Filter Header Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.RightBoxHeader == null ? skin.RightBoxHeader = '#1c1c1c' : skin.RightBoxHeader = skin.RightBoxHeader)"
+                                       ng-model="skin.RightBoxHeader"
+                                       id="RightBoxHeader"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="LabelColorRB">Filter Label Text Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.LabelColorRB == null ? skin.LabelColorRB = '#aaaaaa' : skin.LabelColorRB = skin.LabelColorRB)"
+                                       ng-model="skin.LabelColorRB"
+                                       id="LabelColorRB"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="RightBoxInput">Filter Control Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.RightBoxInput == null ? skin.RightBoxInput = '#333333' : skin.RightBoxInput = skin.RightBoxInput)"
+                                       ng-model="skin.RightBoxInput"
+                                       id="RightBoxInput"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="TextColorRB">Filter Control Text Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.TextColorRB == null ? skin.TextColorRB = '#ffffff' : skin.TextColorRB = skin.TextColorRB)"
+                                       ng-model="skin.TextColorRB"
+                                       id="TextColorRB"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="SideMenu">Menu Container Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.SideMenu == null ? skin.SideMenu = '#333333' : skin.SideMenu = skin.SideMenu)"
+                                       ng-model="skin.SideMenu"
+                                       id="SideMenu"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="TextColorMenu">Menu Text Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.TextColorMenu == null ? skin.TextColorMenu = '#ffffff' : skin.TextColorMenu = skin.TextColorMenu)"
+                                       ng-model="skin.TextColorMenu"
+                                       id="TextColorMenu"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="Header">Header Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.Header == null ? skin.Header = '#1c1c1c' : skin.Header = skin.Header)"
+                                       ng-model="skin.Header"
+                                       id="Header"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="TextColor">Header Text Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.TextColor == null ? skin.TextColor = '#ffffff' : skin.TextColor = skin.TextColor)"
+                                       ng-model="skin.TextColor"
+                                       id="TextColor"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="HeaderSearch">Header Search Background Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.HeaderSearch == null ? skin.HeaderSearch = '#333333' : skin.HeaderSearch = skin.HeaderSearch)"
+                                       ng-model="skin.HeaderSearch"
+                                       id="HeaderSearch"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                        <div class="form-group color">
+                            <label class="col-sm-8 control-label" for="SearchTextColor">Header Search Text Color</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ros-spectrum
+                                       ng-init="(skin.SearchTextColor == null ? skin.SearchTextColor = '#ffffff' : skin.SearchTextColor = skin.SearchTextColor)"
+                                       ng-model="skin.SearchTextColor"
+                                       id="SearchTextColor"
+                                       style="display: none;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

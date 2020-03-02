@@ -1,0 +1,72 @@
+﻿<div class="print-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-7">
+                    <p>Print</p>
+                </div>
+                <div class="col-md-5">
+                    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" ng-click="Cancel()"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" style="border-right: 1px solid #ccc;">
+                        <p class="pt-header">Print Type</p>
+                        <form>
+                            <div class="custom-radio">
+                                <input type="radio" ng-model="DocType" id="1" class="radio" ng-value="1" />
+                                <label for="1">PDF</label>
+                            </div>
+
+                            <div class="custom-radio">
+                                <input type="radio" ng-model="DocType" id="2" class="radio" ng-value="2" />
+                                <label for="2">Excel</label>
+                            </div>
+
+                            <div class="custom-radio">
+                                <input type="radio" ng-model="DocType" id="3" class="radio" ng-value="3" />
+                                <label for="3">CSV</label>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="pt-header" style="margin: 10px 0px 15px 0px;">Print Options</p>
+                                <div>
+                                    <form>
+                                        <label>Pages</label>
+                                        <div>
+                                            <input name="rpage" type="radio" ng-model="PrOptions.PageSelection" ng-value="1" />
+                                            <label for="rpage" style="font-weight: normal;">All</label>
+                                        </div>
+                                        <div style="display:inline-flex;">
+                                            <input name="rpage" type="radio" ng-model="PrOptions.PageSelection" ng-value="2"/>
+                                            <input ng-disabled="PrOptions.PageSelection !== 2" type="text" ng-model="PrOptions.Page" placeholder="e.g. 1-5, 8, 11-13" style="width:90%;margin-left:5px;" />
+                                        </div>
+                                        <label style="margin-top: 5px;">Layout</label>
+                                        <div>
+                                            <select ng-model="PrOptions.Layout" class="layout">
+                                                <option ng-value="1">Landscape</option>
+                                                <option ng-value="2">Portrait</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <button class="btn btn-default col-md-6 pt-btn" ng-repeat="pr in PrButtons" ng-click="btnClick(pr)"> 
+                            <p><i class="fa {{ pr.Icon }}"></i>{{ pr.Name }}</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

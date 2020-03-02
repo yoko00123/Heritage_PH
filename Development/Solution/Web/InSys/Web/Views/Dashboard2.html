@@ -1,0 +1,131 @@
+﻿<div class="dashboard-2" lazy-load-image="{ Image: 's1.jpg', Path: 'Banner' }" ng-init="Init()">
+    <span class="dashboard-2-close" ng-click="closeDashHead()"><i class="fa fa-close"></i> close</span>
+    <p class="dashboard-2-title" ng-click="openDashHead()">{{HasClass == true ? 'Announcement' : 'Dashboard'}}</p>
+    <div class="dashboard-2-overlay"></div>
+    <div id="crslAnnouncement" class="carousel slide carousel-fade col-md-12" data-ride="carousel" ng-if="Announcements.length > 0">
+        <ol class="carousel-indicators">
+            <li data-target="#crslAnnouncement" ng-repeat="d in Announcements" data-slide-to="{{$index}}" ng-class="{'active' : $index == 0}"></li>
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+            <!--<div class="col-md-2"></div>-->
+            <!--for ng-repeat-->
+            <div ng-repeat="d in Announcements" class="col-md-12 item shining" ng-class="{'active' : $index == 0}">
+                <div class="col-md-2 date">
+                    <p class="month">{{FormatCalendarDate(d.StartDate, 'month')}}</p>
+                    <p class="day">{{FormatCalendarDate(d.StartDate, 'day')}}</p>
+                </div>
+                <div class="col-md-10 announcement">
+                    <p class="head"><i class="fa fa-bullhorn"></i> {{d.Name}}</p>
+                    <div class="content-container">
+                        <p class="content">{{d.Comment}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="appLayoutBar" style="display:none;">
+    <div class="btn-group pull-right" role="group" aria-label="...">
+        <button class="btn btn-default shine" ng-click="saveLayout()"><i class="fa fa-save"></i> Save</button>
+        <button class="btn btn-default shine" ng-click="closeBar()"><i class="fa fa-ban"></i> Cancel</button>
+    </div>
+</div>
+<div id="appLayout" class="col-md-12" @contextmenu="openMenu" style="padding: 0px;overflow-y:auto;overflow-x:hidden;">
+    <div>
+        <ul id="right-click-menu" tabindex="-1" ref="right" v-if="viewMenu" v-on:blur="closeMenu" v-bind:style="{top:top, left:left}">
+            <li v-if="!draggable" style="cursor:pointer;" @click="enableEditing">Enable Editing</li>
+            <li v-if="draggable" style="cursor:pointer;" @click="saveLayout">Save</li>
+            <li v-if="draggable" style="cursor:pointer;" @click="cancelLayout">Cancel</li>
+        </ul>
+    </div>
+
+    <grid-layout :layout="layout"
+                 :col-num="12"
+                 :row-height="30"
+                 :is-draggable="draggable"
+                 :is-resizable="resizable"
+                 :vertical-compact="true"
+                 :margin="[10, 10]"
+                 :use-css-transforms="true">
+
+        <div v-if="layout.length == 0" style="width: 100%;margin-top: 10%;text-align: center;font-size: 25px;color: #909090;line-height: 50px;">
+            Add widgets here...
+            <br />
+            <span><i class="fa fa-info-circle" title="Must be an accessible menu"></i> Go to > Menu > Right Click > Add to Dashboard</span>
+        </div>
+
+        <grid-item v-for="item in layout"
+                   :x="item.x"
+                   :y="item.y"
+                   :w="item.w"
+                   :h="item.h"
+                   :i="item.i"
+                   :min-w="item.MinW"
+                   :min-h="item.MinH"
+                   @moved="movedEvent">
+            <!--@click="gotoMenu(item.menu)"-->
+            <div v-if="item.type == 1 && !draggable" @click="gotoMenu(item.menu)" style="width:100%;height:100%;" v-bind:id="'sl_' + item.i" @mouseover="SetSlide(item.i)" @mouseleave="DeSetSlide()" v-bind:class="{ hasDblClick: item.type == 1 }">
+                <div style="padding:5px;" class="ov-container">
+                    <p>{{item.name}}</p>
+                </div>
+                <p class="menu-abbr">{{SetIcon(item.name)}}</p>
+                <span v-if="item.cnt >= 0" class="count">{{item.cnt}}</span>
+            </div>
+            <div v-if="item.type == 1 && draggable" style="width:100%;height:100%;" v-bind:id="'sl_' + item.i" @mouseover="SetSlide(item.i)" @mouseleave="DeSetSlide()" v-bind:class="{ hasDblClick: item.type == 1 }">
+                <i v-if="draggable && !item.IsRemove" @click="RemoveWidget(item.i, event)" class="fa fa-close" style="position:absolute;right:5px;cursor:pointer;padding:5px;z-index:1;" title="Remove Shortcut Link"></i>
+                <div style="padding:5px;" class="ov-container">
+                    <p>{{item.name}}</p>
+                </div>
+                <p class="menu-abbr">{{SetIcon(item.name)}}</p>
+                <span v-if="item.cnt >= 0" class="count">{{item.cnt}}</span>
+            </div>
+            <div v-if="item.type == 3" style="width:100%;height:100%;overflow:auto;" v-bind:id="'sl_' + item.i">
+                <i v-if="draggable && !item.IsRemove" @click="RemoveWidget(item.i, event)" class="fa fa-close" style="position:absolute;right:5px;cursor:pointer;padding:5px;z-index:1;" title="Remove Pie"></i>
+                <div v-bind:class="{'col-md-4' : item.w >= 8}" style="padding:5px;">
+                    <pie-chart :width="275" :height="295" :chart-id="item.i" :labels="item.pieData.Label" :datas="item.pieData.Data" :colors="item.pieData.Colors" :title="item.column + ' Summary of ' + item.name"></pie-chart>
+                </div>
+                <div v-if="item.w >= 8" class="col-md-8" style="padding:5px;max-height:295px;overflow-x:hidden;overflow-y:auto;">
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Legend</th>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(d, $index) in item.pieData.Data">
+                                <td>
+                                    <div style="width:25px;height:25px;" v-bind:style="{backgroundColor: item.pieData.Colors[$index]}"></div>
+                                </td>
+                                <td>{{item.pieData.Label[$index]}}</td>
+                                <td>{{d}}</td>
+                                <td>{{item.pieData.Percentage[$index]}} %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div v-if="item.type == 4" style="width:100%;height:100%;overflow:auto;" v-bind:id="'sl_' + item.i">
+                <i v-if="draggable && !item.IsRemove" @click="RemoveWidget(item.i, event)" class="fa fa-close" style="position:absolute;right:5px;cursor:pointer;padding:5px;z-index:1;" title="Remove Bar"></i>
+                <div style="padding:5px;">
+                    <bar-chart :width="275" :height="295" :chart-id="item.i" :labels="item.barData.Label" :datas="item.barData.Data" :colors="item.barData.Colors" :title="item.column + ' Summary of ' + item.name"></bar-chart>
+                </div>
+            </div>
+        </grid-item>
+    </grid-layout>
+    <!--<div v-on="contextmenu: openMenu"></div>-->
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      setTimeout(function () {
+          $(".carousel").carousel({
+              interval: 10000
+          })
+      },2000)
+  });
+</script>

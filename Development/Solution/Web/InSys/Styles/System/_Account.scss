@@ -1,0 +1,337 @@
+﻿#account-login, #change-password {
+
+    .login-holder {
+        position: relative;
+        /*background: url('/Contents/Images/index_bg3.jpg') center center no-repeat;*/
+        background-size: cover !important;
+        min-height: 90vh;
+
+        .side-bar-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 35px;
+            /*
+            //background: $PrimaryColor;
+            background: url('/Contents/Images/index_bg2.jpg');
+            */
+            .side-bar-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 35px;
+                background-color: $SecondaryColor;
+                opacity: .5;
+                z-index: 999;
+            }
+        }
+
+        .login-container {
+            padding-left: 35px;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            padding-top: 15%;
+
+            .login-title {
+                //position: absolute;
+                //top: 10%;
+                margin-left: 22px;
+                color: $PrimaryColor;
+                /* font-weight: bold; */
+                font-size: 23px;
+                margin-bottom: 30px;
+
+                span {
+                    img {
+                        width: 45px;
+                        height: 45px;
+                        background: url(../../CompanyLogo5.ico) center center no-repeat;
+                    }
+                }
+            }
+
+            .company-ul {
+                list-style: none;
+                max-height: 380px;
+                min-height: 380px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding-left: 15px;
+
+                li {
+                    position: relative;
+                    margin: 5px;
+                    padding: 10px;
+                    border: none;
+                    cursor: pointer;
+                    transition: all .3s;
+
+                    p {
+                        margin: 0px 10px;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        max-width: 75%;
+                        text-overflow: ellipsis;
+                        color: #333;
+                        padding-left: 60px;
+                        width: 100%;
+                        transition: color .3s;
+
+                        &.company-abbr {
+                            text-transform: uppercase;
+                            background-color: $PrimaryColor;
+                            padding: 15px;
+                            color: #fff;
+                            position: absolute;
+                            left: 0px;
+                            width: 52px;
+                            border-radius: 50%;
+                            text-align: center;
+                            margin: 0px;
+                            top: 0px;
+                            box-shadow: 0 5px 17px -3px #333;
+                            transition: all .3s;
+                        }
+
+                        span {
+                            display: inline-block;
+                            margin-left: 0px;
+                        }
+
+                        &.text-slide {
+                            &:hover {
+                                span {
+                                    margin-left: 0px;
+                                    transition: margin-left 5s;
+                                }
+                            }
+                        }
+                    }
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        background-color: #ccc;
+                    }
+
+                    &:hover {
+                        background-color: $PrimaryColor;
+                        transition: all .3s;
+                        box-shadow: 0 5px 17px -3px #373737;
+                        //border: 1px solid #2980b9;
+                        p {
+                            color: #eee;
+                            transition: color .3s;
+
+                            &.company-abbr {
+                                //border-right: 1px solid #ccc;
+                                font-size: 18px;
+                                padding: 12px;
+                                border-radius: 0px;
+                                box-shadow: none; //new
+                                //background-color: transparent; //new
+                                transition: all .3s;
+                            }
+                        }
+
+                        &:after {
+                            width: 120%;
+                            background-color: rgba(255,255,255,0);
+                            -webkit-transition: all .5s ease-out;
+                            -moz-transition: all .5s ease-out;
+                            -ms-transition: all .5s ease-out;
+                            -o-transition: all .5s ease-out;
+                            transition: all .5s ease-out;
+                        }
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 0%;
+                        height: 100%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-transition: none;
+                        -moz-transition: none;
+                        -ms-transition: none;
+                        -o-transition: none;
+                        transition: none;
+                    }
+                }
+            }
+
+            input {
+                width: 90%;
+                margin: 15px auto;
+                border-radius: 0px;
+                box-shadow: none;
+            }
+
+            .sign-btn, .submit-btn, .back-btn {
+                float: none;
+                margin: auto;
+                border-radius: 0;
+                border: none;
+                padding: 7px 20px;
+                margin-top: 15%;
+                outline: none;
+                background-color: $PrimaryColor;
+            }
+        }
+    }
+
+    .bg-holder {
+        padding-right: 0;
+        padding-left: 0;
+
+        .app-bg {
+            //background: $SecondaryColor;
+            height: 100vh;
+            //background: url('/Contents/Images/index_bg.jpg') center center no-repeat;
+            //background-size: cover;
+            //background-position: bottom right;
+            .app-bg-overlay {
+                position: absolute;
+                top: 0;
+                z-index: 2;
+                height: 100%;
+                width: 100%;
+                background-color: $PrimaryColor;
+                opacity: .5;
+            }
+
+            .insys {
+                position: absolute;
+                right: 50px;
+                top: 20%;
+                z-index: 3;
+
+                p {
+                    color: #fff;
+                    font-weight: lighter;
+                    font-family: Microsoft Yi Baiti;
+                    margin: 0px;
+                    text-align: right;
+
+                    &.main-text {
+                        font-size: 165px;
+                    }
+
+                    &.sub-text {
+                        font-size: 30px;
+                        position: relative;
+                        bottom: 35px;
+                    }
+                }
+            }
+        }
+    }
+
+    .text-footer {
+        position: absolute;
+        bottom: 10px;
+        margin-left: 70px;
+        color: #bdc3c7;
+    }
+
+    .captcha-holder {
+        position: relative;
+        background: transparent; //#f0f8ff;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        & captcha {
+            width: 200px;
+            height: 100px;
+            position: relative;
+            margin: auto;
+        }
+    }
+}
+
+.reCaptcha {
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    color: #2980b9;
+    width: 100px;
+    margin: auto;
+    outline: none;
+}
+
+#carouselHacked {
+    .item {
+        height: 100vh;
+        background-size: cover !important;
+        //transform: scale(1);
+        //transition: transform 5s ease-in-out;
+        &.active {
+            //transform: scale(1.2);
+            //transition: transform 5s ease-in-out;
+        }
+    }
+}
+
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1199px){
+    .login-holder {
+        position: absolute!important;
+        width: 400px;
+        z-index: 3;
+    }
+}

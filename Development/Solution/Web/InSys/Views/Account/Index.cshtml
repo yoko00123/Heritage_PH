@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="account-login" ng-controller="AccountComponent">
+    <div class="container-fluid" ng-init="Implant()">
+        <div class="row">
+            <div class="col-lg-4 login-holder" lazy-load-image="{ Image: 'index_bg3.jpg', Size: { Width: 1366, Height: 768 } }">
+                <div class="side-bar-logo">
+                    <div class="side-bar-overlay"></div>
+                    <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" lazy-load-image="{ Image: 's1.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's2.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's3.jpg', Path: 'LoginBG' }">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-container">
+                    <div class="login-inner">
+                        <form ng-submit="SignIn()">
+                            <p class="login-title" style="color:#008ae6; font-weight:bold;"><span><img style="width:80px; height:80px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" /></span> THHM-Online</p>
+                            <div class="control-group">
+                                <input type="text" class="form-control" placeholder="Username" ng-model="data.Username" autocomplete="off" ng-inj-validator />
+                            </div>
+                            <div>
+                                <div class="control-group">
+                                    <input type="password" class="form-control" placeholder="Password" ng-model="data.Password" ng-inj-validator />
+                                </div>
+                            </div>
+                            <span class="remember-me-check" style="position: relative; display: flex; justify-content: flex-end; padding: 0 30px;">
+                                <input type="checkbox" id="remember-me-asd" name="asd" ng-model="data.SelectCompanyAfterValidation" autocomplete="off" />
+                                @*<label for="remember-me-asd" style="margin: 0; padding: 0 0 0 25px; font-weight: normal!important;">Select Company</label>*@
+                            </span>
+                            <div class="captcha-holder" ng-show="CaptchaValue !== null">
+                                <captcha>
+                                </captcha>
+                                <button class="reCaptcha" type="button" ng-click="GenerateCaptcha()"><i class="fa fa-refresh"></i> re captcha</button>
+                                <input class="form-control" type="password" autocomplete="off" ng-model="CaptchaInput" placeholder="Type captcha here..." style="width: 200px;" ng-inj-validator />
+                            </div>
+                            <center>
+                                <button class="btn btn-primary sign-btn" type="submit" style="margin: 0;">Sign-in</button>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 bg-holder">
+                <div class="app-bg">
+                    <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" lazy-load-image="{ Image: 's1.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's2.jpg', Path: 'LoginBG' }">
+                            </div>
+                            <div class="item" lazy-load-image="{ Image: 's3.jpg', Path: 'LoginBG' }">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-bg-overlay"></div>
+
+                    <div class="insys">
+                        <p class="main-text" style="font-size:64px; color:#008ae6; font-weight:bold;">THHM-Online</p>
+                        <p class="sub-text">Integrated System | Powered by Intellismart</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-footer">&#9400; Intellismart Technology Inc.</p>
+        </div>
+    </div>
+</div>
+<script>window.PreLoad = (function (actionCallback) { require(['/Scripts/System/Out/auth.min.js'], function () { actionCallback(); }); });</script>
+

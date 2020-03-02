@@ -1,0 +1,22 @@
+﻿<div class="btn-toolbar info-detail-button-container" role="toolbar" aria-label="...">
+
+    <div class="btn-group tab-heading-2" role="group" aria-label="...">
+        <span>{{ dtData.Name }}</span> 
+        <div class="detail-paging">
+            <p>Total no. of items: <span>{{ RowData.length }}</span> | </p>
+            <div class="paging">
+                Show
+                <select ng-model="grid.Take" ng-options="item as item for item in [10, 30, 50]" ng-change="UpdateView()"></select> of
+                Page
+                <select ng-model="grid.Skip" ng-options="item as item for item in grid.Pages" ng-change="UpdateView()"></select>
+            </div>
+        </div>
+        <span ng-if="HasImportFile">
+            <button type="button" class="btn btn-default" ng-click="bImportFile()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-upload"></i> Import File</button>
+            <button type="button" class="btn btn-default" ng-click="bGenerateTemplate()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-file-excel-o"></i> Generate Template</button>
+        </span> 
+    </div>
+    <div class="Detail-Container">
+        <div class="mdt-table"></div>
+    </div>
+</div>

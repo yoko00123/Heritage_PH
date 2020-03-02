@@ -1,0 +1,60 @@
+﻿<div class="print-dialog themes-dialog create-pie-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="padding: 0px 15px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <p style="padding-top: 7px;">Create Chart</p>
+                </div>
+                <div class="col-md-5" style="padding:0px;">
+                    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default shine" title="Save" ng-click="saveChart()" style="padding: 1px 10px;height: 34px;border-radius: 0px;"><i class="fa fa-floppy-o"></i></button>
+                        <button type="button" class="btn btn-default shine" title="Close" ng-click="Cancel()" style="height: 34px;border-radius: 0px;"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 template">
+                        <div title="Pie Chart" ng-click="selectWidget(3)" ng-class="{'activeWidget': currentWidget == 3}" class="col-md-12 template-itm" style="background-image:url('../../Resources/Images/pie.PNG');"><span>Pie Chart</span><i class="fa fa-check-circle"></i></div>
+                        <div title="Doughnut Chart" ng-click="selectWidget(5)" ng-class="{'activeWidget': currentWidget == 5}" class="col-md-12 template-itm" style="background-image:url('../../Resources/Images/doughnut.PNG');"><span>Doughnut Chart</span><i class="fa fa-check-circle"></i></div>
+                        <div title="Bar Chart" ng-click="selectWidget(4)" ng-class="{'activeWidget': currentWidget == 4}" class="col-md-12 template-itm" style="background-image:url('../../Resources/Images/bar.PNG');"><span>Bar Chart</span><i class="fa fa-check-circle"></i></div>
+                        <div title="Horizontal Bar Chart" ng-click="selectWidget(6)" ng-class="{'activeWidget': currentWidget == 6}" class="col-md-12 template-itm" style="background-image:url('../../Resources/Images/horizontalBar.PNG');"><span> Horizontal Bar Chart</span><i class="fa fa-check-circle"></i></div>
+                        <div title="Line Chart" ng-click="selectWidget(7)" ng-class="{'activeWidget': currentWidget == 7}" class="col-md-12 template-itm" style="background-image:url('../../Resources/Images/line.PNG');"><span>Line Chart</span><i class="fa fa-check-circle"></i></div>
+                    </div>
+                    <div class="col-md-8 template-r">
+                        <p style="margin: 0px;">Preview:</p>
+                        <div id="previewChart" style="width:100%"></div>
+                        <p style="margin: 0px;">Columns:</p>
+                        <button type="button" class="btn btn-primary" ng-click="showPreviewChart()">Try</button>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#Group">Group</a></li>
+                            <li ng-if="cData.selectedColumn != null && (currentWidget == 4 || currentWidget == 6 || currentWidget == 7)"><a data-toggle="tab" href="#Series">Series</a></li>
+                        </ul>
+
+                        <div class="tab-content col-md-12" style="max-height: 288px;min-height: 288px;overflow-x: hidden;overflow-y: auto;">
+                            <div id="Group" class="tab-pane fade in active col-md-12" style="padding-top:15px;margin-bottom:15px;padding-left: 0;padding-right: 0;">
+                                <div ng-if="c.Name.toLowerCase() != 'id'" ng-repeat="c in columns" class="custom-radio">
+                                    <input type="radio" ng-model="cData.selectedColumn" ng-change="setSeries()" name="columns" id="{{$index}}" class="radio" ng-value="c.Name" />
+                                    <label ng-if="c.ID_SystemControlType == 2 || c.ID_SystemControlType == 4" for="{{$index}}">{{ c.Name.substr(3) }}</label>
+                                    <label ng-if="c.ID_SystemControlType != 2 && c.ID_SystemControlType != 4" for="{{$index}}">{{c.Name}}</label>
+                                </div>
+                                <div style="text-align:center;" ng-if="!checkIfHasColumns(columns)">
+                                    <i>No column available for grouping.</i>
+                                </div>
+                            </div>
+                            <div ng-if="cData.selectedColumn != null && (currentWidget == 4 || currentWidget == 6 || currentWidget == 7)" id="Series" class="tab-pane fade col-md-12" style="padding-top:15px;margin-bottom:15px;padding-left: 0;padding-right: 0;">
+                                <div ng-if="c.Name.toLowerCase() != 'id' && cData.selectedColumn != c.Name" ng-repeat="c in columns2" class="custom-radio">
+                                    <input type="radio" ng-model="cData.selectedColumn2" name="columns2" id="{{$index}}_2" class="radio" ng-value="c.Name" />
+                                    <label ng-if="c.ID_SystemControlType == 2 || c.ID_SystemControlType == 4" for="{{$index}}_2">{{ c.Name.substr(3) }}</label>
+                                    <label ng-if="c.ID_SystemControlType != 2 && c.ID_SystemControlType != 4" for="{{$index}}_2">{{c.Name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

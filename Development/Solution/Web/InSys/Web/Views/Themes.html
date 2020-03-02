@@ -1,0 +1,33 @@
+﻿<div class="list-table web-themes">
+    <div class="module-header">
+        <p>Themes</p>
+        <div class="btn-group" role="group" aria-label="...">
+            <!--buttons-->
+            <button type="button" class="btn btn-default shine new" ng-click="ApplyTheme()" data-toggle="tooltip" title="Apply"><i class="fa fa-paint-brush"></i></button>
+            <button type="button" class="btn btn-default shine new" ng-click="NewTheme()" data-toggle="tooltip" title="New"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="table-container">
+        <div class="row" ng-repeat="row in gridRow" style="margin: 0px;">
+            <div class="col-md-12">
+                <div ng-dblclick="OpenTheme(skn)" ng-click="toggleTheme(skn)" ng-class="{'selectedTheme': skn.ID == selectedTheme.ID}" class="col-md-4" style="padding: 15px;" ng-repeat="skn in skins.slice(row.start, row.end)">
+                    <div class="col-md-12" style="cursor: pointer;">
+                        <!--<div class="line-selected" style="display:none;"></div>-->
+                        <div class="col-md-12" style="display: flex;">
+                            <div class="col-md-12 color-square" ng-class="{'not-active' : !skn.IsActive}" ng-if="$index >= 3 && $index <= 8" ng-repeat="(key, value) in skn" style="background-color:{{value}};padding:0px;width:40px;height:40px;"></div>
+                        </div>
+                        <div class="col-md-12" style="display: flex;">
+                            <div class="col-md-12 color-square" ng-class="{'not-active' : !skn.IsActive}" ng-if="$index == 2" ng-repeat="(key, value) in skn" style="background-color:{{value}};padding:0px;width:240px;height:80px;"></div>
+                        </div>
+                        <div class="col-md-12" style="display: flex;">
+                            <div class="col-md-12 color-square" ng-class="{'not-active' : !skn.IsActive}" ng-if="$index >= 9 && $index <= 14" ng-repeat="(key, value) in skn" style="background-color:{{value}};padding:0px;width:40px;height:40px;"></div>
+                        </div>
+                        <div class="col-md-12 skin-name" data-toggle="tooltip" title="{{skn.Name}}">{{skn.Name}}</div>
+                        <i class="fa fa-check-circle ico-selected" style="display: none;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

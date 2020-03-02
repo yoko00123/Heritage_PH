@@ -1,0 +1,66 @@
+﻿<div class="custom-dialog change-pw-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div ng-if="IsFirstLog" class="col-md-7" style="margin-top: 5px;" data-toggle="tooltip" title="Change Password">
+                    Change Password
+                </div>
+                <div ng-if="!IsFirstLog" class="col-md-7" style="margin-top: 5px;" data-toggle="tooltip" title="Change Password">
+                    {{PasswordExpiration}}
+                </div>
+                <div class="col-md-5">
+                    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" ng-click="Cancel()"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-3">New Password</label>
+                            <div class="col-md-9" style="display:flex;">
+                                <input type="{{typechange}}" ng-model="Master.password" class="form-control" placeholder="New Password" required="required">
+                                <span ng-if="Master.password" ng-mousedown="keydownchange()" class="fa fa-eye show-pw form-control-static tc" ng-mouseup="keyupchange()" style="cursor: pointer; pointer-events: all;"> </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-3">Confirm Password</label>
+                            <div class="col-md-9" style="display:flex;">
+                                <input type="{{typechange1}}" ng-model="Master.password1" class="form-control" placeholder="Confirm Password" required="required">
+                                <span ng-if="Master.password1" ng-mousedown="keydownchange1()" class="fa fa-eye show-pw form-control-static tc1" ng-mouseup="keyupchange1()" style="cursor: pointer; pointer-events: all;"> </span>
+                            </div>
+                        </div>
+                        <div ng-if="IsFirstLog" class="form-group col-md-12">
+                            <label class="col-md-3">Security Question</label>
+                            <div class="col-md-9">
+                                <select class="form-control fc-select" name="ID_SecurityQuestion" ng-model="Master.ID_SecurityQuestion" required="required">
+                                    <option value="" selected>-Select One-</option>
+                                    <option ng-repeat="d in cList" value="{{d.ID}}">{{d.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-if="IsFirstLog" class="form-group col-md-12">
+                            <label class="col-md-3">Security Answer</label>
+                            <div class="col-md-9">
+                                <input class="form-control" ng-model="Master.SecurityAnswer" type="text" name="SecurityAnswer" required="required" placeholder="Security Answer" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="btn-group pull-right" role="group">
+                        <button type="button" class="btn btn-danger" ng-click="Cancel()">Cancel</button>
+                        <button type="button" class="btn btn-primary ok" ng-click="OK()">Save <i class="fa fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

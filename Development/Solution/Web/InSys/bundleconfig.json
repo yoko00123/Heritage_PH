@@ -1,0 +1,56 @@
+[ 
+  {
+    "outputFileName": "Scripts/System/Out/auth.js",
+    "inputFiles": [
+      "Web/Components/AccountComponent.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/App.js",
+    "inputFiles": [
+      "Scripts/System/App.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/Directives.js",
+    "inputFiles": [
+      "Scripts/System/Directives.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/Config.js",
+    "inputFiles": [
+      "Scripts/System/Config.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/Controllers.js",
+    "inputFiles": [
+      "Scripts/System/Controllers.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/Dataservices.js",
+    "inputFiles": [
+      "Scripts/System/Dataservices.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/MainComponent2.js",
+    "inputFiles": [
+      "Scripts/System/MainComponent2.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/InfoSet.js",
+    "inputFiles": [
+      "Scripts/System/InfoSet.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/System/Out/ActiveModule.js",
+    "inputFiles": [
+      "Scripts/System/ActiveModule.js"
+    ]
+  }
+]

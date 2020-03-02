@@ -1,0 +1,86 @@
+﻿<div class="grid-filter" ng-form name="sysFilter">
+    <div class="gf-header">
+        <label>Filter</label>
+        <i class="fa fa-times" ng-click="closeFilter()"></i>
+    </div>
+    <div class="gf-holder">
+        <div ng-repeat="c in systemFilter | orderBy: 'SeqNo'" ng-switch="c.type">
+            <!--textbox = 1
+            combo = 2
+            checkbox = 3
+            lookup = 4
+            date = 11
+            time = 12
+            datetime 17-->
+            <!--textbox-->
+            <div class="form-group" ng-switch-when="1" ng-if="c.ColProp.DataType == 'int'">
+                <label>{{ c.Label }}</label>
+                <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="From" class="form-control" ng-model="data['From_' + c.Name]" ng-change="data['To_' + c.Name] = data['From_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="To" class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+            </div>
+            <div class="form-group" ng-switch-when="1" ng-if="c.ColProp.DataType != 'int'">
+                <label>{{ c.Label }}</label>
+                <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="{{c.Name}}" class="form-control" ng-model="data[c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+            </div>
+            <!--combo-->
+            <div class="form-group" ng-switch-when="2">
+                <label>{{ c.Label }}</label>
+                <select name="{{c.Name}}"
+                        ng-options="item.ID as item.Name for item in dropdownSource[c.ColProp.ID_MenuTabField]"
+                        class="form-control" ng-model="data[c.Name]" ng-change="ReturnFilter()">
+                    <option value="">- Select -</option>
+                </select>
+            </div>
+            <!--checkbox-->
+            <div class="form-group" ng-switch-when="3">
+                <div class="form-check">
+                    <label>
+                        <input type="checkbox" id="remember-me-{{c.Name}}" name="{{c.Name}}" ng-model="data[c.Name]" ng-change="ReturnFilter()" ng-inj-validator />
+                        <span class="label-text">{{ c.Label }}</span>
+                    </label>
+                </div>
+            </div>
+            <!--lookup-->
+            <div class="form-group" ng-switch-when="4">
+                <label>{{ c.Label }}</label>
+                <div return-filter="ReturnFilter()" row="data" input-id="c.Name + '_' + $index + '_' + lookupNextSeqNo" seq-no="lookupNextSeqNo" fld="c.ColProp" lookup-autocomplete is-filter="true" multi-select="true"></div>
+            </div>
+            <!--date-->
+            <div class="form-group" ng-switch-when="11">
+                <label>{{ c.Label }}</label>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="From_{{c.Name}}_{{c.ID}}" placeholder='From' class="form-control" ng-model="data['From_' + c.Name]" ng-change="data['To_' + c.Name] = data['From_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+                </div>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="To_{{c.Name}}_{{c.ID}}" placeholder='To' class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+                </div>
+            </div>
+            <!--time-->
+            <div class="form-group" ng-switch-when="12">
+                <label>{{ c.Label }}</label>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='From' class="form-control" id="From_{{c.Name}}_{{c.ID}}" ng-model="data['From_' + c.Name]" ng-change="data['To_' + c.Name] = data['From_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+                </div>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='To' class="form-control" id="To_{{c.Name}}_{{c.ID}}" ng-model="data['To_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+                </div>
+            </div>
+            <!--datetime-->
+            <div class="form-group" ng-switch-when="17">
+                <label>{{ c.Label }}</label>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'datetime'" text-format="'MM/DD/YYYY hh:mm A'" placeholder='From' class="form-control" id="From_{{c.Name}}_{{c.ID}}" ng-model="data['From_' + c.Name]" ng-change="data['To_' + c.Name] = data['From_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+                </div>
+                <div class='input-group'>
+                    <input type="text" name="{{c.Name}}" ng-input text-type="'datetime'" text-format="'MM/DD/YYYY hh:mm A'" placeholder='To' class="form-control" id="To_{{c.Name}}_{{c.ID}}" ng-model="data['To_' + c.Name]" ng-enter="ReturnFilter()" ng-inj-validator />
+                    <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

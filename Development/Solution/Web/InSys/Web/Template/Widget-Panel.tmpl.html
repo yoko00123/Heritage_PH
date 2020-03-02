@@ -1,0 +1,72 @@
+﻿<div ng-repeat="panel in widget.tWebWidgets_Detail | orderBy: 'SeqNo': false" class="col-md-4 w1">
+    <div class="col-md-12 w2">
+        <div class="col-md-12 sticky-panel-header">
+            {{panel.Name}}
+            <i ng-if="panel.ID_WebWidgetsType == 1" style="float: right;cursor: pointer;padding: 2px;" class="fa fa-expand expandor_{{panel.ID}}" rc="{{panel.data.length}}" expand-panel idx="{{$index}}" pid="{{panel.ID}}"></i>&nbsp;
+            <i ng-if="panel.ID_WebWidgetsType == 2" style="float: right;cursor: pointer;padding: 2px;" class="fa fa-expand" expand-panel-chart ng-init="panel.IsExpanded = false" panel-data="panel"></i>&nbsp;
+        </div>
+        <div ng-if="panel.ID_WebWidgetsType == 1" class="widget-table">
+            <div id="div_head_{{panel.ID}}" style="overflow:hidden;width:100%;background-color: #f9f9f9;border-bottom: 1px solid rgba(0,0,0,.12);">
+                <table id="tbl_head_{{panel.ID}}" ros-widget-table panel-data="panel" class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="font-size:14px;font-weight:bold;" ng-repeat="col in panel.Columns" val="{{(col.Label == null ? col.Name : col.Label)}}">{{(col.Label == null ? col.Name : col.Label)}}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div id="div_body_{{panel.ID}}" style="overflow:auto;width:100%;max-height: 150px;min-height: 150px;">
+                <table id="tbl_body_{{panel.ID}}" class="table table-hover table-condensed">
+                    <tbody>
+                        <tr repeat-finish pid="{{panel.ID}}" ng-if="panel.data.length > 0" ng-repeat="data in panel.data | orderBy: 'ID':true">
+                            <td style="font-size:12px;" ng-repeat="col in panel.Columns">{{FormatColumn(col.Name, data)}}</td>
+                        </tr>
+                        <tr ng-if="panel.data.length == 0">
+                            <td style="text-align:center;" colspan="{{panel.Columns.length}}">
+                                <div style="display: grid;">
+                                    <!--<p style="font-size: 75px; margin: 0px; color: #aaa;">:(</p>-->
+                                    <p style="margin: 0px; color: #aaa;">No record found.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="panel.ID_WebWidgetsType == 1 && panel.pages.length > 0" ng-init="panel.selectedPage = 1;panel.countPerPage = 10" class="rosPanelFoot" id="foot_tbl_{{panel.ID}}" align="center">
+                <span class="widget-count" ng-if="panel.ID_WebWidgetsType == 1">{{panel.Cnt}}</span>
+                <span>Page: <select ng-options="p.ID as p.Label for p in panel.pages" ng-model="panel.selectedPage" ng-change="panel.changePage()"></select></span>
+                <span>
+                    Show: <select ng-options="p for p in [10, 50, 100]" ng-model="panel.countPerPage" ng-change="panel.changeDisplayPerPage()"> </select>
+                </span>
+            </div>
+        </div>
+        <div ros-widget-chart panel-data="panel" ng-if="panel.ID_WebWidgetsType == 2">
+            <div ng-if="panel.IsExpanded">
+                <br /><br /><br /><br />
+            </div>
+            <div ng-class="{'col-md-12': !panel.IsExpanded, 'col-md-6': panel.IsExpanded}" style="padding-top:20px;">
+                <canvas class="chart chart-pie" chart-colors="panel.chartColors" chart-data="panel.chartData" chart-labels="panel.chartLabels" chart-options="" style="float: none; margin: auto;"></canvas>
+            </div>
+            <div class="col-md-6" ng-if="panel.IsExpanded" style="max-height: 50vh;min-height: 50vh;overflow-y: auto;">
+                <table class="table table-condensed table-hover table-chart">
+                    <thead>
+                        <tr>
+                            <th>Legend</th>
+                            <th>Name</th>
+                            <th>Count</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="d in panel.chartLabels">
+                            <td><div style='background-color:{{panel.chartColors[$index]}};width:18px;height:18px'></div></td>
+                            <td>{{d}}</td>
+                            <td>{{panel.chartData[$index]}}</td>
+                            <td>{{panel.chartPercentage[$index]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

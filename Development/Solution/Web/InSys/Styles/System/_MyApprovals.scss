@@ -1,0 +1,78 @@
+﻿.my-approvals {
+
+    .quicklink {
+        padding: 7px !important;
+        height: 35px !important;
+        width: 35px !important;
+        border-radius: 0px;
+
+        &:hover {
+            background-color: rgba(0,0,0,.2) !important;
+        }
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .approve, .disapprove {
+        padding: 7px !important;
+        height: 35px !important;
+        width: 35px !important;
+        border-radius: 0px;
+    }
+
+    .check-all {
+        height: 35px !important;
+        width: auto !important;
+
+        &:hover {
+            background-color: rgba(0,0,0,.2) !important;
+        }
+    }
+
+    .table-approvals {
+        margin: 15px;
+        position: relative;
+        padding: 20px;
+        box-shadow: 1px 2px 15px #888;
+
+        .approvals-header {
+            color: #2980b9;
+            font-size: 20px;
+        }
+
+        .tbl-responsive {
+            overflow: auto;
+            min-height: 430px;
+            max-height: 430px;
+            border: 2px solid #ccc;
+
+            table {
+                min-width: 100% !important;
+                max-width: 100% !important;
+
+                th {
+                    white-space: nowrap;
+                    font-weight: bold;
+                    color: #333;
+                    border-bottom: 2px solid #2980b9;
+
+                    i {
+                        color: #2980b9;
+                    }
+                }
+            }
+        }
+    }
+
+    .nodata {
+        color: #777;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .nodataalign {
+        text-align: center;
+    }
+}

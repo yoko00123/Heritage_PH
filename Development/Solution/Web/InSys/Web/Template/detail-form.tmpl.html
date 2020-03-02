@@ -1,0 +1,133 @@
+﻿<div class="btn-toolbar" role="toolbar" aria-label="...">
+
+    <div class="btn-group tab-heading-2" role="group" aria-label="...">
+        <span>{{ dtData.Name }}</span>
+
+        <div class="detail-paging">
+            <p>Total no. of items: <span>{{ RowData.length }}</span> | </p>
+            <div class="paging">
+                Show
+                <select ng-model="grid.Take" ng-options="item as item for item in [10, 30, 50]" ng-change="UpdateView()"></select> of
+                Page
+                <select ng-model="grid.Skip" ng-options="item as item for item in grid.Pages" ng-change="UpdateView()"></select>
+            </div>
+        </div>
+        <span ng-if="HasImportFile">
+            <button type="button" class="btn btn-default" ng-click="bImportFile()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-upload"></i> Import File</button>
+            <button type="button" class="btn btn-default" ng-click="bGenerateTemplate()" ng-disabled="!DetailButtonEnabled"><i class="fa fa-file-excel-o"></i> Generate Template</button>
+        </span>
+
+        <span ng-if="dtData.ID_ListMenu !== null">
+            <button type="button" class="btn btn-default" ng-filter-lookup col-value="ID_ListMenuValues" menu="dtData.ID_ListMenu" idx="idx" lookup-type="button" look-up-set="DetailMenuSet"><i class="fa fa-plus"></i> {{ dtData.ListMenu }}</button>
+        </span>
+        <span ng-repeat="btn in Buttons">
+            <button type="button" class="btn btn-default" ng-disabled="!btn.Enabled" ng-click="buttonClick(btn)"><i class="fa fa-circle"></i> {{ btn.Name }}</button>
+        </span>
+    </div>
+    <div class="Detail-Container">
+        <div class="table-container" style="overflow-y:auto;padding:10px;">
+            <div class="col-md-12 rpt-form" ng-repeat="(idx, row) in RowData | filter: PageBreak">
+                <div class="rpt-count">{{$index + 1}}</div>
+                <div class="rpt-action">
+                    <span class="fa fa-close fa-lg" style="color: #e74c3c;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Delete Row" ng-click="DeleteRow(row, idx)" ng-show="dtData.AllowDeleteRow"></span>
+                    <span class="folder-open" data-toggle="tooltip" data-placement="bottom" title="Open Info" ng-click="OpenDetail(row.ID)" ng-show="dtData.ID_DetailMenu !== null" ng-class="{'hasDel' : dtData.AllowDeleteRow && dtData.ID_DetailMenu !== null }"></span>
+                </div>
+                <div class="col-md-6" ng-repeat="tf in Columns | filter : ColumnFilter" ng-switch="tf.ID_SystemControlType">
+                    <div ng-switch-when="1" class="form-group"> <!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="{{ tf.Name }}_{{idx}}"
+                                   class="detail-control form-control"
+                                   ng-readonly="ReadOnly(tf, row) || Disabled[row.ID]"
+                                   ng-model="row[tf.Name]"
+                                   ng-blur="evBlur(tf, row)"
+                                   ng-required="Required(tf)" maxlength="{{ FieldLength(tf) }}"
+                                   style="width:100%;min-width:200px;" />
+                        </div>
+                    </div>
+                    <div ng-switch-when="2" class="form-group"> <!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="{{ tf.Name }}_{{idx}}"
+                                    ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-blur="evBlur(tf, row)"
+                                    ng-model="row[tf.Name]"
+                                    ng-options="item.ID as item.Name for item in Combos[tf.Name]"
+                                    style="width:100%;min-width:200px;"></select>
+                        </div>
+                    </div>
+                    <div ng-switch-when="3" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" style="text-align:center;">
+                            <!--<label>
+            <input type="checkbox" class="detail-control" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" /><span></span>
+        </label>-->
+                            <span class="remember-me-check">
+                                <input type="checkbox" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" id="remember-me-{{$index}}_{{row.ID}}_{{tf.Name}}" />
+                                <label for="remember-me-{{$index}}_{{row.ID}}_{{tf.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                            </span>
+                        </fieldset>
+                    </div>
+                    <div ng-switch-when="4" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]">
+                            <input style="width:100%;min-width:200px;" name="{{ tf.Name }}_{{idx}}" type="text" class="detail-control form-control" ng-model="row[tf.Name.substr(3)]" ng-required="Required(tf)" />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default folder-open" aria-label="Help"></button>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div ng-switch-when="5" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]">
+                            <input style="width:100%;min-width:200px;" name="{{tf.Name}}_{{idx}}" type="text" class="detail-control form-control" ng-model="row[tf.Name]" ng-required="Required(tf)" ng-blur="evBlur(tf, row)" />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" aria-label="Help"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="evTextEditor()"></i></button>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div ng-switch-when="7" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <!-- dataImage -->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <center>
+                            <fieldset ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-bind-html="PhotoBomb(row)"></fieldset>
+                        </center>
+                    </div>
+                    <div ng-switch-when="11" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <!-- dataDate -->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <input style="width:100%;min-width:200px;" name="{{tf.Name}}_{{idx}}" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" />
+                        </div>
+                    </div>
+                    <div ng-switch-when="12" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <input style="width:100%;min-width:200px;" name="{{ tf.Name }}_{{idx}}" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row)" ng-disabled="ReadOnly(tf, row) || Disabled[row.ID]" ng-required="Required(tf)" ng-input text-type="'time'" text-format="'hh:mm A'" />
+                        </div>
+                    </div>
+                    <div ng-switch-when="17" class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <input style="width:100%;min-width:200px;" name="{{ tf.Name }}_{{idx}}" id="row_detail_{{row.ID}}_{{idx}}_{{tf.Name}}" class="detail-control form-control" type="text" ng-model="row[tf.Name]" ng-blur="evBlur(tf, row) || Disabled[row.ID]" ng-disabled="ReadOnly(tf, row)" ng-required="Required(tf)" ng-input text-type="'datetime'" text-format="'MM/DD/YYYY hh:mm A'" />
+                        </div>
+                    </div>
+                    <div ng-switch-default class="form-group" ><!--ng-if="VisibleIf(tf)"-->
+                        <label class="col-sm-3 control-label" for="{{ tf.Name }}_{{idx}}">{{ tf.EffectiveLabel }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="{{ tf.Name }}_{{idx}}"
+                                   class="detail-control form-control"
+                                   ng-readonly="ReadOnly(tf, row) || Disabled[row.ID]"
+                                   ng-model="row[tf.Name]"
+                                   ng-blur="evBlur(tf, row)"
+                                   ng-required="Required(tf)" maxlength="{{ FieldLength(tf) }}"
+                                   style="width:100%;min-width:200px;" ng-input db-data-type="tf.DataType"
+                                   />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="dtData.AllowNewRow" style="width:100%;">
+                <button class="rpt-add-row" ng-click="AddNewRow()" data-toggle="tooltip" title="Add row"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

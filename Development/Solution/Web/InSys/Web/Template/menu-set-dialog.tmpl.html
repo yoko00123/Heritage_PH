@@ -1,0 +1,79 @@
+﻿<div class="container-fluid MenuList MenuListDialog" ng-init="Init()">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-7" id="panel-title">
+                    <h5>{{ BreadCrumbs }} <span ng-if="grid.TotalItems" class="label label-warning">{{ grid.TotalItems }}</span></h5>
+                </div>
+                <div class="col-md-5" id="panel-controls">
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" ng-click="Refresh()" tooltip-placement="bottom" uib-tooltip="Refresh"><i class="fa fa-refresh"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="Columns()" tooltip-placement="bottom" uib-tooltip="Columns"><i class="fa fa-columns"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="Filter()" tooltip-placement="bottom" uib-tooltip="Filter"><i class="fa fa-{{ ShowFilter ? 'close' : 'filter' }}"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="Cancel()" tooltip-placement="bottom" uib-tooltip="Close"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row filterContainer" uib-collapse="ShowFilter === false">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon fa fa-filter" id="sizing-addon1"></span>
+                        <input type="text" ng-model="fltrText" ng-keyup="fltrClick($event)" class="form-control" placeholder="Filter" aria-describedby="sizing-addon1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body menu-table-container">
+            <div class="table-responsive MenuTable">
+                <table id="table" class="table table-hover table-mc-light-blue table-condensed">
+                    <thead fix-head>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="c in grid.Columns">{{ c.EffectiveLabel }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="r in grid.Rows">
+                            <td>
+                                <span ng-show="AllowCheckItem">
+                                    <input type="checkbox" ng-model="DeleteItems[r.ID]" class="md-primary" />
+                                </span>
+                                <a href="javascript:;" class="md-primary" ng-click="OpenInfo(r.ID)"><i class="fa fa-edit"></i></a>
+                            </td>
+                            <td ng-repeat="c in grid.Columns" ng-switch on="c.ID_SystemControlType">
+                                <div ng-switch-when="3"><md-switch class="md-primary" ng-model="r[c.Name]" disabled></md-switch></div>
+                                <div ng-switch-when="2|4" ng-switch-when-separator="|"><span>{{ r[c.Name.substr(3)] }}</span></div>
+                                <div ng-switch-when="7" style="position:relative;">
+                                    <!--<div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                                    <div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Container: 'Photos' }"></div>
+                                </div>
+                                <div ng-switch-default>
+                                    <span>{{ FormatColumn(c.Name, r) }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <paging class="small md-primary"
+                            page="grid.Skip"
+                            page-size="grid.Take"
+                            total="grid.TotalItems"
+                            show-prev-next="true"
+                            show-first-last="true"
+                            hide-if-empty="true"
+                            paging-action="OnPageChanged(page)"
+                            text-next-class="fa fa-chevron-right"
+                            text-prev-class="fa fa-chevron-left"
+                            text-first-class="fa fa-backward"
+                            text-last-class="fa fa-forward">
+                    </paging>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

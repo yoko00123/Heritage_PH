@@ -1,0 +1,28 @@
+﻿<<div class="custom-dialog change-pw-dialog">
+     <div class="panel panel-primary">
+         <div class="panel-headingr" ng-init="Init()">
+             <button type="button" ng-click="Cancel()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h4 class="modal-title">
+                 <span class="fa fa-external-link"></span> Report Parameter
+             </h4>
+         </div>
+         <div id="lookupContainer" style="height:auto;overflow:auto;max-height:400px;" class="modal-body web-content-holder">
+             <div class="web-content-body">
+                 <div class="row" ng-repeat="rpt in rpData">
+                     <div class="col-md-12">
+                         <div class="form-group col-md-12">
+                             <label>{{ rpt.Label }}</label> <br />
+                             <input type="text" class="form-control" ng-model="rpt.Model" />
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="modal-footer">
+             <button type="button" class="btn btn-primary" ng-click="Accept()"> Accept</button>
+             <button type="button" class="btn btn-primary" ng-click="Cancel()"> Cancel</button>
+         </div>
+     </div>
+     
+</div>
+    

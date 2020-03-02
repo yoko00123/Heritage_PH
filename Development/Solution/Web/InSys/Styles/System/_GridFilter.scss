@@ -1,0 +1,117 @@
+﻿%checkbox-tmpl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    label {
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .label-text {
+        font-weight: 500;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    input[type="checkbox"] {
+        position: absolute;
+        right: 9000px;
+    }
+
+    input[type="checkbox"] + .label-text:before {
+        content: "\f096";
+        font-family: "FontAwesome";
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        font-size: 18px;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        width: 1em;
+        display: inline-block;
+        position: absolute;
+        left: -20px;
+        top: 2px;
+    }
+
+    input[type="checkbox"]:checked + .label-text:before {
+        content: "\f14a";
+        color: #2980b9;
+        animation: effect 250ms ease-in;
+    }
+
+    input[type="checkbox"]:disabled + .label-text {
+        color: #aaa;
+    }
+
+    input[type="checkbox"]:disabled + .label-text:before {
+        content: "\f0c8";
+        color: #ccc;
+    }
+}
+
+.grid-filter {
+    position: fixed;
+    right: 35px;
+    padding: 15px;
+    width: 330px;
+    top: 125px;
+    background-color: #FAFCFD;
+    z-index: 3;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
+    .gf-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        label {
+            font-size: 14px;
+            margin: 0;
+            margin-left: 5px;
+            color: #555;
+        }
+
+        i {
+            color: #cbdbe7;
+            cursor: pointer;
+
+            &:hover {
+                color: #3498db;
+            }
+        }
+    }
+
+    .gf-holder {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        height: calc(100vh - 255px);
+        overflow-y: auto;
+
+        input.form-control,
+        select.form-control,
+        textarea.form-control,
+        .input-group {
+            margin-bottom: 3px;
+        }
+
+        .input-group input {
+            margin-bottom: 0;
+        }
+
+        .form-check {
+            @extend %checkbox-tmpl;
+            justify-content: flex-start;
+            margin-left: 20px;
+        }
+    }
+}

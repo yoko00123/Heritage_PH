@@ -1,0 +1,199 @@
+﻿<div class="my-profile" ng-init="InitProfile()">
+    <div class="module-header">
+        <p>My Profile</p>
+    </div>
+
+    <ul class="nav nav-tabs tabs-left custom-tabs-left">
+        <li class="thumb">
+            <div class="thumb-container">
+                <i ng-mouseover="ToggleUpload()" class="fa fa-camera camera"></i>
+                <center><img ng-mouseover="ToggleUpload()" ng-mouseleave="ToggleUploadLeave()" lazy-load-image="{ Image: DisplayPhoto || 'userdefault.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"/></center>
+            </div>
+            <p class="name">{{Parent.FirstName}} {{Parent.LastName}}</p>
+            <p class="position">{{IsNull(Session('Designation'), ElseVal)}}</p>
+            <p class="contact"><i class="fa fa-phone"></i> {{IsNull(Parent.ContactNo, ElseVal)}}</p>
+            <p class="email"><i class="fa fa-envelope"></i> {{IsNull(Parent.EmailAddress, ElseVal)}}</p>
+        </li>
+        <li class="active side-tab" ng-click="ToggleProfilePanel()"><a href="#a" data-toggle="tab"><span class="fa fa-user"></span> Personal Information</a></li>
+        <!--<li class="side-tab" ng-click="RemovePanel()"><a href="#b" data-toggle="tab"><span class="fa fa-lock"></span> Credentials</a></li>-->
+    </ul>
+    <div style="display: flex;">
+        <!--Tab Content-->
+        <div class="tab-content custom-tab-content">
+            <!--Tab 1-->
+            <div class="tab-pane active" id="a">
+                <p class="heading">Personal Information</p>
+                <div class="profile-container" scrl-area>
+                    <div class="profile-content" id="Basic">
+                        <p class="title-head">Basic</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Last name</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.LastName, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Middle name</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.MiddleName, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">First name</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.FirstName, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Suffix</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Suffix, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Nick name</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.NickName, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Age</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Age, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Birthdate</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.BirthDate, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-offset-4 col-md-9" style="padding-left: 25px;">
+                                        <span class="remember-me-check">
+                                            <input type="checkbox" id="remember-me-hired" ng-model="Parent.Hired" name="_IsActive" disabled="disabled"/> Active
+                                            <label for="remember-me-hired" style="margin: 0; padding: 0 0 0 25px;">Hired</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Birth place</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.BirthPlace, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Gender</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Gender, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Citizenship</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Citizenship, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Religion</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Religion, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Civil Status</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.CivilStatus, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Height (cm)</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Height, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Weight (lbs)</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Weight, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-4">Company</label>
+                                        <div class="col-md-8" style="display:flex;">
+                                            <p>{{IsNull(Parent.Company, ElseVal)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-content" id="{{removeSpace(container.Name)}}" ng-repeat="container in Menu.tMenuDetailTab">
+                        <p class="title-head">{{container.Name}}</p>
+                        <div class="table-responsive">
+                            <table class="table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="(key, value) in Detail[container.ID].Columns">{{value.EffectiveLabel}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in Detail[container.ID].Rows">
+                                        <td ng-repeat="(key2, value2) in Detail[container.ID].Columns">
+                                            <span ng-if="value2.Name.indexOf('ID_') > -1">{{value[value2.Name.substr(3, value2.Name.length - 3)]}}</span>
+                                            <span ng-if="value2.Name.indexOf('ID_') == -1">{{FormatBD(value[value2.Name])}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="Detail[container.ID].Rows.length == 0"><td colspan="4" style="text-align: center;">No record found.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Tab 2-->
+            <!--<div class="tab-pane" id="b">
+                <p class="heading">Credentials</p>
+                <div class="profile-container">
+
+                </div>
+            </div>-->
+        </div>
+        <!--End Tab Content-->
+        <!--Info Panel-->
+        <div class="profile-panel">
+            <div class="profile-header">Quicklink</div>
+            <div class="profile-list">
+                <div scrl-on-click="'Basic'">Basic</div>
+                <div scrl-on-click="'Children'">Children</div>
+                <div scrl-on-click="'Siblings'">Siblings</div>
+                <div scrl-on-click="'Address'">Address</div>
+                <div scrl-on-click="'EmergencyContacts'">Emergency Contacts</div>
+                <div scrl-on-click="'EmploymentRecord'">Employment Record</div>
+                <div scrl-on-click="'CharacterReferences'">Character References</div>
+                <div scrl-on-click="'EducationalRecord'">Educational Record</div>
+                <div scrl-on-click="'Dependents'">Dependents</div>
+                <div scrl-on-click="'MyApprover'">My Approver</div>
+            </div>
+        </div>
+        <!--End Info Panel-->
+    </div>
+</div>

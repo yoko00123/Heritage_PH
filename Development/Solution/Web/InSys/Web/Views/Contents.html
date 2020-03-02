@@ -1,0 +1,285 @@
+﻿<div class="Contents" ng-init="InitContents()">
+    <div class="module-header">
+        <p>Contents</p>
+        <div class="btn-group" role="group" aria-label="...">
+            <button ng-click="AddReport()" class="shine"><i class="fa fa-plus"></i> <p>ADD</p></button>
+        </div>
+    </div>
+    <ul class="nav nav-tabs tabs-left custom-tabs-left">
+        <li class="active side-tab" ng-click="LoadItems('Reports')"><a href="#a" data-toggle="tab"><span class="fa fa-file-pdf-o"></span> Reports</a></li>
+        <li class="side-tab" ng-click="LoadItems('ExcelTemplates')"><a href="#b" data-toggle="tab"><span class="fa fa-file-excel-o"></span> Excel Templates</a></li>
+        <li class="side-tab" ng-click="LoadItems('Files')"><a href="#c" data-toggle="tab"><span class="fa fa-files-o"></span> Files</a></li>
+        <li class="side-tab" ng-click="LoadItems('Banner')"><a href="#d" data-toggle="tab"><span class="fa fa-photo"></span> Banners</a></li>
+        <li class="side-tab" ng-click="LoadItems('LoginBG')"><a href="#e" data-toggle="tab"><span class="fa fa-photo"></span> Log-in Backgrounds</a></li>
+        <li class="side-tab" ng-click="LoadItems('Photos')"><a href="#f" data-toggle="tab"><span class="fa fa-photo"></span> Photos</a></li>
+        <li class="side-tab" ng-click="LoadItems('Assets')"><a href="#g" data-toggle="tab"><span class="fa fa-photo"></span> Assets</a></li>
+    </ul>
+    <!--Tab Content-->
+    <div class="tab-content custom-tab-content">
+        <!--Tab 1-->
+        <div class="tab-pane active" id="a">
+            <p class="heading">Reports</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" id="1" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-pdf-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" id="2" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-pdf-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--Tab 2-->
+        <div class="tab-pane" id="b">
+            <p class="heading">Excel Templates</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-excel-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-excel-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Tab 3-->
+        <div class="tab-pane" id="c">
+            <p class="heading">Files</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-excel-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-excel-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Tab 4-->
+        <div class="tab-pane" id="d">
+            <p class="heading">Banners</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-excel-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-excel-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Tab 5-->
+        <div class="tab-pane" id="e">
+            <p class="heading">Log-in Backgrounds</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-excel-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-excel-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Tab 6-->
+        <div class="tab-pane" id="f">
+            <p class="heading">Photos</p>
+            <div class="view-btn-group btn-group">
+                <div class="find-container">
+                    <i class="fa fa-search find-ico"></i>
+                    <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                    <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+                </div>
+                <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+                <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+                <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+                <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-thumb" ng-if="ViewType == 1" ng-init="InitView()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                            <i class="content-img fa fa fa-file-excel-o"></i>
+                            <p class="content-lbl">{{ itm.Name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid itm-content itm-content-list" ng-if="ViewType == 2" ng-init="InitView()">
+                <ul class="col-md-12">
+                    <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa fa-file-excel-o"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--Tab 7-->
+    <div class="tab-pane active" id="g">
+        <p class="heading">Reports</p>
+        <div class="view-btn-group btn-group">
+            <div class="find-container">
+                <i class="fa fa-search find-ico"></i>
+                <input type="text" id="find" class="form-control" placeholder="Find..." ng-model="rptFilter" />
+                <i class="fa fa-close find-clear" ng-click="FindClear()"></i>
+            </div>
+            <p class="item-list">Item(s) found: <span>{{ rcnt }}</span></p>
+            <button class="select-btn" ng-click="SelectAll()" data-toggle="tooltip" title="{{ Selected ? 'Deselect all' : 'Select all' }}"><i class="fa fa-check-square-o" ng-class="{ 'fa-square-o' : !Selected , 'fa-check-square-o' : Selected }"></i></button>
+            <button ng-if="CheckItems.length > 0" class="del-btn" ng-click="DeleteItem()" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+            <button ng-if="CheckItems.length > 0" class="download-btn" ng-click="DownloadItem()" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+            <button class="listview-btn" ng-click="ToList()" data-toggle="tooltip" title="List"><i class="fa fa-list"></i></button>
+            <button class="thumbview-btn" ng-click="ToThumb()" data-toggle="tooltip" title="Grid"><i class="fa fa-th-large"></i></button>
+        </div>
+
+        <div class="container-fluid itm-content itm-content-thumb" id="1" ng-if="ViewType == 1" ng-init="InitView()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-2" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                        <i class="content-img fa fa-photo"></i>
+                        <p class="content-lbl">{{ itm.Name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid itm-content itm-content-list" id="2" ng-if="ViewType == 2" ng-init="InitView()">
+            <ul class="col-md-12">
+                <li ng-class="{ 'selected' : CheckItems.indexOf(itm.Name) !== -1 }" ng-click="SelectContent(itm)" class="content-itm col-md-4" ng-repeat="itm in ItemList | filter: ReportFilter" data-toggle="tooltip" title="{{ itm.Name }}">
+                    <i class="content-img fa fa-photo"></i>
+                    <p class="content-lbl">{{ itm.Name }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--End Tab Content-->
+</div>

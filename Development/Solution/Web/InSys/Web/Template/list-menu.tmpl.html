@@ -1,0 +1,46 @@
+﻿<div class="panel panel-primary list-menu">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-7">
+                {{ tMenu.Name }} <span ng-if="grid.TotalItems" class="label label-warning">{{ grid.TotalItems }}</span>
+            </div>
+            <div class="col-md-5">
+                <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" ng-click="OpenItem()" tooltip-placement="bottom" uib-tooltip="Open Selected"><i class="fa fa-folder-o"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="Refresh()" tooltip-placement="bottom" uib-tooltip="Refresh"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="Filter()" tooltip-placement="bottom" uib-tooltip="Filter"><i class="fa fa-{{ ShowFilter ? 'close' : 'filter' }}"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row filterContainer" uib-collapse="ShowFilter === false">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon fa fa-filter" id="sizing-addon1"></span>
+                    <input type="text" ng-model="fltrText" ng-keyup="fltrClick($event)" class="form-control" placeholder="Filter">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="listMenuGrid"></div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <paging class="small md-primary pull-right"
+                        page="grid.Skip"
+                        page-size="grid.Take"
+                        total="grid.TotalItems"
+                        show-prev-next="true"
+                        show-first-last="true"
+                        hide-if-empty="true"
+                        paging-action="OnPageChanged(page)"
+                        text-next-class="fa fa-chevron-right"
+                        text-prev-class="fa fa-chevron-left"
+                        text-first-class="fa fa-backward"
+                        text-last-class="fa fa-forward">
+                </paging>
+            </div>
+        </div>
+    </div>
+</div>

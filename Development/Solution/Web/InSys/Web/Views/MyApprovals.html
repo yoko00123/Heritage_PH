@@ -1,0 +1,79 @@
+﻿<div class="main-content my-approvals" ng-init="Init()">
+    <div ui-view="" class="ng-scope" style="">
+        <div class="list-table ng-scope">
+            <div class="module-header">
+                <p class="ng-binding">My Approvals</p>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default shine check-all" ng-click="CheckAll()" ng-if="AData.Source.length >= 1">
+                        {{Icon}}
+                    </button>
+                    <div class="verticalToolbarSeparator"></div>
+                    <button type="button" class="btn btn-default shine approve" ng-click="BatchApprovals(1)" ng-if="AData.Source.length >= 1">
+                        <i class="fa fa-thumbs-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-default shine disapprove" ng-click="BatchApprovals(0)" ng-if="AData.Source.length >= 1">
+                        <i class="fa fa-thumbs-down"></i>
+                    </button>
+                    <button type="button" class="btn btn-default shine refresh" ng-click="LoadData(0)"></button>
+                    <div class="dropdown" ng-if="AData.Source.length >= 1">
+                        <button class="btn btn-primary dropdown-toggle shine quicklink" type="button">
+                            <i class="fa fa-link"></i>
+                        </button>
+                        <ul class="dropdown-menu" style="right:20%;left:auto">
+                            <li class="Filingtype-ql" ng-repeat="ft in MyApprovals">
+                                <a style="cursor:pointer;" scrl-on-click="'tbl_' + ft.ID">{{ft.Name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container" scrl-area>
+                <div class="table-approvals" ng-repeat="ft in MyApprovals"  ng-if="AData.Source.length >= 1">
+                    <p class="approvals-header" id="tbl_{{ft.ID}}">{{ft.Name}}</p>
+                    <div class="tbl-responsive">
+                        <table class="table table-mc-light-blue table-condensed menutable table-striped">
+                            <thead class="ng-scope">
+                                <tr>
+                                    <th style="user-select: none; padding-top: 0px; border-right: none !important; min-width: 20px; max-width: 20px; width: 20px;">
+                                        <span class="remember-me-check ng-scope" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;position: relative;">
+                                            <input type="checkbox" ng-click="SelectAll(ft.ID,$event.target.checked)" id="{{ft.ID}}" targetcb="filingtype">
+                                            <label for="{{ft.ID}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                        </span>
+                                    </th>
+                                    <th style="user-select: none; padding-top: 0px; border-right: none !important; min-width: 20px; max-width: 20px; width: 20px;"></th>
+                                    <th style="user-select: none;  min-width: 50px;" ng-repeat="c in Menu.Columns" class="ng-binding ng-scope">{{c.Label == null ? c.Name : c.Label}}<i style="cursor:pointer;padding:5px;" class="fa fa-sort-desc"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in AData.Source | filter : FilingFilter(ft.ID)">
+                                    <td style="padding-bottom: 0px;min-width:40px;position:relative;">
+                                        <span class="remember-me-check ng-scope" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                                            <input type="checkbox" id="row-{{d.ID}}" ng-model="CB" ng-click="CBAction(d.ID,ft.ID,CB)" targetid="row_{{ft.ID}}" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                            <label for="row-{{d.ID}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+                                        </span>
+                                    </td>
+                                    <td style="padding-bottom: 0px;min-width:40px;position:relative;">
+                                        <a href="javascript:;" class="md-primary pen" ng-click="OpenInfo(d.ID,ft)"><div class="item-selector"></div></a>
+                                    </td>
+                                    <td ng-repeat="c in Menu.Columns">
+                                        {{DataFormatter(d,c)}}
+                                        <span class="remember-me-check ng-scope" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;" ng-if="c.ID_SystemControlType == 3">
+                                            <input type="checkbox" ng-model="d[c.Name]" class="ng-pristine ng-untouched ng-valid ng-empty" disabled />
+                                            <label style="margin: 0; padding: 0 0 0 25px;left:13px;"></label>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+                <div class="m-grid-header nodataalign" ng-if="AData.Source.length == 0">
+                    <i class="nodata">No Pending Approvals</i>
+                </div>
+            </div>
+        </div>
+        <div class="table-footer">
+            <p class="ng-binding">{{AData.Source.length}}</p>
+        </div>
+    </div>
+</div>

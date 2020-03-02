@@ -1,0 +1,41 @@
+﻿<div class="panel panel-primary" ng-init="Init()" ng-style="{ 'width': Width }">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-7" style="margin-top: 5px;" data-toggle="tooltip" title="{{ lookupName }}">
+                {{ lookupName }}
+            </div>
+            <div id="panel-controls" class="col-md-5">
+                <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" style="background-color: transparent;border: none;color: #fff;" ng-click="CloseLookUp()"><i class="fa fa-close"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Sheets</p>
+                <ul>
+                    <li ng-repeat="gh in Sheets"><input type="checkbox" ng-model="gh.IsChecked" /> {{gh.Sheet}} ({{gh.Data.length || '-'}})</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <p>Option</p>
+                <select class="form-control" convert-to-number ng-model="UploadOption">
+                    <option value="1">Append Only</option>
+                    <option value="2">Overwrite</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-default" ng-click="Upload()">
+                    {{loading ? 'Uploading' : 'Upload Template'}}
+                </button>
+                <button type="button" class="btn btn-default" ng-click="Submit()">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

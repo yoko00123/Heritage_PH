@@ -1,0 +1,187 @@
+﻿<div class="list-table">
+    <!--ng-init="Init()"-->
+    <div class="module-header" ng-init="Init()">
+        <p>{{ MenuHeader }}</p>
+        <!--<span class="menu-fav-star" ng-class="{'menu-fav-star-active': tMenu.Parent.HasFav }" ng-click="itemToggleFav(tMenu.Parent)"><i class="fa fa-star"></i></span>-->
+        <div class="btn-group" role="group" aria-label="...">
+            <button ng-if="HasGroup" ng-click="toggleAllGroup(!IsExpand)" class="toggle-grp shine">{{ IsExpand ? 'Collapse all' : 'Expand all' }}</button>
+            <button ng-if="IsAllowNew" type="button" class="btn btn-default shine new" ng-click="OpenInfo(0)"><i class="fa fa-plus"></i></button>
+            <button ng-if="IsAllowDelete" type="button" class="btn btn-default shine delete" ng-click="DeleteRecord()"><i class="fa fa-trash"></i></button>
+            <button type="button" class="btn btn-default shine refresh" ng-click="LoadData()"></button>
+            
+        
+            <!--<button type="button" class="btn btn-default shine print" print-dialog="PrintData"></button>-->
+            <div class="verticalToolbarSeparator"></div>
+            <button type="button" class="btn btn-default shine filter" ng-click="FilterClick()"></button>
+        </div>
+    </div>
+    <div class="module-header module-tab" ng-if="Menu.ID_MenuType == 6">
+        <p ng-repeat="ch in child" ng-click="setDataSource(ch.ID)" id="ch_{{ch.ID}}" ng-class="{'active' : $index == 0 }">
+            {{ ch.Name }}
+            <!--<span class="badge" ng-if="grid.Rows.length > 0">{{ grid.Rows.length > 99 ? '99+' : grid.Rows.length }}</span>-->
+        </p>
+    </div>
+    <div class="table-container">
+        <table id="table" class="groupIndx_00 table table-mc-light-blue table-condensed" ng-class="HasGroup ? 'MenuTable2' : 'MenuTable table-striped'">
+            <thead ng-if="!HasGroup">
+                <tr>
+                    <th style="user-select:none;padding-top: 0px;border-right:none!important;">
+                        <span ng-if="IsAllowDelete" class="remember-me-check" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;position: relative;">
+                            <input type="checkbox" ng-click="checkChildren('00')" id="remember-me-{{a.id}}" targetid="parent_00" />
+                            <label for="remember-me-{{a.id}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                        </span>
+                    </th>
+                    <th style="user-select:none;" ng-if="c.ID != 0 && c.GroupSeqNo == 0 && !IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                    <th style="user-select:none;" ng-if="c.ID == 0 && c.GroupSeqNo == 0 && IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="HasGroup" ng-repeat="a in grpItems[0]">
+                    <td>
+                        <div class="toggle-table group-table" a="{{a.id}}" ng-click="toggleGroup(a.id)">
+                            <span ng-if="IsAllowDelete" class="remember-me-check" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                                <input type="checkbox" ng-click="checkChildren(a.id)" id="remember-me-{{a.id}}" targetid="parent_{{a.id}}" />
+                                <label for="remember-me-{{a.id}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+                            </span>
+                            <i ng-class="changeToggle(a.id)"></i> <b>{{((a.GroupName == '' || a.GroupName == null) ? 'Unspecified' : a.GroupName)}}</b>
+                            <span class="label label-warning">{{a.Children.length}}</span>
+                        </div>
+                        <table id="table" ng-style="a.Children[0].Children != undefine && {'margin-left': 15} || a.Children[0].Children == undefine && {'margin-left': 5}" ng-if="a.Children != undefined" class="groupIndx_{{a.id}} table table-mc-light-blue table-condensed" ng-class="a.Children[0].Children == undefined ? 'MenuTable table-striped' : 'MenuTable2'">
+                            <thead ng-if="a.Children[0].Children == undefined">
+                                <tr>
+                                    <th style="user-select:none; border-right:none!important;"></th>
+                                    <th style="user-select:none;" ng-if="c.ID != 0 && c.GroupSeqNo == 0 && !IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                                    <th style="user-select:none;" ng-if="c.ID == 0 && c.GroupSeqNo == 0 && IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ng-dblclick="OpenInfo(b.ID)"-->
+                                <tr ng-repeat="(idx, b) in a.Children">
+                                    <td ng-if="b.Children == undefined" style="padding-bottom: 0px;min-width:40px; position:relative;">
+                                        <span class="remember-me-check" ng-if="IsAllowDelete" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                                            <input type="checkbox" id="remember-me-{{b.ID}}" catch-check ng-model="b.IsChecked" targetid="child_{{a.id}}" />
+                                            <label for="remember-me-{{b.ID}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+                                        </span>
+                                        <a class="md-primary pen" ng-class="{'hasCB' : IsAllowDelete}" ng-click="OpenInfo(b.ID)"><div class="item-selector"></div></a>
+                                    </td>
+                                    <td ng-if="b.Children == undefined && bb.ID > 0 && !IsLoadDefault" ng-repeat="bb in grid.Columns | filter: NotGroup" ng-switch on="bb.ID_SystemControlType">
+                                        <div ng-switch-when="3">
+                                            <!--<md-switch class="md-primary" ng-model="b[bb.Name]" disabled></md-switch>-->
+                                            <fieldset disabled style="text-align:center;">
+                                                <span class="remember-me-check">
+                                                    <input type="checkbox" ng-model="b[bb.Name]" id="remember-me-{{idx}}-{{bb.Name}}" />
+                                                    <label for="remember-me-{{idx}}-{{bb.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                                </span>
+                                            </fieldset>
+                                        </div>
+                                        <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="{{a.id}}" txt="{{ b[bb.Name.substr(3)] }}" data-toggle="tooltip" title="{{ b[bb.Name.substr(3)] }}">{{ b[bb.Name.substr(3)] }}</span></div>
+                                        <div ng-switch-when="7" style="position:relative;">
+                                            <!--<div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                                            <div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Container: 'Photos' }"></div>
+                                            </div>
+                                        <div ng-switch-default>
+                                            <span shorten-text tbl="{{a.id}}" txt="{{ FormatColumn(bb.Name, b) }}" data-toggle="tooltip" title="{{ FormatColumn(bb.Name, b) }}">{{ FormatColumn(bb.Name, b) }}</span>
+                                        </div>
+                                    </td>
+                                    <td ng-if="b.Children == undefined && bb.ID == 0 && IsLoadDefault" ng-repeat="bb in grid.Columns | filter: NotGroup" ng-switch on="bb.ID_SystemControlType">
+                                        <div ng-switch-when="3">
+                                            <!--<md-switch class="md-primary" ng-model="b[bb.Name]" disabled></md-switch>-->
+                                            <fieldset disabled style="text-align:center;">
+                                                <span class="remember-me-check">
+                                                    <input type="checkbox" ng-model="b[bb.Name]" id="remember-me-{{idx}}-{{bb.Name}}" />
+                                                    <label for="remember-me-{{idx}}-{{bb.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                                </span>
+                                            </fieldset>
+                                        </div>
+                                        <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="{{a.id}}" txt="{{ b[bb.Name.substr(3)] }}" data-toggle="tooltip" title="{{ b[bb.Name.substr(3)] }}">{{ b[bb.Name.substr(3)] }}</span></div>
+                                        <div ng-switch-when="7" style="position:relative;">
+                                            <!--<div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                                            <div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Container: 'Photos' }"></div>
+                                        </div>
+                                        <div ng-switch-default>
+                                            <span shorten-text tbl="{{a.id}}" txt="{{ FormatColumn(bb.Name, b) }}" data-toggle="tooltip" title="{{ FormatColumn(bb.Name, b) }}">{{ FormatColumn(bb.Name, b) }}</span>
+                                        </div>
+                                    </td>
+                                    <td ng-style="a.Children[0].Children != undefine && {'padding': 0}" ng-if="b.Children != undefined">
+                                        <ng-table-grouping grp-var="b"
+                                                           grp-data="grid"
+                                                           format-column="FormatColumn"
+                                                           load-default="IsLoadDefault"
+                                                           open-info="OpenInfo"
+                                                           allow-delete="IsAllowDelete"
+                                                           chk="checkChildren"
+                                                           parent-group="a.id"
+                                                           arrange-icon="sortIcon"
+                                                           arrange-record="sortRecord">
+                                        </ng-table-grouping>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!--ng-dblclick="OpenInfo(r.ID)"-->
+                <tr ng-if="!HasGroup" ng-repeat="(idx, r) in grid.Rows">
+                    <td style="padding-bottom: 0px;min-width:40px;position:relative;">
+                        <span class="remember-me-check" ng-if="IsAllowDelete" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                            <input type="checkbox" id="remember-me-{{r.ID}}" catch-check ng-model="r.IsChecked" targetid="child_00" />
+                            <label for="remember-me-{{r.ID}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+                        </span>
+                        <a class="md-primary pen" ng-class="{'hasCB' : IsAllowDelete}" ng-click="OpenInfo(r.ID)"><div class="item-selector"></div></a>
+                    </td>
+                    <td ng-if="c.ID != 0 && c.GroupSeqNo == 0 && !IsLoadDefault" ng-repeat="c in grid.Columns" ng-switch on="c.ID_SystemControlType">
+                        <div ng-switch-when="3">
+                            <!--<md-switch class="md-primary" ng-model="r[c.Name]" disabled></md-switch>-->
+                            <fieldset disabled style="text-align:center;">
+                                <span class="remember-me-check">
+                                    <input type="checkbox" ng-model="r[c.Name]" id="remember-me-{{idx}}-{{c.Name}}" />
+                                    <label for="remember-me-{{idx}}-{{c.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                </span>
+                            </fieldset>
+                        </div>
+                        <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="00" txt="{{ r[c.Name.substr(3)] }}" data-toggle="tooltip" title="{{ r[c.Name.substr(3)] }}">{{ r[c.Name.substr(3)] }}</span></div>
+                        <div ng-switch-when="7" style="position:relative;">
+                            <!--<div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                            <div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Container: 'Photos' }"></div>
+                        </div>
+                        <div ng-switch-default>
+                            <span shorten-text tbl="00" txt="{{ FormatColumn(c.Name, r) }}" data-toggle="tooltip" title="{{ FormatColumn(c.Name, r) }}">{{ FormatColumn(c.Name, r) }}</span>
+                        </div>
+                    </td>
+                    <td ng-if="c.ID == 0 && c.GroupSeqNo == 0 && IsLoadDefault" ng-repeat="c in grid.Columns" ng-switch on="c.ID_SystemControlType">
+                        <div ng-switch-when="3">
+                            <!--<md-switch class="md-primary" ng-model="r[c.Name]" disabled></md-switch>-->
+                            <fieldset disabled style="text-align:center;">
+                                <span class="remember-me-check">
+                                    <input type="checkbox" ng-model="r[c.Name]" id="remember-me-{{idx}}-{{c.Name}}" />
+                                    <label for="remember-me-{{idx}}-{{c.Name}}" style="margin: 0; padding: 0 0 0 25px;top: 3px;"></label>
+                                </span>
+                            </fieldset>
+                        </div>
+                        <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="00" txt="{{ r[c.Name.substr(3)] }}" data-toggle="tooltip" title="{{ r[c.Name.substr(3)] }}">{{ r[c.Name.substr(3)] }}</span></div>
+                        <div ng-switch-when="7" style="position:relative;">
+                            <!--<div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                            <div class="menu-list-image" lazy-load-image="{ Image: r[c.Name], Container: 'Photos' }"></div>
+                        </div>
+                        <div ng-switch-default>
+                            <span shorten-text tbl="00" txt="{{ FormatColumn(c.Name, r) }}" data-toggle="tooltip" title="{{ FormatColumn(c.Name, r) }}">{{ FormatColumn(c.Name, r) }}</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-if="grid.Rows.length == 0 && !HasGroup" style="text-align:center;font-weight:bold;margin-top:10px;"><i>No Record Found.</i></div>
+        <div ng-if="grpItems.length == 0 && HasGroup" style="text-align:center;font-weight:bold;margin-top:10px;"><i>No Record Found.</i></div>
+
+    </div>
+</div>
+<div class="table-footer">
+    <p>{{ grid.Rows.length }}</p>
+    <div class="paging">
+        Show
+        <select ng-model="grid.Take" ng-options="item as item for item in [10, 30, 50]" ng-change="LoadData()"></select> of
+        Page
+        <select ng-model="grid.Skip" ng-options="item as item for item in grid.Pages" ng-change="LoadData()"></select>
+        <span>Total items: {{grid.TotalItems}}</span>
+    </div>
+</div>

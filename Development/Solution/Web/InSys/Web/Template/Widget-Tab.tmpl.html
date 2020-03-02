@@ -1,0 +1,16 @@
+﻿<div style="position: absolute; width: 100%;">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li ng-class="{'active': $index == 0}" ng-click="setActiveTab(tab.tWebWidgets.ID)" ng-repeat="tab in widgets | orderBy:'tWebWidgets.SeqNo':false"><a href="#{{tab.tWebWidgets.Name.replace(' ', '')}}_{{tab.tWebWidgets.ID}}" aria-controls="{{tab.tWebWidgets.Name}}" role="tab" data-toggle="tab">{{tab.tWebWidgets.Name}}</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div ng-repeat="tab in widgets | orderBy:'tWebWidgets.SeqNo':false" role="tabpanel" ng-class="{'active': $index == 0}" class="tab-pane fade in row widget-tab" id="{{tab.tWebWidgets.Name.replace(' ', '')}}_{{tab.tWebWidgets.ID}}">
+            <br />
+            <ros-widget-panel ng-if="activeTab == tab.tWebWidgets.ID" widget="tab"></ros-widget-panel>
+        </div>
+    </div>
+
+</div>

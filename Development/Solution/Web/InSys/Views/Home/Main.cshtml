@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@{
+    <link rel="stylesheet" type="text/css" href="@Model.skin" async />
+}
+
+
+
+    <div ng-controller="MainComponent">
+
+        @*<button style="display:none;" ng-click="SetOnline()" id="CallViewer">
+            <span>setonline</span>
+        </button>*@
+        <!--Header-->
+        <div class="header" key-press-detector>
+            <p class="company-name" ng-click="GoToDashboard()">
+                <span>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" />
+                </span>
+                {{ AppTitle }}
+            </p>
+            <div class="header-right">
+
+                <i class="fa fa-exclamation-circle action-ico" ng-click="openDashHead()" style="position:relative;margin-right:0px;" ng-if="IONSHome()"><span style="position:relative;margin-top:-25px;" class="badge notifico" ng-if="Announcements.length > 0">{{Announcements.length > 99 ? '99+' : Announcements.length}}</span></i>
+                <i class="fa fa-calendar-o action-calendar" ng-click="OpenCalendar()" ng-if="!IONSHome()"></i>
+              
+                <ul id="notificationIconBar">
+                    <li id="noti_Container">
+
+                        <i id="noti_Button" class="fa fa-bell action-ico bellring" ng-click="openNotification()" style="position:relative;margin-right:-5px;"><span id="notification_count" ng-if="NotificationCnt > 0 " style="position:relative;margin-top:-25px;-webkit-animation-duration: 1s;animation-duration: 1s; " class="badge notifico">{{NotificationCnt > 99 ? '99+' : NotificationCnt }}</span></i>
+                        @*<span id="notification_count" ng-if="Onlineusers  > 0 " style="position:relative;margin-top:-25px;-webkit-animation-duration: 1s;animation-duration: 1s;  background-color:forestgreen;" class="badge notifico">{{Onlineusers > 0 ? Onlineusers + ' Online Users '   : Onlineusers }}</span>*@
+                        <div id="notifications">
+                            <h3>Notifications</h3>
+                            <div id="notifications_container" style="height:300px;overflow-y:auto;overflow-x:hidden;">
+
+                                @*<div ng-if="Onlineusers > 0 " class="notification_title">Online Users<span style="font-weight: 100;float: right;font-style: italic;">Right Now</span></div>
+                                <div ng-if="Onlineusers > 0 " class="notification_body" style="font-style:normal">{{OnlineusersName}} is logged in.</div>*@
+
+                                <div ng-class="{'notification_unread': !itm.IsView}" ng-click="generateNotificationLink(itm)" class="notification_item" ng-repeat="itm in Notifications | orderBy: '-DateTimeCreated'">
+                                    <div class="notification_title">{{itm.Title}} <span style="font-weight: 100;float: right;font-style: italic;">{{setNotificationTime(itm.DateTimeCreated)}}</span></div>
+                                    <div class="notification_body">{{itm.Body}}</div>
+
+                                </div>
+                            </div>
+                            <!-- UNCOMMENT NALANG PAG MERONG SEE ALL -->
+                            @*<div class="seeAll"><a href="#">See All</a></div>*@
+                        </div>
+                    </li>
+                </ul>
+                <div class="search-container">
+                    <i class="fa fa-search search-ico"></i>
+                    <i class="fa fa-close search-clear" ng-click="SearchClear()"></i>
+                    @*<input type="text" id="search" class="form-control" placeholder="Search" />*@
+                    <angucomplete id="auto_searchMain"
+                                  placeholder="Find Menu"
+                                  pause="100"
+                                  selectedobject="selectedMenu"
+                                  localdata="copyMenu"
+                                  searchfields="Name"
+                                  titlefield="Name"
+                                  minlength="3"
+                                  inputclass="form-control"
+                                  gotomenu="menuSelect" />
+
+                </div>
+                @*<i class="fa fa-question-circle-o action-ico" ng-click="openHelper()"></i>*@
+                @*<i class="fa fa-money action-ico"></i>*@
+                <div class="header-user" tabindex="-1" ng-blur="OnBlur()" ng-click="ToggleUser()">
+                    <div style="display: grid;">
+                        <p class="username">{{PersonaName}}</p>
+                    </div>
+                    <img lazy-load-image="{ Image: DisplayPhoto || 'userdefault.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" />
+                    <i class="fa fa-close close-toggle"></i>
+                </div>
+            </div>
+        </div>
+        <!--End Header-->
+        <!--Main-->
+        <div class="main-container">
+            <sessionTimeOut>@ViewBag.SessionTimeOut</sessionTimeOut>
+            <div class="user-toggle-container">
+                <div class="user-toggle">
+                    <div class="user-image-container">
+                        <div ng-mouseover="ToggleUpload()" class="upload-button fa fa-camera" ng-click="UploadDP()"></div>
+                        <img ng-mouseover="ToggleUpload()" ng-mouseleave="ToggleUploadLeave()" lazy-load-image="{ Image: DisplayPhoto || 'userdefault.png' , Container: 'Photos' }" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" />
+                    </div>
+                    <p class="username">{{PersonaName}}</p>
+                    <div class="toggle-actions">
+                        <span class="shine" ui-sref="MyProfile" ng-click="ToggleUser()"><i class="fa fa-user"></i> View Profile</span>
+                        @*<span class="shine"><i class="fa fa-money"></i> Subscription <span class="amount">0.00</span></span>*@
+                        <span class="shine" ng-if="IsSystem" ng-click="Publish()"><i class="fa fa-arrow-circle-up"></i> Publish Website</span>
+                        @*<span class="shine" ng-if="IsSystem" ng-click="BuildWebsite()"><i class="fa fa-arrow-circle-up"></i> Build Website</span>*@
+                        <span class="shine" ng-if="IsSystem" ng-click="Contents()"><i class="fa fa-file-image-o"></i> Contents</span>
+                        <span class="shine" ng-if="IsSystem" ng-click="GoToThemes()"><i class="fa fa-paint-brush"></i> Themes</span>
+                        <span class="shine" ng-if="IsSystem" ng-click="GotoHangFire()"><i class="fa fa-question-circle-o"></i> Hangfire</span>
+                        <span class="shine" ng-if="IsSystem" ng-click="Restart()"><i class="fa fa-refresh"></i> Restart</span>
+                        <span class="shine" ng-click="openHelper()"><i class="fa fa-question-circle-o"></i> Help</span>
+                        <span class="shine" ng-click="LogOut()"><i class="fa fa-sign-out"></i> Log-out</span>
+                    </div>
+                </div>
+            </div>
+            <div class="side-menu">
+                <div class="toggle-menus">
+                    <i class="fa fa-bars" ng-click="ToggleSideMenu()"></i>
+                    <span class="action" ng-click="GoToDashboard()"><i class="fa fa-home dashboard"></i></span>
+                    <span class="action star" ng-click="ToggleBookmark()"><i class="fa fa-star bookmark"></i></span>
+                    <label class="switch">
+                        <input type="checkbox" ng-disabled="ID_ApplicationType != null" ng-click="ChangeDashboard()" ng-model="AppType">
+                        <i class="slider round"></i>
+                    </label>
+                </div>
+                <div class="menu-items">
+                    @{
+                        if (@Model.useMenu == 1)
+                        {
+                            <nav class="ISAzureMenu_nav_wrap">
+                                <div class="nav-inner">
+                                    <div ng-recursive-menu menus="Menus" item-select="menuSelect" item-toggle-fav="toggleFav" menu-context="menuContext"></div>
+                                </div>
+                            </nav>
+                        }
+                        else if (@Model.useMenu == 2)
+                        {
+                            <nav class="covering_levels">
+                                <div class="nav-inner">
+                                    <div idx="0" ng-recursive-menu2 menus="Menus" item-select="menuSelect" item-toggle-fav="toggleFav" menu-context="menuContext"></div>
+                                </div>
+                            </nav>
+                        }
+                        else
+                        {
+                            <nav class="covering_levels">
+                                <div class="nav-inner">
+                                    <div idx="0" ng-recursive-menu3 menus="Menus" item-select="menuSelect" item-toggle-fav="toggleFav" menu-context="menuContext"></div>
+                                </div>
+                            </nav>
+                        }
+                    }
+
+                </div>
+
+                <div class="untoggled-actions">
+                    <i class="fa fa-home dashboard" ng-click="GoToDashboard()"></i>
+                    <i class="fa fa-star bookmark" ng-click="ToggleBookmark()"></i>
+                </div>
+            </div>
+            <div class="right-box" ng-class="{ 'show-box': showbox }" ng-controller="RightPanelController">
+                <div class="right-inner">
+                    <p class="right-box-header">{{ RPanelTitle }} <span ng-click="TogglePanel()"><i class="fa fa-close"></i></span></p>
+                    <div class="right-box-body">
+
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div ng-style="(IsOpenAnnouncement && currentState != 'Dashboard') && {'display':'block'} || (!IsOpenAnnouncement && currentState != 'Dashboard') && {'display':'none'}" class="dashboard-2" lazy-load-image="{ Image: 's1.jpg', Path: 'Banner' }" ng-init="Init()">
+                    <p class="dashboard-2-title">{{HasClass == true ? 'Announcement' : 'Dashboard'}}</p>
+                    <div class="dashboard-2-overlay"></div>
+                    <div id="crslAnnouncement" class="carousel carousel-fade col-md-12" data-ride="carousel" ng-if="Announcements.length > 0">
+                        <ol class="carousel-indicators">
+                            <li data-target="#crslAnnouncement" ng-repeat="d in Announcements" data-slide-to="{{$index}}" ng-class="{'active' : $index == 0}"></li>
+                        </ol>
+
+                        <div class="carousel-inner" role="listbox">
+                            <div ng-repeat="d in Announcements" class="col-md-12 item shining" ng-class="{'active' : $index == 0}">
+                                <div class="col-md-2 date">
+                                    <p class="month">{{FormatCalendarDate(d.StartDate, 'month')}}</p>
+                                    <p class="day">{{FormatCalendarDate(d.StartDate, 'day')}}</p>
+                                </div>
+                                <div class="col-md-10 announcement">
+                                    <p class="head"><i class="fa fa-bullhorn"></i> {{d.Name}}</p>
+                                    <div class="content-container">
+                                        <p class="content">{{d.Comment}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ui-view></div>
+            </div>
+
+            <div class="bookmark-panel">
+                <p class="bookmark-header">Bookmark <span><i class="fa fa-close" ng-click="ToggleBookmark()"></i></span></p>
+                <div class="bookmark-list">
+                    <div ng-repeat="fv in UserFav | filter : FavFilter | orderBy: 'SeqNo'">
+                        <p ng-click="FavMenuSelect(fv)" class="shine">{{ fv.Menu }} <span ng-click="FavRemove(fv)"><i class="fa fa-trash"></i></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Main-->
+    </div>

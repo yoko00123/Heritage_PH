@@ -1,0 +1,218 @@
+﻿<form class="form-horizontal">
+    <div ng-if="c.ID > 0 && HasUserColumn" ng-repeat="c in nFltr | orderBy: 'SeqNo':false" ng-switch="c.CType">
+        <div class="form-group" ng-switch-when="1" ng-if="c.DataType == 'int'">
+            <label>{{ c.EffectiveLabel }}</label>
+            <!--ng-update-model="{ model: data, name: 'To_' + c.Name }"-->
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="From" class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="To" class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="1" ng-if="c.DataType != 'int'">
+            <label>{{ c.EffectiveLabel }}</label>
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="{{c.Name}}" class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="2">
+            <label>{{ c.EffectiveLabel }}</label>
+            <input type="text" name="{{c.Name}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="3">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY h:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="From_{{c.Name}}_{{c.ID}}" placeholder='From' class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="To_{{c.Name}}_{{c.ID}}" placeholder='To' class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="4">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="hh:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='From' class="form-control" id="From_{{c.Name}}_{{c.ID}}" ng-model="data['From_' + c.Name]" ng-change="data['To_' + c.Name] = data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='To' class="form-control" id="To_{{c.Name}}_{{c.ID}}" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="8">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY" make-datetime-picker-->
+                <input datetimeformat="MMM DD YYYY" make-datetime-picker type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="From_{{c.Name}}_{{c.ID}}" placeholder='From' class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <!--<span class='input-group-addon'><i class='fa fa-calendar'></i></span>-->
+            </div>
+            <div class='input-group'>
+                <input datetimeformat="MMM DD YYYY" make-datetime-picker type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="To_{{c.Name}}_{{c.ID}}" placeholder='To' class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <!--<span class='input-group-addon'><i class='fa fa-calendar'></i></span>-->
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="9">
+            <label>{{ c.EffectiveLabel }}</label>
+            <select name="{{c.Name}}"
+                    ng-options="item.ID as item.Name for item in dropdownSource[c.ID_MenuTabField]"
+                    class="form-control" ng-model="data[c.Name]" ng-change="ExecuteFilter()">
+                <option value="">- Select -</option>
+            </select>
+        </div>
+        <div class="form-group" ng-switch-when="10">
+            <span class="remember-me-check">
+                <input type="checkbox" id="remember-me-{{c.Name}}" name="{{c.Name}}" ng-model="dat[c.Name]" ng-change="ExecuteFilter()" ng-inj-validator />
+                <label for="remember-me-{{c.Name}}" style="margin: 0; padding: 0 0 0 25px;">{{ c.EffectiveLabel }}</label>
+            </span>
+        </div>
+        <div class="form-group" ng-switch-when="11">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" col-value="data[c.Name]" menu="c.ID_Menu" idx="idx" placeholder='{{c.EffectiveLabel}}' class="form-control" ng-model="data[c.Name.substr(3)]" ng-enter="ExecuteFilter()" ng-filter-lookup ng-inj-validator />
+                <input ng-model="data[c.Name]" type="hidden" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-folder-open'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="12">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="{{c.Name}}_{{c.ID}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="13">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="{{c.Name}}_{{c.ID}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="14">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="hh:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='{{c.Name}}' class="form-control" id="{{c.Name}}_{{c.ID}}" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="15">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='{{c.Name}}' class="form-control" id="{{c.Name}}_{{c.ID}}" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-default>
+            <label>{{ c.EffectiveLabel }}</label>
+            <input type="text" name="{{c.Name}}" placeholder='{{c.EffectiveLabel}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+    </div>
+    <div ng-if="c.ID == 0 && !HasUserColumn" ng-repeat="c in nFltr | orderBy: 'SeqNo':false" ng-switch="c.CType">
+        <div class="form-group" ng-switch-when="1" ng-if="c.DataType == 'int'">
+            <label>{{ c.EffectiveLabel }}</label>
+            <!--ng-update-model="{ model: data, name: 'To_' + c.Name }"-->
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="From" class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="To" class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="1" ng-if="c.DataType != 'int'">
+            <label>{{ c.EffectiveLabel }}</label>
+            <input ng-input db-data-type="c.DataType" type="text" name="{{c.Name}}" placeholder="{{c.Name}}" class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="2">
+            <label>{{ c.EffectiveLabel }}</label>
+            <input type="text" name="{{c.Name}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+        <div class="form-group" ng-switch-when="3">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY h:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="From_{{c.Name}}_{{c.ID}}" placeholder='From' class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="To_{{c.Name}}_{{c.ID}}" placeholder='To' class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="4">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="hh:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='From' class="form-control" id="From_{{c.Name}}_{{c.ID}}" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='To' class="form-control" id="To_{{c.Name}}_{{c.ID}}" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="8">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="From_{{c.Name}}_{{c.ID}}" placeholder='From' class="form-control" ng-model="data['From_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="To_{{c.Name}}_{{c.ID}}" placeholder='To' class="form-control" ng-model="data['To_' + c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="9">
+            <label>{{ c.EffectiveLabel }}</label>
+            <select name="{{c.Name}}"
+                    ng-options="item.ID as item.Name for item in dropdownSource[c.ID_MenuTabField]"
+                    class="form-control" ng-model="data[c.Name]" ng-change="ExecuteFilter()">
+                <option value="">- Select -</option>
+            </select>
+        </div>
+        <div class="form-group" ng-switch-when="10">
+            <span class="remember-me-check">
+                <input type="checkbox" id="remember-me-{{c.Name}}" name="{{c.Name}}" ng-model="dat[c.Name]" ng-change="ExecuteFilter()" ng-inj-validator />
+                <label for="remember-me-{{c.Name}}" style="margin: 0; padding: 0 0 0 25px;">{{ c.EffectiveLabel }}</label>
+            </span>
+        </div>
+        <div class="form-group" ng-switch-when="11">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" col-value="data[c.Name]" menu="c.ID_Menu" idx="idx" placeholder='{{c.EffectiveLabel}}' class="form-control" ng-model="data[c.Name.substr(3)]" ng-enter="ExecuteFilter()" ng-filter-lookup ng-inj-validator />
+                <input ng-model="data[c.Name]" type="hidden" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-folder-open'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="12">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="MM/DD/YYYY" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="{{c.Name}}_{{c.ID}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="13">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" id="{{c.Name}}_{{c.ID}}" placeholder='{{c.Name}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="14">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <!--datetimeformat="hh:mm A" make-datetime-picker-->
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='{{c.Name}}' class="form-control" id="{{c.Name}}_{{c.ID}}" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-when="15">
+            <label>{{ c.EffectiveLabel }}</label>
+            <div class='input-group'>
+                <input type="text" name="{{c.Name}}" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder='{{c.Name}}' class="form-control" id="{{c.Name}}_{{c.ID}}" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+                <span class='input-group-addon'><i class='fa fa-clock-o'></i></span>
+            </div>
+        </div>
+        <div class="form-group" ng-switch-default>
+            <label>{{ c.EffectiveLabel }}</label>
+            <input type="text" name="{{c.Name}}" placeholder='{{c.EffectiveLabel}}' class="form-control" ng-model="data[c.Name]" ng-enter="ExecuteFilter()" ng-inj-validator />
+        </div>
+    </div>
+</form>

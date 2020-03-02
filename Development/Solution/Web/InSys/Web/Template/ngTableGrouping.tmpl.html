@@ -1,0 +1,65 @@
+﻿<!--<input ng-if="IsAllowDelete" ng-click="checkChildren(a.id)" targetid="parent_{{a.id}}_{{parentGroup}}" type="checkbox" style="float: left;margin: 8px 5px;" />-->
+
+<div class="group-table" a="{{a.id}}" ng-click="toggleGroup(a.id)">
+    <span ng-if="IsAllowDelete" class="remember-me-check" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+        <input type="checkbox" ng-click="checkChildren(a.id)" id="remember-me-{{a.id}}" targetid="parent_{{a.id}}_{{parentGroup}}" />
+        <label for="remember-me-{{a.id}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+    </span>
+    <i ng-class="changeToggle(a.id)"></i>
+    <b>{{((a.GroupName == '' || a.GroupName == null) ? 'Unspecified' : a.GroupName)}}</b>
+    <span class="label label-warning">{{a.Children.length}}</span>
+</div>
+<table id="table" ng-style="a.Children[0].Children != undefine && {'margin-left': 15} || a.Children[0].Children == undefine && {'margin-left': 5}" ng-if="a.Children != undefined" class="groupIndx_{{a.id}} table table-mc-light-blue table-condensed" ng-class="a.Children[0].Children == undefined ? 'MenuTable table-striped' : 'MenuTable2'">
+    <thead ng-if="a.Children[0].Children == undefined">
+        <tr>
+            <th style="user-select:none; border-right:none!important;" ></th>
+            <th style="user-select:none;" ng-if="c.ID != 0 && c.GroupSeqNo == 0 && !IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+            <th style="user-select:none;" ng-if="c.ID == 0 && c.GroupSeqNo == 0 && IsLoadDefault" ng-repeat="c in grid.Columns" large-width>{{ c.EffectiveLabel }} <i ng-click="sortRecord(c.Name, $event)" style="cursor:pointer;padding:5px;" ng-class="sortIcon(c.Name)" class="fa"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--ng-dblclick="OpenInfo(b.ID)"-->
+        <tr ng-repeat="b in a.Children">
+            <td ng-if="b.Children == undefined" style="padding-bottom: 0px;min-width:40px;position:relative;">
+                <span class="remember-me-check" ng-if="IsAllowDelete" style="background-color: transparent!important;top: 11px;padding: 0px!important;left: 0px;">
+                    <input type="checkbox" id="remember-me-{{b.ID}}" catch-check ng-model="b.IsChecked" targetid="child_{{a.id}}" />
+                    <label for="remember-me-{{b.ID}}" style="margin: 0; padding: 0 0 0 25px;"></label>
+                </span>
+                <a href="javascript:;" class="md-primary pen" ng-class="{'hasCB' : IsAllowDelete}" ng-click="OpenInfo(b.ID)"><div class="item-selector"></div></a>
+            </td>
+            <td ng-if="b.Children == undefined && bb.ID > 0 && !IsLoadDefault" ng-repeat="bb in grid.Columns | filter: NotGroup" ng-switch on="bb.ID_SystemControlType">
+                <div ng-switch-when="3"><md-switch class="md-primary" ng-model="b[bb.Name]" disabled></md-switch></div>
+                <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="{{a.id}}" txt="{{ b[bb.Name.substr(3)] }}" data-toggle="tooltip" title="{{ b[bb.Name.substr(3)] }}">{{ b[bb.Name.substr(3)] }}</span></div>
+                <div ng-switch-when="7" style="position:relative;">
+                    <!--<div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                    <div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Container: 'Photos' }"></div>
+                </div>
+                <div ng-switch-default>
+                    <span shorten-text tbl="{{a.id}}" txt="{{ FormatColumn(bb.Name, b) }}" data-toggle="tooltip" title="{{ FormatColumn(bb.Name, b) }}">{{ FormatColumn(bb.Name, b) }}</span>
+                </div>
+            </td>
+            <td ng-if="b.Children == undefined && bb.ID == 0 && IsLoadDefault" ng-repeat="bb in grid.Columns | filter: NotGroup" ng-switch on="bb.ID_SystemControlType">
+                <div ng-switch-when="3"><md-switch class="md-primary" ng-model="b[bb.Name]" disabled></md-switch></div>
+                <div ng-switch-when="2|4" ng-switch-when-separator="|"><span shorten-text tbl="{{a.id}}" txt="{{ b[bb.Name.substr(3)] }}" data-toggle="tooltip" title="{{ b[bb.Name.substr(3)] }}">{{ b[bb.Name.substr(3)] }}</span></div>
+                <div ng-switch-when="7" style="position:relative;">
+                    <!--<div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Size: { Width: 50, Height: 50 } }"></div>-->
+                    <div class="menu-list-image" lazy-load-image="{ Image: b[bb.Name], Container: 'Photos' }"></div>
+                </div>
+                <div ng-switch-default>
+                    <span shorten-text tbl="{{a.id}}" txt="{{ FormatColumn(bb.Name, b) }}" data-toggle="tooltip" title="{{ FormatColumn(bb.Name, b) }}">{{ FormatColumn(bb.Name, b) }}</span>
+                </div>
+            </td>
+            <td ng-style="a.Children[0].Children != undefine && {'padding': 0}" ng-if="b.Children != undefined">
+                <ng-table-grouping grp-var="b"
+                                   grp-data="grid"
+                                   format-column="FormatColumn"
+                                   load-default="IsLoadDefault"
+                                   open-info="OpenInfo"
+                                   allow-delete="IsAllowDelete"
+                                   chk="checkChildren"
+                                   parent-group="a.id">
+                </ng-table-grouping>
+            </td>
+        </tr>
+    </tbody>
+</table>

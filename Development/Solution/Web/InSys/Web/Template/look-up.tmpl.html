@@ -1,0 +1,23 @@
+﻿<div class="panel panel-primary" ng-init="Init()" ng-style="{ 'width': Width }">
+    <div class="panel-heading">
+        <div id="panel-title">
+            {{ lookupName }} 
+        </div>
+        <div id="panel-controls">
+            <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="Refresh()"><i class="fa fa-refresh"></i></button> 
+                <button type="button" class="btn btn-default" ng-click="CloseLookUp()"><i class="fa fa-close"></i></button>
+            </div>
+        </div> 
+    </div>
+    <div class="panel-body">
+        <div id="lookUpGrid"></div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+    </div>
+</div>

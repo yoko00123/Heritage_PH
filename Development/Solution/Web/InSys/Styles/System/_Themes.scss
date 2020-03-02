@@ -1,0 +1,416 @@
+﻿/*
+$PrimaryColor
+$RightBox FilterBox
+$RightBoxHeader FilterBox header
+$LabelColorRB FilterBox Label
+$RightBoxInput FilterBox Controls Background Color
+$TextColorRB FilterBox Controls Font Color
+$SecondaryColor
+$SideMenu SideMenu Color Container
+$TextColorMenu SideMenu Text Color
+$Header Header Background Color
+$HeaderSearch Header Searchbox Background Color
+$SearchTextColor Header Searchbox text color
+$TextColor Header Text Color*/
+
+/*SiteMaster*/
+.module-header {
+    background-color: $PrimaryColor!important;
+}
+
+.module-header.dash-board.toggled-dashboard .mh-header-overlay {
+    background-color: $PrimaryColor!important;
+}
+
+.module-header.dash-board .mh-header-overlay {
+    background-color: $PrimaryColor!important;
+}
+
+.module-header.dash-board .toggle-db {
+    background-color: $PrimaryColor!important;
+}
+
+.right-box {
+    background: $RightBox !important;
+}
+
+.right-box .right-inner .right-box-header {
+    color: $PrimaryColor !important;
+    background-color: $RightBoxHeader !important;
+}
+
+.right-box .right-inner .right-box-body form .form-group label {
+    color: $LabelColorRB !important;
+}
+
+.right-box .right-inner .right-box-body form .form-group input,
+.right-box .right-inner .right-box-body form .form-group select {
+    background-color: $RightBoxInput !important;
+    color: $TextColorRB !important;
+}
+
+.remember-me-check [type="checkbox"]:checked+label:before {
+    border-right: 2px solid $PrimaryColor!important;
+    border-bottom: 2px solid $PrimaryColor!important;
+}
+
+.angucomplete-dropdown {
+    background-color: $HeaderSearch!important;
+    color: $SearchTextColor!important;
+}
+
+.angucomplete-row {
+    color: $SearchTextColor!important;
+}
+
+.right-box .bootstrap-datetimepicker-widget.dropdown-menu {
+    background-color: $RightBox!important;
+    color: $TextColorRB!important;
+}
+
+.right-box .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+    border-bottom: 6px solid $RightBox!important;
+}
+
+.right-box .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+    border-top: 7px solid $RightBox!important;
+}
+
+.right-box .bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+    border-top: 6px solid $RightBox!important;
+}
+
+/*_Account*/
+#account-login .bg-holder .app-bg .app-bg-overlay,
+#change-password .bg-holder .app-bg .app-bg-overlay {
+    background-color: $PrimaryColor!important;
+}
+
+#account-login .login-holder .side-bar-logo .side-bar-overlay,
+#change-password .login-holder .side-bar-logo .side-bar-overlay {
+    background-color: $SecondaryColor !important;
+}
+
+#account-login .login-holder .login-container .login-title
+ #change-password .login-holder .login-container .login-title {
+    color: $PrimaryColor!important;
+}
+
+#account-login .login-holder .login-container .company-ul li p.company-abbr,
+#change-password .login-holder .login-container .company-ul li p.company-abbr {
+    background-color: $PrimaryColor!important;
+}
+
+#account-login .login-holder .login-container .company-ul li:hover,
+#change-password .login-holder .login-container .company-ul li:hover {
+    background-color: $PrimaryColor!important;
+}
+
+#account-login .login-holder .login-container .sign-btn,
+#account-login .login-holder .login-container .submit-btn,
+#account-login .login-holder .login-container .back-btn,
+#change-password .login-holder .login-container .sign-btn,
+#change-password .login-holder .login-container .submit-btn,
+#change-password .login-holder .login-container .back-btn {
+    background-color: $PrimaryColor!important;
+}
+
+/*_CustomListTable*/
+.list-table .table-container .MenuTable thead th,
+.list-table .table-container ng-table-grouping table.MenuTable thead th {
+    border-bottom: 2px solid $PrimaryColor !important;
+}
+
+.list-table .table-container .MenuTable thead th i,
+.list-table .table-container ng-table-grouping table.MenuTable thead th i {
+    color: $PrimaryColor !important;
+}
+
+.table-footer p {
+    background-color: $SecondaryColor!important;
+}
+
+
+.setA li:hover, .setB li:hover {
+    background-color: $PrimaryColor !important;
+}
+
+.setB li {
+    background-color: $PrimaryColor !important;
+}
+
+ng-table-grouping table.MenuTable, .MenuTable2 table.MenuTable {
+    border: 1px solid $PrimaryColor!important;
+}
+
+.toggle-table i, ng-table-grouping>div i {
+    color: $PrimaryColor !important;
+}
+
+.toggle-table span, ng-table-grouping>div span {
+    background-color: $SecondaryColor !important;
+}
+
+/*_Dialog*/
+
+.print-dialog .panel .panel-heading {
+    background-color: $PrimaryColor !important;
+    border-color: $PrimaryColor !important;
+}
+
+.print-dialog .panel .panel-body form .custom-radio input.radio:checked ~ label:before {
+    background-color: $PrimaryColor !important;
+}
+
+.print-dialog .panel .panel-body form .custom-radio input.radio:checked ~ label {
+    color: $PrimaryColor !important;
+}
+
+.print-dialog .panel .panel-body .pt-btn {
+    background-color: $PrimaryColor !important;
+}
+
+.print-dialog .panel .panel-body .pt-btn:hover {
+    color: $PrimaryColor !important;
+}
+
+.custom-dialog .panel .panel-heading {
+    background-color: $PrimaryColor !important;
+}
+
+.custom-dialog .panel .panel-footer .btn-group button.ok {
+    color: $PrimaryColor !important;
+}
+
+/*_DropdownMenu*/
+.ISAzureMenu_nav_wrap {
+    background-color: $SideMenu !important;
+}
+
+.ISAzureMenu_nav_wrap ul a p {
+    color: $TextColorMenu!important;
+}
+
+.ISAzureMenu_nav_wrap ul a .menu-abbr {
+    color: $PrimaryColor!important;
+}
+
+.ISAzureMenu_nav_wrap ul li {
+    background-color: $SideMenu!important;
+}
+
+.ISAzureMenu_nav_wrap ul ul {
+    background-color: $SideMenu!important;
+}
+/*_Home*/
+.header {
+    background-color: $Header !important;
+}
+
+.header .header-right .search-container input {
+    background-color: $HeaderSearch !important;
+    color: $SearchTextColor !important;
+}
+
+.header .header-right .search-container .search-ico,
+.header .header-right .search-container .search-clear {
+    color: $TextColor !important;
+}
+
+.header .company-name {
+    color: $TextColor !important;
+}
+
+.header .header-right .action-ico {
+    color: $TextColor !important;
+}
+
+.header .header-right .header-user p.username {
+    color: $TextColor !important;
+}
+
+.main-container .user-toggle-container .user-toggle {
+    background-color: $Header !important;
+}
+
+.main-container .user-toggle-container .user-toggle .username {
+    color: $TextColor !important;
+}
+
+.main-container .user-toggle-container .user-toggle .toggle-actions span {
+    color: $TextColor !important;
+}
+
+.main-container .user-toggle-container .user-toggle .toggle-actions span.amount {
+    color: $PrimaryColor !important;
+}
+
+.side-menu {
+    background-color: $SideMenu !important;
+}
+.side-menu .toggle-menus {
+    background-color: $Header !important;
+}
+.side-menu .toggle-menus .slider {
+    background-color: $PrimaryColor !important;
+}
+.side-menu .toggle-menus input:checked + .slider,
+.side-menu .toggle-menus input:focus + .slider {
+    background-color: $SecondaryColor !important;
+}
+.side-menu .toggle-menus span.action {
+    color: $TextColor !important;
+}
+.side-menu .toggle-menus span.action i.dashboard {
+    color: $PrimaryColor !important;
+}
+
+.bookmark-panel {
+    background-color: $SideMenu !important;
+}
+
+.bookmark-panel .bookmark-header {
+    color: $TextColor !important;
+    background-color: $Header !important;
+}
+
+.bookmark-panel .bookmark-list p {
+    color: $TextColorMenu!important;
+}
+
+.untoggled-actions i.dashboard {
+    color: $PrimaryColor !important;
+}
+
+ros-widget .nav-tabs li.active a,
+ros-widget .nav-tabs li.active a:hover,
+ros-widget .nav-tabs li.active a:focus {
+    border-bottom: 3px solid $PrimaryColor !important;
+    color: $PrimaryColor !important;
+}
+
+/*.angular-bootstrap-contextmenu ul {
+    background-color: $SideMenu!important;
+}
+.angular-bootstrap-contextmenu ul li a {
+    background-color: $SideMenu!important;
+    color: $TextColorMenu!important;
+}
+.angular-bootstrap-contextmenu ul li a:hover {
+    color: $TextColorMenu !important;
+}*/
+
+.context_menu_css{
+    height:auto!important;
+    overflow: hidden!important;
+    background-color: #fff!important;
+}
+
+.context_menu_css li{
+    background-color: #fff!important;
+}
+
+.context_menu_css li a{
+    background-color: #fff!important;
+    color: #555 !important;
+}
+
+.context_menu_css li a:hover{
+    color: #fff !important;
+    background-color: #7f8c8d!important;
+}
+
+.context_menu_css li.disabled a{
+    color: #ccc!important;
+}
+
+.context_menu_css li.disabled a:hover{
+    background-color: #fff!important;
+    cursor: not-allowed!important;
+}
+/*_Info*/
+.info-panel .info-header {
+    background-color: $PrimaryColor !important;
+}
+
+.Info-Form .panel .panel-heading {
+    background-color: $PrimaryColor !important;
+}
+
+.image-group .image-button {
+    background-color: $PrimaryColor !important;
+}
+
+.Info-Form .panel .Detail-Container .table-container table thead th {
+    border-bottom: 2px solid $PrimaryColor !important;
+}
+
+/*_MyProfile*/
+.my-profile .custom-tabs-left li.thumb .thumb-container .camera {
+    color: $PrimaryColor !important;
+}
+
+.my-profile .tabs-left>.side-tab.active>a,
+.my-profile .tabs-left>.side-tab.active>a:hover,
+.my-profile .tabs-left>.side-tab.active>a:focus {
+    background-color: $PrimaryColor !important;
+}
+
+.my-profile .profile-container .profile-content .title-head {
+    color: $PrimaryColor !important;
+}
+
+.my-profile .profile-container .profile-content table thead tr th {
+    border-color: $PrimaryColor !important;
+}
+/*_Report*/
+.report-param-dialog .report-param-header {
+    background-color: $PrimaryColor!important;
+}
+
+.report-param-dialog .report-param-inner button {
+    color: $PrimaryColor!important;
+}
+
+#toolbarViewer {
+    background-color: $PrimaryColor!important;
+}
+/*_WebWidget*/
+div.sticky-panel-header{
+    background-color: $PrimaryColor!important;
+}
+.widget-table th {
+    border-bottom: 2px solid $PrimaryColor!important;
+}
+
+/*Contents*/
+
+.Contents .itm-content-thumb .content-itm .content-img,
+.Contents .itm-content-list ul li .content-img {
+    color: $PrimaryColor!important;
+}
+
+/*Dashboard-2*/
+.dashboard-2 .dashboard-2-overlay {
+    background-color: $PrimaryColor!important;
+}
+
+.vue-grid-item {
+        border: 2px solid $PrimaryColor !important;
+}
+
+.vue-grid-item .hasDblClick .menu-abbr {
+    color: $PrimaryColor!important;
+}
+
+.vue-grid-item:hover .hasDblClick {
+    background-color: $PrimaryColor!important;
+}
+
+.vue-grid-item .hasDblClick .count {
+    color: $SecondaryColor!important;
+}
+
+.vue-grid-item .fa-close {
+    color: $PrimaryColor!important;
+}

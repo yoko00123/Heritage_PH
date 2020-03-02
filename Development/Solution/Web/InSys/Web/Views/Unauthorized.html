@@ -1,0 +1,85 @@
+﻿<div class="error-page">
+    
+    <div class="error-box">
+        
+        <div class="error-text">
+            <h1 class="error-404">404</h1>
+            <i class="fa fa-search ico-bg"></i>
+            <div class="error-detail">
+                <h2 class="font-xl">
+                    <!--<i ng-bind-html="ErrorMsg"></i>-->
+                    Oops! something went wrong...
+                </h2>
+
+                <p class="lead">
+                    The page you requested could not be found, either contact your webmaster or try again.
+                </p>
+            </div>
+        </div>
+        <center>
+            <button class="btn btn-primary go-back" ng-click="GoBack()">Go back</button>
+        </center>
+    </div>
+
+</div>
+<style>
+    .error-page {
+        width: 100%;
+        height: 100vh;
+        background-color: #ecf0f1;
+    }
+
+    .ico-bg {
+        position: absolute;
+        color: #ccc;
+        font-size: 300px;
+        opacity: .3;
+        width: 100%;
+        top: -10px;
+        left: 20px;
+    }
+
+    .error-box {
+        position: relative;
+        top: 20%;
+    }
+
+    .lead {
+        font-size: 18px !important;
+    }
+
+    .error-text {
+        display: grid;
+        text-align: center;
+    }
+
+    .error-404 {
+        margin: 0px;
+        color: #95a5a6;
+        font-size: 170px;
+        z-index: 1;
+    }
+
+    .error-404 > span {
+        font-size: 55px;
+    }
+
+    .error-detail {
+        z-index: 1;
+    }
+
+    .error-detail > h2, .error-detail > p {
+        margin-top: 0px;
+        color: #95a5a6;
+    }
+
+    .go-back {
+        font-size: 18px;
+        border-radius: 0px;
+        border: none;
+        background-color: transparent !important;
+        padding: 12px 15px;
+        color: #7f8c8d !important;
+        border: 2px solid #ccc !important;
+    }
+</style>

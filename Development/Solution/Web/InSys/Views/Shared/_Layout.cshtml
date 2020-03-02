@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'sha256-LF9pHg+kfEiXfdOeJOGAzPTRfQGbaY+NVjYobzGjzCo=' 'sha256-xACe9YUcsPtmQCkVhUCm47pXLH7UK/kbUDgR8o98I6E=' 'sha256-j1XoD/aE9PJPYat9RkZ8/2+wwkdTl+P/+90M8PM1/k8=' 'sha256-sN1l1yeh/SrVXofSTvkPWTmBPzGSYXzI3CVTvDW7eAI='; img-src @System.Configuration.ConfigurationManager.AppSettings["ImageMetaSrc"].ToString() 'self' data:;">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/CompanyLogo5.ico" />
+    <title>InSys - Integrated System</title>
+    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="InSys, Integrated System" />
+
+    @Styles.Render("~/bundles/core-styles")
+    <link href="@Url.Content("~/Styles/References/SiteMaster.min.css")" rel="stylesheet" />
+
+</head>
+<body>
+
+
+
+    <div vw-loading-bar></div>
+    <div id="window-screen">
+        <div class="screen-outer">
+            <div class="windows8">
+                <div class="wBall" id="wBall_1">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_2">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_3">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_4">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_5">
+                    <div class="wInnerBall"></div>
+                </div>
+            </div>
+            <div class="insys-logo">
+
+            </div>
+            <div class="loading-msg-box">
+                <p id="LoadingMessage">Loading ...</p>
+            </div>
+            <div class="bg-screen"></div>
+        </div>
+    </div>
+    <div>
+
+
+        <script>window.PreLoad = function (act) { act(); };</script>
+        <insys>@ViewBag.EncryptionString</insys>
+        @RenderBody()
+    </div>
+	
+    @Scripts.RenderFormat(@"<script defer src=""{0}""></script>", "~/bundles/core-scripts")
+    <script defer src="~/Scripts/References/require.js" data-main="/Scripts/System/Main.js"></script>
+    <environment prod="@System.Configuration.ConfigurationManager.AppSettings["OptimizedBundles"].ToString()"></environment>
+</body>
+</html>

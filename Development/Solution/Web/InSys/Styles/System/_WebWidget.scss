@@ -1,0 +1,102 @@
+﻿.w1{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.w2 {
+    //border: 1px solid black;
+    height: 245px;
+    margin-bottom: 10px;
+    padding: 0px;
+    background-color: #fff;
+    box-shadow: 0 5px 30px -7px #373737;
+}
+
+div.sticky-panel-header{
+    padding: 5px 5px 3px 15px;
+    margin: 0px;
+    color: #fff;
+    background-color: $PrimaryColor;
+}
+
+div.widget-compress{
+    transition: all 1s;
+    -moz-transition: all 1s; /* Firefox 4 */
+    -webkit-transition: all 1s; /* Safari and Chrome */
+    -o-transition: all 1s; /* Opera */
+}
+
+div.widget-expand{
+    width: 100%;
+    float: left;
+    min-height: 1px;
+    height: 80vh;
+    position: relative;
+    float: left;
+    transition: all 1s;
+    -moz-transition: all 1s; /* Firefox 4 */
+    -webkit-transition: all 1s; /* Safari and Chrome */
+    -o-transition: all 1s; /* Opera */
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    right: 3px;
+}
+
+div.widget-tab{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 82vh;
+}
+
+div.max-height{
+    height: 100%;
+}
+
+div.rosPanelFoot {
+    background-color: #eee;
+    padding: 5px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+
+    .widget-count {
+        background-color: $SecondaryColor;
+        padding: 2px 0px;
+        position: absolute;
+        left: 0px;
+        font-size: 20px;
+        color: #fff;
+        top: 0px;
+        width: 50px;
+        height: 30px;
+    }
+
+    span {
+        float: right;
+        select {
+            background-color: transparent;
+            border: none;
+            font-size: 15px;
+            outline: none;
+        }
+    }
+}
+
+.table-chart {
+    thead {
+        tr {
+            background-color: #eee;
+            th {
+                font-size: 14px !important;
+            }
+        }
+    }
+}
+
+.widget-table {
+    th {
+        border-bottom: 2px solid $PrimaryColor!important;
+        background-color: #fff!important;
+    }
+}

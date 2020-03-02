@@ -1,0 +1,1505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02D2CC4D-6C64-4731-B8A9-97AF39C71C85}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InSys</RootNamespace>
+    <AssemblyName>InSys</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.0.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.0.0\lib\net40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.2\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="EcmaScript.NET, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Autofac, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Autofac.2.3.1\lib\net45\Hangfire.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Console, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Console.1.4.2\lib\net45\Hangfire.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.6.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.6.21\lib\net45\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.6.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.6.21\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.0.3\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="InSys.Office, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\InSys.Office.1.0.10\lib\net40\InSys.Office.dll</HintPath>
+    </Reference>
+    <Reference Include="InSys.Storage, Version=1.1.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\InSys.Storage.1.1.6\lib\net45\InSys.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="InSys.Util, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\InSys.Util.1.0.6\lib\net45\InSys.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="insysreport.Binary, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\insysreport.Binary.1.9.4\lib\net45\insysreport.Binary.dll</HintPath>
+    </Reference>
+    <Reference Include="insysreport.Client, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\insysreport.Client.2.0.4\lib\net45\insysreport.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="insysreport.Local, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\insysreport.Local.1.1.2\lib\net45\insysreport.Local.dll</HintPath>
+    </Reference>
+    <Reference Include="insysreport.Shared, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\insysreport.Shared.1.0.1\lib\net45\insysreport.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="insysreport.Types, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\insysreport.Types.1.8.4\lib\net45\insysreport.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.2\lib\net40\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Binary, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Binary.2.5.0\lib\net45\jsreport.Binary.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Client, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Client.3.0.1\lib\net45\jsreport.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Local, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Local.2.1.0\lib\net45\jsreport.Local.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Shared, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Shared.2.0.1\lib\net45\jsreport.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Types, Version=2.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Types.2.2.7\lib\net45\jsreport.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="LZ4, Version=1.0.9.93, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Zipper.1.2.0\lib\net40\LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.6.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.2.0.4\lib\net45\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.3\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.3\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.3\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.4.0.0\lib\net451\Microsoft.Owin.FileSystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.4.0.0\lib\net451\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.4.0.0\lib\net451\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.StaticFiles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.StaticFiles.4.0.0\lib\net451\Microsoft.Owin.StaticFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.TransactSql.ScriptDom.14.0.3811.1\lib\net40\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Web.BrowserLink.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Web.BrowserLink.12.0.12.0.0\lib\net40\Microsoft.VisualStudio.Web.BrowserLink.12.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.SDK.2.9.0\lib\Microsoft.WindowsAzure.Diagnostics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.SDK.2.9.0\lib\Microsoft.WindowsAzure.ServiceRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.1.1\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.11\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NUglify, Version=1.5.12.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUglify.1.5.12\lib\net40\NUglify.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.8.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.9.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.MSSqlServer, Version=5.1.2.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.MSSqlServer.5.1.2\lib\net452\Serilog.Sinks.MSSqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.PeriodicBatching, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.PeriodicBatching.2.1.1\lib\net45\Serilog.Sinks.PeriodicBatching.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.108.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.108.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlServerCe_unofficial.4.0.8482.1\lib\net20\System.Data.SqlServerCe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.3\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.6\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.6\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsAzureEventSource, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.SDK.2.9.0\lib\WindowsAzureEventSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsAzureTelemetryEvents, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.SDK.2.9.0\lib\WindowsAzureTelemetryEvents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Yahoo.Yui.Compressor, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YUICompressor.NET.2.7.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Data.Standard, Version=1.2.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Data.Standard.1.2.8\lib\net45\z.Data.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Diagnostics, Version=1.0.6197.27148, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Diagnostics.1.0.6197.27148\lib\net45\z.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="z.IO, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.IO.1.1.2\lib\net45\z.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="z.IO.Report, Version=1.0.6197.28011, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.IO.Report.1.0.6197.28011\lib\net45\z.IO.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Report.Binary, Version=1.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Report.Binary.1.9.5\lib\net45\z.Report.Binary.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Report.Client, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Report.Client.2.0.5\lib\net45\z.Report.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Report.Local, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Report.Local.1.1.3\lib\net45\z.Report.Local.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Report.Shared, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Report.Shared.1.0.2\lib\net45\z.Report.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Report.Types, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Report.Types.1.8.5\lib\net45\z.Report.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Security, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Security.2.0.0\lib\net40\z.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="z.SQL, Version=1.1.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.SQL.1.1.12\lib\net45\z.SQL.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Zipper, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Zipper.1.2.0\lib\net40\z.Zipper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="7z.dll" />
+    <Content Include="7z64.dll" />
+    <Content Include="CompanyLogo5.ico" />
+    <Content Include="CompanyLogo5.png" />
+    <Content Include="FAQ\11Readers.html" />
+    <Content Include="FAQ\12Modules.html" />
+    <Content Include="FAQ\13Requirements.html" />
+    <Content Include="FAQ\1GeneralInformation.html" />
+    <Content Include="FAQ\21LoginPage.html" />
+    <Content Include="FAQ\2AccessingTheSystem.html" />
+    <Content Include="FAQ\31PartsDescriptionsandProcedures.html" />
+    <Content Include="FAQ\32MainFunctionsandButtons.html" />
+    <Content Include="FAQ\3MainPage.html" />
+    <Content Include="FAQ\410IONSMaintenance.html" />
+    <Content Include="FAQ\41Maintenance.html" />
+    <Content Include="FAQ\42OrganizationalManagement.html" />
+    <Content Include="FAQ\43InSysPeople.html" />
+    <Content Include="FAQ\44InSysOrbit.html" />
+    <Content Include="FAQ\45InSysPayroll.html" />
+    <Content Include="FAQ\46Accounting.html" />
+    <Content Include="FAQ\47Administrative.html" />
+    <Content Include="FAQ\48Alert.html" />
+    <Content Include="FAQ\49System.html" />
+    <Content Include="FAQ\4AddEditDeleteRecords.html" />
+    <Content Include="FAQ\51Dashboard.html" />
+    <Content Include="FAQ\52Applications.html" />
+    <Content Include="FAQ\53Approvals.html" />
+    <Content Include="FAQ\54RequestforCancellation.html" />
+    <Content Include="FAQ\5IntegratedOnlineEmploymentServi.html" />
+    <Content Include="FAQ\A1EmployeeMovementType.html" />
+    <Content Include="FAQ\A1HeaderBar.html" />
+    <Content Include="FAQ\A1ScheduleAssignment.html" />
+    <Content Include="FAQ\A2ColumnHeader.html" />
+    <Content Include="FAQ\A2EmployeeTimesheetFile.html" />
+    <Content Include="FAQ\A2EmploymentStatus.html" />
+    <Content Include="FAQ\A3EmployeeAttendanceLogFile.html" />
+    <Content Include="FAQ\A3GroupHeader.html" />
+    <Content Include="FAQ\A3LeaveandCreditFiling.html" />
+    <Content Include="FAQ\A4EmployeeTimeRecord.html" />
+    <Content Include="FAQ\A4Listview.html" />
+    <Content Include="FAQ\A5StatusBar.html" />
+    <Content Include="FAQ\ACompanyProfile.html" />
+    <Content Include="FAQ\AEmployeesRecords201File.html" />
+    <Content Include="FAQ\AHeader.html" />
+    <Content Include="FAQ\AHeaderBar.html" />
+    <Content Include="FAQ\AInSysPeople.html" />
+    <Content Include="FAQ\AIONSDateFilingMaintenance.html" />
+    <Content Include="FAQ\ALoans.html" />
+    <Content Include="FAQ\AModuleListing.html" />
+    <Content Include="FAQ\AOfficialBusiness.html" />
+    <Content Include="FAQ\APendingApprovals.html" />
+    <Content Include="FAQ\ATimeandAttendance.html" />
+    <Content Include="FAQ\AUserGroup.html" />
+    <Content Include="FAQ\B1BatchApprove.html" />
+    <Content Include="FAQ\B1Holiday.html" />
+    <Content Include="FAQ\B1OvertimeFileLeaveFileOfficialB.html" />
+    <Content Include="FAQ\B1QuickLinkBar.html" />
+    <Content Include="FAQ\B1Undertime.html" />
+    <Content Include="FAQ\B2HeaderBar.html" />
+    <Content Include="FAQ\B2Leave.html" />
+    <Content Include="FAQ\B2Schedule.html" />
+    <Content Include="FAQ\B2SingleApproveDisapprove.html" />
+    <Content Include="FAQ\B3FormBody.html" />
+    <Content Include="FAQ\B3OfficialBusiness.html" />
+    <Content Include="FAQ\B3WeeklySchedule.html" />
+    <Content Include="FAQ\B4LeaveParameter.html" />
+    <Content Include="FAQ\B4MissedLogs.html" />
+    <Content Include="FAQ\B5Overtime.html" />
+    <Content Include="FAQ\B6EmployeeChangeofSchedule.html" />
+    <Content Include="FAQ\B7TimeandAttendanceProcessing.html" />
+    <Content Include="FAQ\BApproveDisapproveApplications.html" />
+    <Content Include="FAQ\BBatchFiling.html" />
+    <Content Include="FAQ\BBranch.html" />
+    <Content Include="FAQ\BDetails.html" />
+    <Content Include="FAQ\BEmployeeWorkedHoursFile.html" />
+    <Content Include="FAQ\BEmploymentRecord.html" />
+    <Content Include="FAQ\BIncomeandDeduction.html" />
+    <Content Include="FAQ\BInSysOrbit.html" />
+    <Content Include="FAQ\BMissedLog.html" />
+    <Content Include="FAQ\BModuleForms.html" />
+    <Content Include="FAQ\BTimeKeepingItems.html" />
+    <Content Include="FAQ\BToolBar.html" />
+    <Content Include="FAQ\BUser.html" />
+    <Content Include="FAQ\C1Announcement.html" />
+    <Content Include="FAQ\C1Overtime.html" />
+    <Content Include="FAQ\C1PayrollItem.html" />
+    <Content Include="FAQ\C2Leave.html" />
+    <Content Include="FAQ\C2PayrollParameter.html" />
+    <Content Include="FAQ\C3IncomeTaxExemptions.html" />
+    <Content Include="FAQ\C3OfficialBusiness.html" />
+    <Content Include="FAQ\C3SSSTablePhilHealthTableCurrenc.html" />
+    <Content Include="FAQ\C4MissedLogs.html" />
+    <Content Include="FAQ\C4SSSTablePhilHealthTableCurrenc.html" />
+    <Content Include="FAQ\C5EmployeeChangeofSchedule.html" />
+    <Content Include="FAQ\C6TimeandAttendanceProcessing.html" />
+    <Content Include="FAQ\CDashboard.html" />
+    <Content Include="FAQ\CDepartment.html" />
+    <Content Include="FAQ\CEmployeeTemplate.html" />
+    <Content Include="FAQ\CIncomeandDeduction.html" />
+    <Content Include="FAQ\CInSysPayroll.html" />
+    <Content Include="FAQ\CLeave.html" />
+    <Content Include="FAQ\CPayrollProcessing.html" />
+    <Content Include="FAQ\CRegularReportsLogReportsandMont.html" />
+    <Content Include="FAQ\CSeparatedEmployees.html" />
+    <Content Include="FAQ\css\effects.min.css" />
+    <Content Include="FAQ\css\hnd.content.css" />
+    <Content Include="FAQ\css\layout.min.css" />
+    <Content Include="FAQ\css\print.min.css" />
+    <Content Include="FAQ\css\theme-dark-blue.min.css" />
+    <Content Include="FAQ\css\theme-dark-green.min.css" />
+    <Content Include="FAQ\css\theme-dark-orange.min.css" />
+    <Content Include="FAQ\css\theme-dark-purple.min.css" />
+    <Content Include="FAQ\css\theme-light-blue.min.css" />
+    <Content Include="FAQ\css\theme-light-green.min.css" />
+    <Content Include="FAQ\css\theme-light-orange.min.css" />
+    <Content Include="FAQ\css\theme-light-purple.min.css" />
+    <Content Include="FAQ\CTimeKeepingItems.html" />
+    <Content Include="FAQ\DAnnouncement.html" />
+    <Content Include="FAQ\DBankExport.html" />
+    <Content Include="FAQ\DEmployeeMovement.html" />
+    <Content Include="FAQ\DMenuBar.html" />
+    <Content Include="FAQ\DOvertime.html" />
+    <Content Include="FAQ\DPayrollProcessing.html" />
+    <Content Include="FAQ\DPositionLevel.html" />
+    <Content Include="FAQ\DRegularReportsLogReportsandMont.html" />
+    <Content Include="FAQ\DSetting.html" />
+    <Content Include="FAQ\EAnnouncements.html" />
+    <Content Include="FAQ\EChangeofSchedule.html" />
+    <Content Include="FAQ\EPosition.html" />
+    <Content Include="FAQ\ERegularandMonthlyReports.html" />
+    <Content Include="FAQ\EReports.html" />
+    <Content Include="FAQ\FBankAccounts.html" />
+    <Content Include="FAQ\FBankExport.html" />
+    <Content Include="FAQ\FFinalPay.html" />
+    <Content Include="FAQ\GLeaveConversion.html" />
+    <Content Include="FAQ\GSSSReportsHDMFReportPHICReport.html" />
+    <Content Include="FAQ\H13thMonthPay.html" />
+    <Content Include="FAQ\IBonusesandBenefits.html" />
+    <Content Include="FAQ\INSYS ONE USER GUIDE.html" />
+    <Content Include="FAQ\INSYSONEUSERGUIDE1.html" />
+    <Content Include="FAQ\JFinalPay.html" />
+    <Content Include="FAQ\js\app.min.js" />
+    <Content Include="FAQ\js\hndsd.min.js" />
+    <Content Include="FAQ\js\hndse.min.js" />
+    <Content Include="FAQ\K1RegularReports.html" />
+    <Content Include="FAQ\K2SSSReports.html" />
+    <Content Include="FAQ\K3HDMFReports.html" />
+    <Content Include="FAQ\K4PHICReports.html" />
+    <Content Include="FAQ\K5AnnualReports.html" />
+    <Content Include="FAQ\KReports.html" />
+    <Content Include="FAQ\lib\NewItem1.png" />
+    <Content Include="FAQ\lib\NewItem100.png" />
+    <Content Include="FAQ\lib\NewItem101.png" />
+    <Content Include="FAQ\lib\NewItem102.png" />
+    <Content Include="FAQ\lib\NewItem103.png" />
+    <Content Include="FAQ\lib\NewItem104.png" />
+    <Content Include="FAQ\lib\NewItem105.png" />
+    <Content Include="FAQ\lib\NewItem106.png" />
+    <Content Include="FAQ\lib\NewItem107.png" />
+    <Content Include="FAQ\lib\NewItem108.png" />
+    <Content Include="FAQ\lib\NewItem11.png" />
+    <Content Include="FAQ\lib\NewItem12.png" />
+    <Content Include="FAQ\lib\NewItem13.png" />
+    <Content Include="FAQ\lib\NewItem14.png" />
+    <Content Include="FAQ\lib\NewItem15.png" />
+    <Content Include="FAQ\lib\NewItem16.png" />
+    <Content Include="FAQ\lib\NewItem17.png" />
+    <Content Include="FAQ\lib\NewItem18.png" />
+    <Content Include="FAQ\lib\NewItem19.png" />
+    <Content Include="FAQ\lib\NewItem2.png" />
+    <Content Include="FAQ\lib\NewItem21.png" />
+    <Content Include="FAQ\lib\NewItem3.png" />
+    <Content Include="FAQ\lib\NewItem4.png" />
+    <Content Include="FAQ\lib\NewItem43.png" />
+    <Content Include="FAQ\lib\NewItem44.png" />
+    <Content Include="FAQ\lib\NewItem45.png" />
+    <Content Include="FAQ\lib\NewItem46.png" />
+    <Content Include="FAQ\lib\NewItem47.png" />
+    <Content Include="FAQ\lib\NewItem48.png" />
+    <Content Include="FAQ\lib\NewItem49.png" />
+    <Content Include="FAQ\lib\NewItem5.png" />
+    <Content Include="FAQ\lib\NewItem55.png" />
+    <Content Include="FAQ\lib\NewItem57.png" />
+    <Content Include="FAQ\lib\NewItem58.png" />
+    <Content Include="FAQ\lib\NewItem6.png" />
+    <Content Include="FAQ\lib\NewItem7.png" />
+    <Content Include="FAQ\lib\NewItem76.png" />
+    <Content Include="FAQ\lib\NewItem8.png" />
+    <Content Include="FAQ\lib\NewItem85.png" />
+    <Content Include="FAQ\lib\NewItem9.png" />
+    <Content Include="FAQ\lib\NewItem90.png" />
+    <Content Include="FAQ\lib\NewItem91.png" />
+    <Content Include="FAQ\lib\NewItem92.png" />
+    <Content Include="FAQ\lib\NewItem93.png" />
+    <Content Include="FAQ\lib\NewItem94.png" />
+    <Content Include="FAQ\lib\NewItem95.png" />
+    <Content Include="FAQ\lib\NewItem96.png" />
+    <Content Include="FAQ\lib\NewItem97.png" />
+    <Content Include="FAQ\lib\NewItem98.png" />
+    <Content Include="FAQ\lib\NewItem99.png" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\css\bootstrap-theme.min.css" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\css\bootstrap.min.css" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\css\ie10-viewport-bug-workaround.css" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\js\bootstrap.min.js" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="FAQ\vendors\fastclick-1.0.6\fastclick.min.js" />
+    <Content Include="FAQ\vendors\headroom-0.9.3\headroom.min.js" />
+    <Content Include="FAQ\vendors\headroom-0.9.3\jquery.headroom.min.js" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\0.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\1.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\10.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\11.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\12.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\13.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\14.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\15.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\16.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\17.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\18.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\19.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\2.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\20.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\21.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\22.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\23.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\24.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\25.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\26.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\27.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\28.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\29.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\3.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\30.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\31.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\32.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\33.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\34.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\35.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\36.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\37.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\38.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\39.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\4.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\40.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\41.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\5.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\6.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\7.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\8.png" />
+    <Content Include="FAQ\vendors\helpndoc-5\icons\9.png" />
+    <Content Include="FAQ\vendors\html5shiv-3.7.2\html5shiv.min.js" />
+    <Content Include="FAQ\vendors\jquery-1.11.3\jquery.min.js" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\jstree.min.js" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default-dark\32px.png" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default-dark\40px.png" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default-dark\style.css" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default-dark\style.min.css" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default-dark\throbber.gif" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default\32px.png" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default\40px.png" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default\style.css" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default\style.min.css" />
+    <Content Include="FAQ\vendors\jstree-3.3.2\themes\default\throbber.gif" />
+    <Content Include="FAQ\vendors\markjs-8.8.3\jquery.mark.min.js" />
+    <Content Include="FAQ\vendors\respond-1.4.2\respond.min.js" />
+    <Content Include="FAQ\vendors\uri-1.18.9\uri.min.js" />
+    <Content Include="FAQ\_translations.js" />
+    <Content Include="Global.asax" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="FAQ\vendors\bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="FAQ\_keywords.json" />
+    <Content Include="FAQ\_toc.json" />
+    <Content Include="log4net.config" />
+    <Content Include="bundleconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\hiltonwebapp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hiltonwebapp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\InSys-Azure-Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\InSysWebApp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Jenkins.pubxml" />
+    <None Include="Resources\Execute With Audit Trail VS1.sql" />
+    <Content Include="jsreport.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\bar.PNG" />
+    <Content Include="Resources\Images\doughnut.PNG" />
+    <Content Include="Resources\Images\horizontalBar.PNG" />
+    <Content Include="Resources\Images\line.PNG" />
+    <Content Include="Resources\Images\loading.gif" />
+    <Content Include="Resources\Images\pie.PNG" />
+    <Content Include="noimage.png" />
+    <Content Include="Resources\Theme_Instructions\filter-help-1.jpg" />
+    <Content Include="Resources\Theme_Instructions\menu-help-1.jpg" />
+    <Content Include="Resources\Theme_Instructions\prisec-help-1.jpg" />
+    <Content Include="Scripts\Pack\dhtmlx\dhtmlx.css" />
+    <Content Include="Scripts\Pack\dhtmlx\dhtmlx.js" />
+    <Content Include="Scripts\Pack\dhtmlx\dhtmlxscheduler.css" />
+    <Content Include="Scripts\Pack\dhtmlx\dhtmlxscheduler.js" />
+    <Content Include="Scripts\Pack\dhtmlx\dhtmlxscheduler_minical.js" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\blank.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\but_cut.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\folderClosed.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\folderOpen.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\iconCheckAll.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\iconCheckDis.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\iconCheckGray.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\iconUncheckAll.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\iconUncheckDis.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\leaf.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\lock.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\minus.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\plus.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\radio_off.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\dhxtree_material\radio_on.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\arrow_left.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\arrow_right.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\but_repeat.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\calendar.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\clock_big.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\clock_small.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\close_icon.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\collapse_expand_icon.gif" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\controls.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\databg.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\databg_now.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\export_ical.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\export_pdf.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\resize_dots.png" />
+    <Content Include="Scripts\Pack\dhtmlx\imgs_dhx_terrace\resizing.png" />
+    <Content Include="Scripts\Pack\PDFJS\build\pdf.js" />
+    <Content Include="Scripts\Pack\PDFJS\build\pdf.worker.js" />
+    <Content Include="Scripts\Pack\PDFJS\web\compatibility.js" />
+    <Content Include="Scripts\Pack\PDFJS\web\debugger.js" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-check.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-comment.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-help.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-insert.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-key.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-newparagraph.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-noicon.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-note.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\annotation-paragraph.svg" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-next%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-next-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-next-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-next.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-previous%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-previous-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-previous-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\findbarButton-previous.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\grab.cur" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\grabbing.cur" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\loading-icon.gif" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\loading-small%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\loading-small.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-documentProperties%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-documentProperties.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-firstPage%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-firstPage.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-handTool%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-handTool.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-lastPage%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-lastPage.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-rotateCcw%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-rotateCcw.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-rotateCw%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\secondaryToolbarButton-rotateCw.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\shadow.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\texture.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-bookmark%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-bookmark.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-download%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-download.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-downloadexcel%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-downloadexcel.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-menuArrows%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-menuArrows.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-openFile%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-openFile.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageDown%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageDown-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageDown-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageDown.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageUp%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageUp-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageUp-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-pageUp.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-presentationMode%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-presentationMode.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-print%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-print.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-search%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-search.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-secondaryToolbarToggle%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-secondaryToolbarToggle-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-secondaryToolbarToggle-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-secondaryToolbarToggle.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-sidebarToggle%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-sidebarToggle-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-sidebarToggle-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-sidebarToggle.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewAttachments%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewAttachments.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewOutline%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewOutline-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewOutline-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewOutline.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewThumbnail%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-viewThumbnail.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-zoomIn%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-zoomIn.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-zoomOut%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\toolbarButton-zoomOut.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-collapsed%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-collapsed-rtl%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-collapsed-rtl.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-collapsed.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-expanded%402x.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\images\treeitem-expanded.png" />
+    <Content Include="Scripts\Pack\PDFJS\web\serviceworker.js" />
+    <Content Include="Scripts\Pack\PDFJS\web\l10n.js" />
+    <Content Include="Scripts\Pack\PDFJS\web\viewer.css" />
+    <Content Include="Scripts\Pack\PDFJS\web\viewer.html" />
+    <Content Include="Scripts\Pack\PDFJS\web\viewer.js" />
+    <Content Include="Scripts\References\angucomplete.js" />
+    <Content Include="Scripts\References\angular-animate.min.js" />
+    <Content Include="Scripts\References\angular-aria.min.js" />
+    <Content Include="Scripts\References\angular-chart.min.js" />
+    <Content Include="Scripts\References\angular-cookies.min.js" />
+    <Content Include="Scripts\References\angular-drag-and-drop-lists.min.js" />
+    <Content Include="Scripts\References\angular-loader.min.js" />
+    <Content Include="Scripts\References\angular-sanitize.min.js" />
+    <Content Include="Scripts\References\angular-toastr.tpls.js" />
+    <Content Include="Scripts\References\angular-ui-router.min.js" />
+    <Content Include="Scripts\References\angular.min.js" />
+    <Content Include="Scripts\References\base64js.min.js" />
+    <Content Include="Scripts\References\bootstrap-clockpicker.min.js" />
+    <Content Include="Scripts\References\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\References\bootstrap-toggle.min.js" />
+    <Content Include="Scripts\References\bootstrap.min.js" />
+    <Content Include="Scripts\References\chart.min.js" />
+    <Content Include="Scripts\References\compatibility.js" />
+    <Content Include="Scripts\References\contextMenu.js" />
+    <Content Include="Scripts\References\ct-ui-router-extras.min.js" />
+    <Content Include="Scripts\References\fullcalendar.3.9.0.min.js" />
+    <Content Include="Scripts\References\handsontable.full.min.js" />
+    <Content Include="Scripts\References\HandsonTableExtensions.js" />
+    <Content Include="Scripts\References\input-module.js" />
+    <Content Include="Scripts\References\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\References\jquery.canvasjs.min.js" />
+    <Content Include="Scripts\References\jquery.tokeninput.js" />
+    <Content Include="Scripts\References\linq.min.js" />
+    <Content Include="Scripts\References\loading-bar.min.js" />
+    <Content Include="Scripts\References\lz-string.js" />
+    <Content Include="Scripts\References\moment.min.js" />
+    <Content Include="Scripts\References\nickcrypt.js" />
+    <Content Include="Scripts\References\paging.min.js" />
+    <Content Include="Scripts\References\require.js" />
+    <Content Include="Scripts\References\spectrum.js" />
+    <Content Include="Scripts\References\tether.min.js" />
+    <Content Include="Scripts\References\textAngular-rangy.min.js" />
+    <Content Include="Scripts\References\textAngular-sanitize.min.js" />
+    <Content Include="Scripts\References\textAngular.min.js" />
+    <Content Include="Scripts\References\timeline.js" />
+    <Content Include="Scripts\References\ui-bootstrap-tpls-2.5.0.min.js" />
+    <Content Include="Scripts\References\vcl.js" />
+    <Content Include="Scripts\References\vue-chartjs.full.min.js" />
+    <Content Include="Scripts\References\vue-grid-layout.min.js" />
+    <Content Include="Scripts\References\vue.min.js" />
+    <Content Include="Scripts\System\ActiveModule.js" />
+    <Content Include="Scripts\System\App.js" />
+    <Content Include="Scripts\System\Config.js" />
+    <Content Include="Scripts\System\Controllers.js" />
+    <Content Include="Scripts\System\DataServices.js" />
+    <Content Include="Scripts\System\Directives.js" />
+    <Content Include="Scripts\System\InfoSet.js" />
+    <Content Include="Scripts\System\Main.js" />
+    <Content Include="Scripts\System\MainComponent.js" />
+    <Content Include="Scripts\System\MainComponent2.js" />
+    <Content Include="Scripts\System\ng-lzy-table.js" />
+    <Content Include="Scripts\System\Out\ActiveModule.js" />
+    <Content Include="Scripts\System\Out\ActiveModule.min.js">
+      <DependentUpon>ActiveModule.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\App.js" />
+    <Content Include="Scripts\System\Out\App.min.js">
+      <DependentUpon>App.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\auth.js" />
+    <Content Include="Scripts\System\Out\auth.min.js">
+      <DependentUpon>auth.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\Config.js" />
+    <Content Include="Scripts\System\Out\Config.min.js">
+      <DependentUpon>Config.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\Controllers.js" />
+    <Content Include="Scripts\System\Out\Controllers.min.js">
+      <DependentUpon>Controllers.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\Dataservices.js" />
+    <Content Include="Scripts\System\Out\Dataservices.min.js">
+      <DependentUpon>Dataservices.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\Directives.js" />
+    <Content Include="Scripts\System\Out\Directives.min.js">
+      <DependentUpon>Directives.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\InfoSet.js" />
+    <Content Include="Scripts\System\Out\InfoSet.min.js">
+      <DependentUpon>InfoSet.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\MainComponent2.js" />
+    <Content Include="Scripts\System\Out\MainComponent2.min.js">
+      <DependentUpon>MainComponent2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\System\Out\ng-lzy-table.js" />
+    <Content Include="Scripts\System\Out\ng-lzy-table.min.js" />
+    <Content Include="Scripts\System\rosDirective.js" />
+    <Content Include="Styles\References\angucomplete.css" />
+    <Content Include="Styles\References\angular-chart.css" />
+    <Content Include="Styles\References\angular-toastr.css" />
+    <Content Include="Styles\References\bootstrap-clockpicker.min.css" />
+    <Content Include="Styles\References\bootstrap-datetimepicker.css" />
+    <Content Include="Styles\References\bootstrap-toggle.min.css" />
+    <Content Include="Styles\References\bootstrap.min.css" />
+    <Content Include="Styles\References\font-awesome.min.css" />
+    <Content Include="Styles\References\fonts\fontawesome-webfont.svg" />
+    <Content Include="Styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\References\fullcalendar.3.9.0.min.css" />
+    <Content Include="Styles\References\handsontable.full.min.css" />
+    <Content Include="Styles\References\jquery.tokeninput.css" />
+    <Content Include="Styles\References\loading-bar.min.css" />
+    <Content Include="Styles\References\sitemaster.css" />
+    <Content Include="Styles\References\sitemaster.min.css" />
+    <Content Include="Styles\References\spectrum.css" />
+    <Content Include="Styles\References\tether.min.css" />
+    <Content Include="Styles\References\timeline.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web\Components\About.js" />
+    <Content Include="Web\Components\AccountComponent.js" />
+    <Content Include="Web\Components\Contents.js" />
+    <Content Include="Web\Components\Dashboard.js" />
+    <Content Include="Web\Components\Dashboard2.js" />
+    <Content Include="Web\Components\Dashboard3.js" />
+    <Content Include="Web\Components\DirectReport.js" />
+    <Content Include="Web\Components\Helper.js" />
+    <Content Include="Web\Components\IONSDashboard.js" />
+    <Content Include="Web\Components\List.js" />
+    <Content Include="Web\Components\MyApprovals.js" />
+    <Content Include="Web\Components\MyProfile.js" />
+    <Content Include="Web\Components\Report.js" />
+    <Content Include="Web\Components\Themes.js" />
+    <Content Include="Web\Infos\EmployeeAttendanceLogFileInfo.js" />
+    <Content Include="Web\Infos\EmployeeDailyScheduleInfo.js" />
+    <Content Include="Web\Infos\EmployeeTemplateFileInfo.js" />
+    <Content Include="Web\Infos\TimeAndAttendanceProcessingInfo.js" />
+    <Content Include="Web\Infos\TKFilingInfo.js" />
+    <Content Include="Web\Infos\TKProcessingInfo.js" />
+    <Content Include="Web\Infos\UserGroupInfo.js" />
+    <Content Include="Web\Infos\UserInfo.js" />
+    <Content Include="Web\Infos\ZInfo.js" />
+    <Content Include="Web\Template\ChangePassword.tmpl.html" />
+    <Content Include="Web\Template\Chart.tmpl.html" />
+    <Content Include="Web\Template\Confirm.tmpl.html" />
+    <Content Include="Web\Template\Control-Filter.tmpl.html" />
+    <Content Include="Web\Template\CreateBarChart.tmpl.html" />
+    <Content Include="Web\Template\CreateChart.tmpl.html" />
+    <Content Include="Web\Template\CreatePieChart.tmpl.html" />
+    <Content Include="Web\Template\CreateShortcutLink.tmpl.html" />
+    <Content Include="Web\Template\detail-form.tmpl.html" />
+    <Content Include="Web\Template\detail-grid.tmpl.html" />
+    <Content Include="Web\Template\detail-list.tmpl.html" />
+    <Content Include="Web\Template\detail-tree.tmpl.html" />
+    <Content Include="Web\Template\email.tmpl.html" />
+    <Content Include="Web\Template\EmployeTemplateFile-Excel-Dialog.tmpl.html" />
+    <Content Include="Web\Template\FirstLog.tmpl.html" />
+    <Content Include="Web\Template\FullCalendar.tmpl.html" />
+    <Content Include="Web\Template\list-menu.tmpl.html" />
+    <Content Include="Web\Template\look-up.tmpl.html" />
+    <Content Include="Web\Template\lookup-autocomplete.tmpl.html" />
+    <Content Include="Web\Template\Lookup.tmpl.html" />
+    <Content Include="Web\Template\lzy-grid.tmpl.html" />
+    <Content Include="Web\Template\lzy.lookup.tmpl.html" />
+    <Content Include="Web\Template\menu-set-dialog.tmpl.html" />
+    <Content Include="Web\Template\MenuTreeView.tmpl.html" />
+    <Content Include="Web\Template\ngRecursiveMenu.html" />
+    <Content Include="Web\Template\ngRecursiveMenu2.html" />
+    <Content Include="Web\Template\ngRecursiveMenu3.html" />
+    <Content Include="Web\Template\ngTableGrouping.tmpl.html" />
+    <Content Include="Web\Template\print-dialog.tmpl.html" />
+    <Content Include="Web\Template\ReportParameterDialog.tmpl.html" />
+    <Content Include="Web\Template\systemFilter.tmpl.html" />
+    <Content Include="Web\Template\tmp.tmpl.html" />
+    <Content Include="Web\Template\ThemesDialog.tmpl.html" />
+    <Content Include="Web\Template\ThemesHelp.tmpl.html" />
+    <Content Include="Web\Template\Widget-Panel.tmpl.html" />
+    <Content Include="Web\Template\Widget-Tab.tmpl.html" />
+    <Content Include="Web\Views\About.html" />
+    <Content Include="Web\Views\Contents.html" />
+    <Content Include="Web\Views\Dashboard.html" />
+    <Content Include="Web\Views\Dashboard2.html" />
+    <Content Include="Web\Views\Dashboard3.html" />
+    <Content Include="Web\Views\DirectReport.html" />
+    <Content Include="Web\Views\Helper.html" />
+    <Content Include="Web\Views\Info.html" />
+    <Content Include="Web\Views\IONSDashboard.html" />
+    <Content Include="Web\Views\List.html" />
+    <Content Include="Web\Views\MyApprovals.html" />
+    <Content Include="Web\Views\MyProfile.html" />
+    <Content Include="Web\Views\Report.html" />
+    <Content Include="Web\Views\Themes.html" />
+    <Content Include="Web\Views\Unauthorized.html" />
+    <Content Include="Startup.cmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\InSysBundles.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Classes\ETF.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Controllers\API\ActionController.cs" />
+    <Compile Include="Controllers\API\BaseController.cs" />
+    <Compile Include="Controllers\API\CoreController.cs" />
+    <Compile Include="Controllers\API\InfoController.cs" />
+    <Compile Include="Controllers\API\LoginController.cs" />
+    <Compile Include="Controllers\API\MobileController.cs" />
+    <Compile Include="Controllers\Infos\EmployeeAttendanceLogFileInfoController.cs" />
+    <Compile Include="Controllers\Infos\EmployeeDailyScheduleInfoController.cs" />
+    <Compile Include="Controllers\Infos\EmployeeTemplateFileInfoController.cs" />
+    <Compile Include="Controllers\Infos\TimeAndAttendanceProcessingInfoController.cs" />
+    <Compile Include="Controllers\Infos\TKProcessingInfoController.cs" />
+    <Compile Include="Controllers\Infos\UserInfoController.cs" />
+    <Compile Include="Controllers\MVC\AccountController.cs" />
+    <Compile Include="Controllers\MVC\HomeController.cs" />
+    <Compile Include="Controllers\MVC\MvcBaseController.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CustomAttributes.cs" />
+    <Compile Include="Helpers\EmailAnnouncement.cs" />
+    <Compile Include="Helpers\EncryptionHandler.cs" />
+    <Compile Include="Helpers\HangFireDashboardAuthFilter.cs" />
+    <Compile Include="Helpers\InfoPrint.cs" />
+    <Compile Include="Helpers\InfoPrintList.cs" />
+    <Compile Include="Helpers\InfoSet_bak.cs" />
+    <Compile Include="Helpers\InfoSet.cs" />
+    <Compile Include="Helpers\JobQueue.cs" />
+    <Compile Include="Helpers\JSReport.cs" />
+    <Compile Include="Helpers\LogManager.cs" />
+    <Compile Include="Helpers\Parsers.cs" />
+    <Compile Include="Helpers\RandomKeyGenerator.cs" />
+    <Compile Include="Helpers\SQLToJS.cs" />
+    <Compile Include="Helpers\ZDataTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\ActionModel.cs" />
+    <Compile Include="Models\ChartCtx.cs" />
+    <Compile Include="Models\Content.cs" />
+    <Compile Include="Models\FilterSchema.cs" />
+    <Compile Include="Models\InfoSchema.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\TreeList.cs" />
+    <Compile Include="Models\UtilityModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="compilerconfig.json" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78ms-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\78ms-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\83pv-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90ms-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90ms-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90msp-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90msp-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90pv-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\90pv-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Add-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Add-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Add-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Add-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-0.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-1.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-3.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-4.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-5.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-6.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-CNS1-UCS2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-0.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-1.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-3.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-4.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-5.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-GB1-UCS2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-0.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-1.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-3.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-4.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-5.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-6.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Japan1-UCS2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Korea1-0.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Korea1-1.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Korea1-2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Adobe-Korea1-UCS2.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\B5pc-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\B5pc-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS1-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS1-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS2-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\CNS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETen-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETen-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETenms-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETenms-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETHK-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\ETHK-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Ext-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Ext-RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Ext-RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Ext-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GB-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GB-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GB-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GB-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBK-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBK-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBK2K-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBK2K-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBKp-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBKp-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBpc-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBpc-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBT-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBT-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBT-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBT-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBTpc-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\GBTpc-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Hankaku.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Hiragana.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKdla-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKdla-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKdlb-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKdlb-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKgccs-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKgccs-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKm314-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKm314-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKm471-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKm471-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKscs-B5-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\HKscs-B5-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Katakana.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-Johab-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-Johab-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCms-UHC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCms-UHC-HW-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCms-UHC-HW-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCms-UHC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCpc-EUC-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\KSCpc-EUC-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\LICENSE" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\NWP-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\NWP-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\RKSJ-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\RKSJ-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\Roman.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UCS2-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UCS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF16-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF16-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF8-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniCNS-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UCS2-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UCS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF16-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF16-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF8-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniGB-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UCS2-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UCS2-HW-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UCS2-HW-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UCS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF16-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF16-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF8-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF16-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF16-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF8-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJIS2004-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISPro-UCS2-HW-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISPro-UCS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISPro-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISX0213-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISX0213-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISX02132004-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniJISX02132004-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UCS2-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UCS2-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF16-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF16-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF32-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF32-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF8-H.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\UniKS-UTF8-V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\V.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\cmaps\WP-Symbol.bcmap" />
+    <Content Include="Scripts\Pack\PDFJS\web\locale\en-GB\viewer.properties" />
+    <Content Include="Scripts\Pack\PDFJS\web\locale\en-US\viewer.properties" />
+    <Content Include="Scripts\Pack\PDFJS\web\locale\en-ZA\viewer.properties" />
+    <Content Include="Scripts\Pack\PDFJS\web\locale\locale.properties" />
+    <Content Include="Styles\References\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\References\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\References\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\References\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Styles\References\fonts\FontAwesome.otf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Black.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Black.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Black.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Black.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BlackItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BlackItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BlackItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BlackItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Bold.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Bold.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Bold.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Bold.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BoldItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BoldItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BoldItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-BoldItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Hairline.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Hairline.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Hairline.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Hairline.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HairlineItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HairlineItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HairlineItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HairlineItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Heavy.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Heavy.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Heavy.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Heavy.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HeavyItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HeavyItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HeavyItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-HeavyItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Italic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Italic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Italic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Italic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Light.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Light.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Light.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Light.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-LightItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-LightItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-LightItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-LightItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Medium.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Medium.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Medium.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Medium.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-MediumItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-MediumItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-MediumItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-MediumItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Regular.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Regular.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Regular.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Regular.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Semibold.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Semibold.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Semibold.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Semibold.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-SemiboldItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-SemiboldItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-SemiboldItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-SemiboldItalic.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Thin.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Thin.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Thin.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-Thin.woff2" />
+    <Content Include="Styles\References\fonts\Lato\Lato-ThinItalic.eot" />
+    <Content Include="Styles\References\fonts\Lato\Lato-ThinItalic.ttf" />
+    <Content Include="Styles\References\fonts\Lato\Lato-ThinItalic.woff" />
+    <Content Include="Styles\References\fonts\Lato\Lato-ThinItalic.woff2" />
+    <Content Include="Styles\System\SiteMaster.scss" />
+    <Content Include="Styles\System\_Account.scss" />
+    <Content Include="Styles\System\_Announcement.scss" />
+    <Content Include="Styles\System\_CustomListTable.scss" />
+    <Content Include="Styles\System\_Dialog.scss" />
+    <Content Include="Styles\System\_DropdownMenu.scss" />
+    <Content Include="Styles\System\_Fonts.scss" />
+    <Content Include="Styles\System\_Home.scss" />
+    <Content Include="Styles\System\_Info.scss" />
+    <Content Include="Styles\System\_ListTable.scss" />
+    <Content Include="Styles\System\_LoadingScreen.scss" />
+    <Content Include="Styles\System\_LookUp.scss" />
+    <Content Include="Styles\System\_MyProfile.scss" />
+    <Content Include="Styles\System\_Report.scss" />
+    <Content Include="Styles\System\_WebWidget.scss" />
+    <Content Include="Views\Account\Companies.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\PasswordSetUp.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Styles\System\_Contents.scss" />
+    <Content Include="Styles\System\_About.scss" />
+    <Content Include="Styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Startup.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Styles\System\_Dashboard_2.scss" />
+    <Content Include="Styles\System\_CoveringLevelMenu.scss" />
+    <Content Include="Styles\System\_NotificationIcon.scss" />
+    <Content Include="Styles\System\_DirectReport.scss" />
+    <Content Include="Styles\System\_IONSDashboard.scss" />
+    <Content Include="Styles\System\_MyApprovals.scss" />
+    <Content Include="Styles\System\_lookup-autocomplete.scss" />
+    <Content Include="Styles\System\_GridFilter.scss" />
+    <Content Include="Styles\System\_lzy-grid.scss" />
+    <None Include="Styles\System\_Themes.scss" />
+    <Content Include="Styles\System\_WebThemes.scss" />
+    <Content Include="Styles\System\_Vue.scss" />
+    <Content Include="Views\Home\Main - Copy.cshtml" />
+    <Content Include="Styles\System\_treeviewMenu.scss" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
+    <Folder Include="Build\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets'))" />
+    <Error Condition="!Exists('..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets'))" />
+    <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets" Condition="Exists('..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets')" />
+  <Import Project="..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets" Condition="Exists('..\packages\BuildBundlerMinifier.2.8.391\build\BuildBundlerMinifier.targets')" />
+  <Import Project="..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
+</Project>

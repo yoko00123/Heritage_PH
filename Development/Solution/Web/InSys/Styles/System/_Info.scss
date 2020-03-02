@@ -1,0 +1,918 @@
+﻿.info-panel {
+    background-color: #ffffff;
+    min-width: 0px;
+    border-right: none;
+    height: 100vh;
+    transition: all .3s;
+
+    .info-header {
+        height: 35px;
+        border-bottom: 1px solid #aaa;
+        background-color: $PrimaryColor;
+        display: none;
+
+        p {
+            padding: 7px 15px;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .info-list {
+        display: none;
+
+        p {
+            margin: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+            color: #555;
+            font-weight: bold;
+
+            &:hover {
+                background-color: #ccc;
+            }
+        }
+    }
+
+    &.info-toggled {
+        min-width: 200px;
+        border-right: 1px solid #ccc;
+        transition: all .3s;
+
+        .info-header {
+            display: flex;
+        }
+
+        .info-list {
+            display: grid;
+        }
+    }
+}
+
+.Info-Form {
+    max-width: 100vh;
+    min-width: 100%;
+    width: 100%;
+
+    .panel-title {
+        color: #fff;
+    }
+
+    .panel {
+        border-radius: 0px;
+        border: none;
+
+        .panel-heading {
+            height: 35px;
+            background-color: $PrimaryColor;
+            border-bottom: 1px solid #aaa;
+            padding: 0px;
+            display: flex;
+            border-radius: 0px;
+
+            .toggle-info {
+                background-color: transparent;
+                border: none;
+                font-size: 16px;
+                height: 35px;
+                width: 35px;
+                padding: 5px;
+                outline: none;
+                box-shadow: none;
+                background: url(../../Scripts/Pack/PDFJS/web/images/toolbarButton-sidebarToggle.png) center center no-repeat;
+
+                &:hover {
+                    background-color: rgba(0,0,0,.2);
+                }
+            }
+
+            p {
+                padding: 6px 15px;
+            }
+
+            span {
+                &.menu-fav-star {
+                    font-size: 18px;
+                    padding-top: 5px;
+                    cursor: pointer;
+                    color: rgba(0,0,0,.2);
+                }
+
+                & .menu-fav-star-active {
+                    & i {
+                        color: yellow;
+                    }
+                }
+            }
+
+            .btn-toolbar {
+                right: 0;
+                position: absolute;
+                display: flex;
+
+                button {
+                    background-color: transparent;
+                    border: none;
+                    font-size: 16px;
+                    color: #fff;
+                    height: 34px;
+                    width: 35px;
+                    padding: 6px;
+                    outline: none;
+                    box-shadow: none;
+                    border-radius: 0px;
+
+                    &:hover {
+                        background-color: rgba(0,0,0,.2) !important;
+                    }
+
+                    i {
+                        text-shadow: 0 1px 1px #555;
+                        color: #d6e7f2;
+                    }
+
+                    &.close-btn {
+                        padding: 5px;
+                        margin: 0px;
+                    }
+
+                    &.print {
+                        background: url(../../Scripts/Pack/PDFJS/web/images/toolbarButton-print.png) center center no-repeat;
+                        height: 34px;
+                        width: 35px;
+
+                        &:hover {
+                            background-color: rgba(0,0,0,.2) !important;
+                        }
+                    }
+
+                    &.refresh {
+                        background: url(../../Scripts/Pack/PDFJS/web/images/secondaryToolbarButton-rotateCw.png) center center no-repeat;
+                        height: 34px;
+                        width: 35px;
+
+                        &:hover {
+                            background-color: rgba(0,0,0,.2) !important;
+                        }
+                    }
+
+                    &.info-set-custom {
+                        font-size: 14px;
+                        width: auto;
+                        padding: 7px 5px;
+                        height: 35px;
+                        color: #ddd;
+                        border-radius: 0px;
+                        border-bottom: 1px solid #aaa;
+
+                        &:hover {
+                            color: #fff;
+                            background-color: rgba(0,0,0,.2);
+                        }
+                    }
+                }
+
+                .separator-btn {
+                    display: block;
+                    padding: 8px 0;
+                    margin: 8px 4px;
+                    margin-left: 10px;
+                    width: 1px;
+                    background-color: rgba(0,0,0,.5);
+                    box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+                }
+
+                .dropdown {
+                    right: 90px;
+
+                    ul {
+                        border-radius: 0px;
+
+                        li[disabled="disabled"] {
+                            cursor: not-allowed !important;
+
+                            a {
+                                color: #ccc;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .panel-body {
+            overflow-y: auto;
+            max-height: 83vh;
+            min-height: 83vh;
+            overflow-x: hidden;
+            //position: relative; //New!
+            //width: 100%; //New!
+            .form-group {
+                label {
+                    color: #555;
+                    font-weight: normal;
+                    margin-bottom: 2px;
+                }
+
+                textarea {
+                    //width: 230%;
+                    min-height: 200px;
+                }
+
+                input, select, textarea {
+                    background-color: #f5f5f5;
+                    border-radius: 0;
+                    border: none;
+                    color: #333;
+                    padding: 0 10px;
+                    height: 30px;
+                    box-shadow: none;
+                    border-left: 5px solid #ddd;
+                }
+
+                input[required="required"],
+                select[required="required"],
+                textarea[required="required"] {
+                    border-left: 5px solid #c0392b;
+
+                    &.form-control[disabled],
+                    &.form-control[readonly] {
+                        border-left: 5px solid #aaa;
+                        cursor: not-allowed;
+                    }
+                }
+
+                .bootstrap-datetimepicker-widget.dropdown-menu {
+                    background-color: #fff;
+                    color: #555;
+
+                    &.bottom:after {
+                        border-bottom: 6px solid #fff;
+                    }
+
+                    &.top:before {
+                        border-top: 7px solid #fff;
+                    }
+
+                    &.top:after {
+                        border-top: 6px solid #fff;
+                    }
+
+                    .separator {
+                        color: #aaa;
+                        background: none;
+                        background-color: transparent;
+                    }
+
+                    th {
+                        &:hover {
+                            background: none;
+                            background-color: transparent !important;
+                        }
+                    }
+
+                    td {
+                        height: 27px;
+                        line-height: 27px;
+
+                        &.hour:hover,
+                        &.minute:hover,
+                        &.day:hover {
+                            background: none;
+                            background-color: transparent !important;
+                        }
+
+                        a {
+                            &[title="Increment Hour"], &[title="Decrement Hour"],
+                            &[title="Increment Minute"], &[title="Decrement Minute"] {
+                                color: #aaa;
+                                padding: 0px;
+                            }
+
+                            span {
+                                &:hover {
+                                    background: none;
+                                    background-color: transparent !important;
+                                }
+                            }
+                        }
+
+                        span {
+                            height: 27px;
+                            line-height: 27px;
+
+                            &:hover {
+                                background: none;
+                                background-color: transparent !important;
+                            }
+                        }
+
+                        button {
+                            &[title="Toggle Period"] {
+                                background-color: transparent;
+                                border: none;
+                                color: #aaa;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .input-group {
+                .input-group-btn {
+                    z-index: 0;
+
+                    button.lookup-btn {
+                        border: none !important;
+                        outline: none !important;
+                        background-color: #f5f5f5 !important;
+                        padding: 7px;
+                        border-radius: 0px;
+                        background: url(../../Scripts/Pack/dhtmlx/dhxtree_material/folderClosed.gif);
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width: 30px;
+                        height: 30px;
+                        /*&:before {
+                            content: '\f07c';
+                            font-family: FontAwesome;
+                            color: #7f8c8d;
+                            font-size: 15px;
+                        }*/
+                    }
+                }
+
+                .form-control {
+                    z-index: 0;
+                }
+            }
+        }
+
+        .panel-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 2px 15px;
+            color: #fff;
+            border-radius: 0px;
+            background-color: #e67e22;
+            transition: all .3s;
+
+            &.ready {
+                background-color: #2ecc71;
+                transition: all .3s;
+            }
+
+            &.error {
+                background-color: #e74c3c;
+                transition: all .3s;
+            }
+        }
+
+        .Detail-Container {
+            // overflow: auto;
+            position: relative;
+
+            .table-container {
+                border: 1px solid #ccc;
+                max-height: calc(100vh - 200px);
+                min-height: calc(100vh - 200px);
+
+                table {
+
+                    thead {
+                        th {
+                            font-weight: bold;
+                            border-bottom: 2px solid $PrimaryColor;
+                        }
+                    }
+
+                    tbody {
+                        td {
+                            padding: 3px;
+
+                            &.td-action {
+                                padding: 9px 0px 9px 12px;
+                                display: flex;
+                                position: relative;
+                                min-width: 60px;
+
+                                span.folder-open {
+                                    background: url(../../Scripts/Pack/dhtmlx/dhxtree_material/folderClosed.gif);
+                                    background-repeat: no-repeat;
+                                    background-position: center;
+                                    width: 40px;
+                                    height: 20px;
+                                    cursor: pointer;
+                                    border-radius: 0;
+                                    position: absolute;
+                                    left: 0px;
+
+                                    &.hasDel {
+                                        left: 30px;
+                                    }
+                                }
+                            }
+
+                            select, input.detail-control {
+                                border-radius: 0px;
+                                border: none;
+                                background-color: #f5f5f5;
+                                box-shadow: none;
+                                border-left: 5px solid #ddd;
+
+                                &.isID {
+                                    border: none !important;
+                                    background-color: transparent !important;
+                                    min-width: 60px !important;
+                                    max-width: 60px !important;
+                                    font-weight: bold;
+                                }
+
+                                &[required="required"] {
+                                    border-left: 5px solid #c0392b;
+                                }
+
+                                &[disabled], &[readonly="readOnly"] {
+                                    border-left: 5px solid #aaa;
+                                    cursor: not-allowed;
+                                }
+                            }
+
+                            .input-group {
+                                input {
+                                    padding-right: 39px;
+                                }
+
+                                .input-group-btn {
+                                    button {
+                                        position: absolute;
+                                        background-color: transparent;
+                                        border: none;
+                                        right: 0px;
+                                        color: $PrimaryColor;
+                                        outline: none;
+
+                                        &.folder-open {
+                                            background: url(../../Scripts/Pack/dhtmlx/dhxtree_material/folderClosed.gif);
+                                            background-repeat: no-repeat;
+                                            background-position: center;
+                                            width: 39px;
+                                            height: 33px;
+                                            cursor: pointer;
+                                            border-radius: 0px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    button {
+                        &.add-row {
+                            border: none;
+                            background-color: #7f8c8d;
+                            color: #fff;
+                            border-radius: 50%;
+                            padding: 7px 10px 4px 10px;
+                            outline: none;
+                            box-shadow: 1px 2px 6px #888;
+                        }
+                    }
+                }
+
+                .table-striped.table-mc-light-blue > tbody > tr:nth-child(odd) > td,
+                .table-striped.table-mc-light-blue > tbody > tr:nth-child(odd) > th {
+                    background-color: #f5f5f5 !important;
+                }
+
+                .bootstrap-datetimepicker-widget.dropdown-menu {
+                    background-color: #fff;
+                    color: #555;
+
+                    &.bottom:after {
+                        border-bottom: 6px solid #fff;
+                    }
+
+                    &.top:before {
+                        border-top: 7px solid #fff;
+                    }
+
+                    &.top:after {
+                        border-top: 6px solid #fff;
+                    }
+
+                    .separator {
+                        color: #aaa;
+                        background: none;
+                        background-color: transparent;
+                    }
+
+                    th {
+                        &:hover {
+                            background: none;
+                            background-color: transparent !important;
+                        }
+                    }
+
+                    td {
+                        height: 27px;
+                        line-height: 27px;
+
+                        &.hour:hover,
+                        &.minute:hover,
+                        &.day:hover {
+                            background: none;
+                            background-color: transparent !important;
+                        }
+
+                        a {
+                            &[title="Increment Hour"], &[title="Decrement Hour"],
+                            &[title="Increment Minute"], &[title="Decrement Minute"] {
+                                color: #aaa;
+                                padding: 0px;
+                            }
+
+                            span {
+                                &:hover {
+                                    background: none;
+                                    background-color: transparent !important;
+                                }
+                            }
+                        }
+
+                        span {
+                            height: 27px;
+                            line-height: 27px;
+
+                            &:hover {
+                                background: none;
+                                background-color: transparent !important;
+                            }
+                        }
+
+                        button {
+                            &[title="Toggle Period"] {
+                                background-color: transparent;
+                                border: none;
+                                color: #aaa;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .mdt-table {
+            z-index: 0;
+            min-height: 400px;
+            position: relative;
+            overflow: auto;
+            border: 1px solid #ccc;
+
+            th {
+                white-space: nowrap;
+                border-bottom: 2px solid $PrimaryColor;
+                font-weight: bold;
+            }
+
+            & tr, td {
+                padding: 0 5px;
+                margin: 0;
+            }
+            /*select {
+                padding: 0px;
+                height: 24px;
+                border-radius: 0px;
+                box-shadow: none;
+            }
+
+            fieldset {
+                text-align: center;
+            }
+
+            & select, & input[type="text"] {
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+                background-color: transparent;
+                outline: none;
+                //width: 100%;
+
+                &[required="required"] {
+                    border-bottom: 1px solid #c0392b;
+                }
+
+                &[disabled="disabled"],
+                &[readonly="readonly"] {
+                    border-bottom: 1px solid #aaa;
+                    cursor: not-allowed;
+                }
+            }*/
+            button {
+                &.add-row {
+                    border: none;
+                    background-color: #7f8c8d;
+                    color: #fff;
+                    border-radius: 50%;
+                    padding: 7px 10px 4px 10px;
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    fieldset[disabled="disabled"] {
+        .remember-me-check {
+            label {
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.image-group {
+    .image-button {
+        width: 150px;
+        position: absolute;
+        bottom: -20px;
+        color: #fff;
+        background-color: $PrimaryColor;
+        display: flex;
+        cursor: pointer;
+
+        p {
+            text-align: center;
+            margin: 0px;
+            width: 100%;
+            padding: 2px 0px;
+        }
+    }
+
+    .image-view {
+        width: 150px;
+        height: 150px;
+        background-color: #f5f5f5;
+        background-size: contain !important;
+    }
+}
+
+.detail-tree {
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    & div {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.info-body-container {
+    position: relative;
+    //position: absolute; //New!
+}
+
+.report-body {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 84vh;
+    background: white;
+    display: none;
+}
+
+.report-body-show {
+    display: block;
+}
+
+.info-sub-header {
+    text-align: center;
+    color: #7f8c8d;
+}
+
+.tab-heading, .tab-heading-2 {
+    background-color: transparent!important;
+    font-size: 25px;
+    color: #555;
+    //padding: 10px;
+    border-bottom: 1px solid #aaa!important;
+    float: none!important;
+}
+
+.tab-heading-2 {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0px;
+    float: none !important;
+
+    &.btn-group {
+        button {
+            float: right;
+            border: none;
+            outline: none;
+            color: #777;
+            border-radius: 0px;
+
+            &.add-row {
+                font-size: 14px;
+                padding: 5px 10px;
+                background-color: transparent;
+                color: #27ae60;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+        }
+    }
+
+    .detail-paging {
+        display: flex;
+        position: relative;
+        float: right;
+        top: 6px;
+        margin-left: 5px;
+
+        p {
+            font-size: 14px;
+            margin: 0px;
+            color: #777;
+        }
+
+        .paging {
+            font-size: 14px;
+            margin-left: 5px;
+            color: #777;
+
+            select {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+.info-dialog {
+    .Info-Form {
+        max-width: none;
+        min-width: initial;
+        position: relative;
+        width: 80%;
+    }
+
+    .info-panel {
+        &.info-toggled {
+            min-width: 200px;
+        }
+    }
+
+    .toggle-info-off {
+        display: none;
+    }
+}
+
+.custom-info-dialog {
+    /*.modal-dialog {
+        width: 80%;
+    }*/
+
+    &.custom-lg-dialog {
+        .modal-dialog {
+            width: 80%;
+        }
+    }
+
+    .modal-content {
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+
+        .info-panel {
+            height: 93.4vh;
+        }
+
+        .panel-footer {
+            position: relative;
+        }
+    }
+}
+
+.handsontable th, .handsontable td {
+    white-space: nowrap;
+}
+
+.rpt-form {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    box-shadow: 1px 2px 6px #ccc;
+
+    .rpt-count {
+        position: absolute;
+        color: #fff;
+        background-color: #7f8c8d;
+        padding: 3px 10px;
+        left: -1px;
+        top: -1px;
+    }
+
+    .rpt-action {
+        margin: 5px 0px;
+        text-align: right;
+    }
+}
+
+.rpt-add-row {
+    border: none;
+    background-color: #7f8c8d;
+    color: #fff;
+    border-radius: 50%;
+    padding: 7px 10px 4px 10px;
+    outline: none;
+    margin: 10px;
+    box-shadow: 1px 2px 6px #888;
+}
+
+
+.tab-container {
+    display: none;
+    transition: display linear 1s;
+    
+    &.tab-container-show {
+        display: block;
+    }
+}
+/*.ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height {
+    height: 200px;
+    min-height: 300px;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.form-control.myform2-height > .ta-bind {
+    min-height: 300px;
+    padding: 6px 12px;
+}*/
+
+.text-editor {
+    margin: 0 !important;
+
+    .control-label {
+        margin-bottom: 10px;
+    }
+
+    [text-angular-toolbar] {
+        margin: 0 0 15px 0;
+        background-color: #2980b9;
+        .btn-group {
+            margin: 0;
+
+            button {
+                border-radius: 0;
+                border: none;
+                color: #fff;
+                outline: none;
+                box-shadow:none;
+                background-color:transparent;
+
+                &.active {
+                    background-color:  rgba(0,0,0,0.15);
+                }
+            }
+
+            &:first-child {
+                display: none;
+            }
+
+            &:nth-child(3) {
+                button:nth-child(5),
+                button:nth-child(6) {
+                    display: none;
+                }
+            }
+
+            &:nth-child(4) {
+                display: none;
+            }
+        }
+    }
+
+    .ta-bind {
+        outline:none;
+    }
+
+    .ta-editor {
+        min-height: 200px;
+        overflow-y: auto;
+        border-radius: 0;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        background-color: #f5f5f5;
+    }
+}
+ 

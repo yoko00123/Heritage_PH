@@ -1,0 +1,33 @@
+﻿<div class="print-dialog themes-dialog create-pie-dialog">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="padding: 0px 15px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <p style="padding-top: 7px;">Pie Chart</p>
+                </div>
+                <div class="col-md-5" style="padding:0px;">
+                    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default shine" title="Save" ng-click="savePie()" style="padding: 1px 10px;height: 34px;border-radius: 0px;"><i class="fa fa-floppy-o"></i></button>
+                        <button type="button" class="btn btn-default shine" title="Close" ng-click="Cancel()" style="height: 34px;border-radius: 0px;"><i class="fa fa-close"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="max-height:500px;overflow-y:auto;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="pt-header">Select Column</p>
+                        <form>
+                            <div ng-if="c.Name.toLowerCase() != 'id'" ng-repeat="c in columns" class="custom-radio">
+                                <input type="radio" ng-model="cData.selectedColumn" name="columns" id="{{$index}}" class="radio" ng-value="c.Name" />
+                                <label ng-if="c.ID_SystemControlType == 2 || c.ID_SystemControlType == 4" for="{{$index}}">{{ c.Name.substr(3) }}</label>
+                                <label ng-if="c.ID_SystemControlType != 2 && c.ID_SystemControlType != 4" for="{{$index}}" >{{c.Name}}</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
